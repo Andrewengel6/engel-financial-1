@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — Engel Financial Group</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #111d2b;
+      --gold: #b87333;
+      --gold-light: #bd9468;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--navy);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-logo {
+      margin-bottom: 32px;
+    }
+
+    .page-logo img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(184,115,51,0.2);
+      border-radius: 4px;
+      padding: 64px 56px;
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 4px 4px 0 0;
+    }
+    .check-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(184,115,51,0.1);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+    }
+    .check-wrap svg { width: 32px; height: 32px; }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    h1 em { font-style: italic; color: var(--gold-light); }
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 12px;
+    }
+    .highlight {
+      background: rgba(184,115,51,0.08);
+      border: 1px solid rgba(184,115,51,0.2);
+      border-radius: 2px;
+      padding: 20px 24px;
+      margin: 28px 0;
+      text-align: left;
+    }
+    .highlight p { margin: 0; font-size: 14px; }
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Jost', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--gold-light); }
+  </style>
+</head>
+<body>
+  <div class="page-logo">
+    <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" />
+  </div>
+  <div class="card">
+    <div class="check-wrap">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 13l4 4L19 7" stroke="#bd9468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1>You're All Set,<br /><em>We'll Be in Touch</em></h1>
+    <p>Your information has been received. A licensed agent from Engel Financial Group will reach out to you shortly — typically within a few hours during business hours.</p>
+    <div class="highlight">
+      <p><strong style="color:#fff; font-weight:500;">What happens next:</strong> You'll receive a call from a licensed agent to discuss your coverage options at no cost and no obligation. Feel free to have any questions ready!</p>
+    </div>
+    <a href="/" class="btn">Back to Home</a>
+  </div>
+</body>
+</html>
