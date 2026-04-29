@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Engel Financial Group | Independent Life Insurance Broker</title>
+  <meta name="description" content="Engel Financial Group is an independent life insurance brokerage built on integrity, independence, and advocacy. We work for you — not an insurance company." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Stats section */
+    .stats-section { background: var(--navy-mid); padding: 80px 32px; }
+    .stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; text-align: center; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 6vw, 72px); font-weight: 700; color: var(--gold); line-height: 1; }
+    .stat-label { font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.6); margin-top: 8px; }
+    .stat-desc { font-size: 13px; color: rgba(255,255,255,.45); margin-top: 4px; line-height: 1.5; }
+    @media(max-width:700px) { .stats-inner { grid-template-columns: repeat(2,1fr); } }
+
+    /* Founder section */
+    .founder-section { background: var(--off-white); padding: 100px 32px; }
+    .founder-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .founder-image { position: relative; border-radius: 4px; overflow: hidden; }
+    .founder-image img { width: 100%; height: 560px; object-fit: cover; display: block; }
+    .founder-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(184,115,51,.4) 0%, transparent 60%); }
+    .founder-content h2 { font-size: clamp(32px, 4vw, 48px); margin: 12px 0 20px; }
+    .founder-content p { color: var(--text-mid); line-height: 1.75; margin-bottom: 16px; }
+    @media(max-width:800px) { .founder-inner { grid-template-columns: 1fr; gap: 40px; } .founder-image img { height: 360px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Company
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/about.html">About</a>
+          <a href="/about-andrew.html">About Andrew</a>
+          <a href="/how-it-works.html">How It Works</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="/contact.html" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCompany(this)">
+        Company
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-company">
+        <a href="/about.html">About</a>
+        <a href="/about-andrew.html">About Andrew</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="/contact.html" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">About Us</span>
+    <h1>Protecting Families<br /><em>Across America.</em></h1>
+    <p>We're an independent life insurance brokerage built on one belief — every family deserves real protection.</p>
+    <div class="hero-ctas">
+      <a href="/contact.html" class="btn-dark">Get a Free Quote</a>
+      <a href="/about-andrew.html" class="btn-ghost">Meet Our Founder</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISSION & VALUES ═══ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Our Values</span>
+      <h2>Built on Integrity.<br /><em>Driven by Purpose.</em></h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Integrity</h3>
+        <p>We never push a product that isn't right for you. Our only agenda is your protection.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Independence</h3>
+        <p>As independent brokers, we shop every major carrier to find your best fit — not ours.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Advocacy</h3>
+        <p>We work for you, not an insurance company. Your family's security is our only goal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY INDEPENDENT BROKER ═══ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-content fade-up">
+      <span class="section-label">Why It Matters</span>
+      <h2>We Work for You —<br />Not an Insurance Company.</h2>
+      <p>Captive agents are tied to a single insurance carrier. That means every policy they recommend comes from one company, whether it's your best option or not. They can't compare across the market — and you may never know what you're missing.</p>
+      <p>As independent brokers, we shop 20+ of the nation's top carriers to find the coverage that fits your life and budget. No quotas, no bias, no pressure — just honest, side-by-side comparisons on your behalf.</p>
+      <div class="fact-chips">
+        <span class="fact-chip">Access to 20+ Carriers</span>
+        <span class="fact-chip">No Carrier Bias</span>
+        <span class="fact-chip">Advocate, Not Salesperson</span>
+      </div>
+    </div>
+    <div class="what-image fade-up">
+      <img src="https://placehold.co/600x480/111d2b/bd9468?text=Independent+Broker" alt="Independent insurance broker working for clients" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BY THE NUMBERS ═══ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Carriers</div>
+      <div class="stat-desc">Access to the nation's top life insurance providers</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">50</div>
+      <div class="stat-label">States</div>
+      <div class="stat-desc">Licensed to serve families across America</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">1,000+</div>
+      <div class="stat-label">Families</div>
+      <div class="stat-desc">Protected and counting</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Independent</div>
+      <div class="stat-desc">No quotas, no pressure, no bias</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MEET THE FOUNDER ═══ -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div class="founder-image fade-up">
+      <img src="https://placehold.co/480x560/1a2d3f/bd9468?text=Andrew+Engel" alt="Andrew Engel, founder of Engel Financial Group" />
+    </div>
+    <div class="founder-content fade-up">
+      <span class="section-label">Our Founder</span>
+      <h2>Meet Andrew Engel</h2>
+      <p>Andrew built Engel Financial Group from a deeply personal mission — to make sure no family goes through what his did. Growing up without a financial safety net, he saw firsthand the devastation that comes when loved ones aren't protected.</p>
+      <p>As an independent broker and senior underwriter, he brings the same care and urgency to every client he serves. This isn't just a career for Andrew — it's a responsibility.</p>
+      <a href="/about-andrew.html" class="btn-primary" style="display:inline-block;margin-top:8px;">Read Andrew's Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>Ready to Protect<br /><em>What Matters Most?</em></h2>
+    <p>One conversation is all it takes. No pressure, no obligation.</p>
+    <a href="/contact.html" class="btn-dark">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/about-andrew.html">About Andrew</a></li>
+          <li><a href="/how-it-works.html">How It Works</a></li>
+          <li><a href="/carriers.html">Carriers We Work With</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('js-animations');
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function toggleMobileCompany(btn) {
+  const content = document.getElementById('mobile-company');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
