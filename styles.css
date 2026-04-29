@@ -119,13 +119,13 @@ nav {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 16px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(10,18,25,0.98);
   border: 1px solid rgba(184,115,51,0.2);
   border-radius: 4px;
-  padding: 8px 0;
+  padding: 16px 0 8px;
   min-width: 230px;
   opacity: 0;
   visibility: hidden;
