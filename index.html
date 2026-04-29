@@ -761,6 +761,38 @@
       .steps-track::before { display: none; }
 
       .section-inner { padding: 0 20px; }
+
+      .broker-table-wrap { display: none; }
+      .broker-mobile-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .broker-mobile-card {
+        background: #fff;
+        border: 1px solid #EAE7E0;
+        border-radius: 4px;
+        padding: 20px;
+      }
+      .broker-mobile-feature {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .broker-mobile-engel {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--navy);
+        margin-bottom: 4px;
+      }
+      .broker-mobile-captive-val {
+        font-size: 13px;
+        color: rgba(17,29,43,0.4);
+      }
     }
 
     @media (max-width: 480px) {
@@ -872,40 +904,6 @@
     }
 
     .broker-mobile-cards { display: none; }
-
-    @media (max-width: 768px) {
-      .broker-table-wrap { display: none; }
-      .broker-mobile-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 32px;
-      }
-      .broker-mobile-card {
-        background: #fff;
-        border: 1px solid #EAE7E0;
-        border-radius: 4px;
-        padding: 20px;
-      }
-      .broker-mobile-feature {
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 10px;
-      }
-      .broker-mobile-engel {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--navy);
-        margin-bottom: 4px;
-      }
-      .broker-mobile-captive-val {
-        font-size: 13px;
-        color: rgba(17,29,43,0.4);
-      }
-    }
   </style>
 </head>
 <body>
@@ -1277,9 +1275,9 @@
         <table class="broker-table">
           <thead>
             <tr>
-              <th class="broker-th-feature"></th>
-              <th class="broker-th-engel">✦ Engel Financial (Independent)</th>
-              <th class="broker-th-captive">Captive Agent</th>
+              <th class="broker-th-feature" scope="col" aria-label="Feature"></th>
+              <th class="broker-th-engel" scope="col"><span aria-hidden="true">✦</span> Engel Financial (Independent)</th>
+              <th class="broker-th-captive" scope="col">Captive Agent</th>
             </tr>
           </thead>
           <tbody>
@@ -1290,8 +1288,8 @@
             </tr>
             <tr class="broker-row">
               <td class="broker-feature">Shops the market for you</td>
-              <td class="broker-engel">✓ Yes — compares all options</td>
-              <td class="broker-captive">✗ Cannot compare outside products</td>
+              <td class="broker-engel"><span aria-hidden="true">✓</span> Yes — compares all options</td>
+              <td class="broker-captive"><span aria-hidden="true">✗</span> Cannot compare outside products</td>
             </tr>
             <tr class="broker-row">
               <td class="broker-feature">Who they work for</td>
@@ -1311,23 +1309,23 @@
       <div class="broker-mobile-cards">
         <div class="broker-mobile-card">
           <div class="broker-mobile-feature">Carriers available</div>
-          <div class="broker-mobile-engel">✓ 40–50+ A-rated carriers</div>
-          <div class="broker-mobile-captive-val">✗ 1 company only (captive)</div>
+          <div class="broker-mobile-engel"><span aria-hidden="true">✓</span> 40–50+ A-rated carriers</div>
+          <div class="broker-mobile-captive-val"><span aria-hidden="true">✗</span> 1 company only (captive)</div>
         </div>
         <div class="broker-mobile-card">
           <div class="broker-mobile-feature">Shops the market for you</div>
-          <div class="broker-mobile-engel">✓ Compares all options</div>
-          <div class="broker-mobile-captive-val">✗ Cannot compare outside products</div>
+          <div class="broker-mobile-engel"><span aria-hidden="true">✓</span> Compares all options</div>
+          <div class="broker-mobile-captive-val"><span aria-hidden="true">✗</span> Cannot compare outside products</div>
         </div>
         <div class="broker-mobile-card">
           <div class="broker-mobile-feature">Who they work for</div>
-          <div class="broker-mobile-engel">✓ You, the client</div>
-          <div class="broker-mobile-captive-val">✗ The insurance company</div>
+          <div class="broker-mobile-engel"><span aria-hidden="true">✓</span> You, the client</div>
+          <div class="broker-mobile-captive-val"><span aria-hidden="true">✗</span> The insurance company</div>
         </div>
         <div class="broker-mobile-card">
           <div class="broker-mobile-feature">Rate &amp; coverage flexibility</div>
-          <div class="broker-mobile-engel">✓ Best available rate through competition</div>
-          <div class="broker-mobile-captive-val">✗ Limited to one company's pricing</div>
+          <div class="broker-mobile-engel"><span aria-hidden="true">✓</span> Best available rate through competition</div>
+          <div class="broker-mobile-captive-val"><span aria-hidden="true">✗</span> Limited to one company's pricing</div>
         </div>
       </div>
 
