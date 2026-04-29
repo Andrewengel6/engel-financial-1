@@ -884,9 +884,11 @@ footer {
    SCROLL ANIMATIONS
    ══════════════════════════════ */
 .fade-up {
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.js-animations .fade-up {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16,1,0.3,1);
 }
 .fade-up.in-view { opacity: 1; transform: translateY(0); }
 
