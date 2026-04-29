@@ -768,6 +768,144 @@
       .stat-item { padding: 24px 16px; }
       .stat-num { font-size: 32px; }
     }
+
+    /* ── Broker Advantage Section ── */
+    .broker-section {
+      background: var(--off-white);
+      padding: 100px 0;
+    }
+
+    .broker-section h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    .broker-intro {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--text-mid);
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+
+    .broker-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+
+    .broker-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .broker-table thead tr {
+      background: rgba(184,115,51,0.08);
+    }
+
+    .broker-th-feature {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(17,29,43,0.4);
+      width: 28%;
+    }
+
+    .broker-th-engel {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      width: 36%;
+    }
+
+    .broker-th-captive {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(17,29,43,0.35);
+      width: 36%;
+    }
+
+    .broker-row td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(17,29,43,0.07);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .broker-feature {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .broker-engel {
+      background: rgba(184,115,51,0.04);
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .broker-captive {
+      color: rgba(17,29,43,0.35);
+      font-weight: 400;
+    }
+
+    .broker-trust {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-mid);
+      max-width: 680px;
+      line-height: 1.7;
+      padding: 20px 0 0 20px;
+      border-left: 2px solid var(--gold);
+    }
+
+    .broker-mobile-cards { display: none; }
+
+    @media (max-width: 768px) {
+      .broker-table-wrap { display: none; }
+      .broker-mobile-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .broker-mobile-card {
+        background: #fff;
+        border: 1px solid #EAE7E0;
+        border-radius: 4px;
+        padding: 20px;
+      }
+      .broker-mobile-feature {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .broker-mobile-engel {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--navy);
+        margin-bottom: 4px;
+      }
+      .broker-mobile-captive-val {
+        font-size: 13px;
+        color: rgba(17,29,43,0.4);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1122,6 +1260,80 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ BROKER ADVANTAGE ═══════════════ -->
+  <section class="broker-section" id="broker-advantage">
+    <div class="section-inner">
+      <div class="section-eyebrow">The Advantage</div>
+      <h2>Independent Broker vs. Captive Agent —<br />Here's the Difference</h2>
+      <p class="broker-intro">
+        Not all insurance agents work the same way — and that difference has a direct impact on your rate and your options. As an independent broker, I have access to 40–50+ A-rated carriers, which means I can shop the market and find you the best coverage at the best price. Captive agents are locked into one company's products. I work for you, not the carrier.
+      </p>
+
+      <!-- Desktop table (hidden on mobile) -->
+      <div class="broker-table-wrap">
+        <table class="broker-table">
+          <thead>
+            <tr>
+              <th class="broker-th-feature"></th>
+              <th class="broker-th-engel">✦ Engel Financial (Independent)</th>
+              <th class="broker-th-captive">Captive Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="broker-row">
+              <td class="broker-feature">Carriers available</td>
+              <td class="broker-engel">40–50+ A-rated carriers</td>
+              <td class="broker-captive">1 company only</td>
+            </tr>
+            <tr class="broker-row">
+              <td class="broker-feature">Shops the market for you</td>
+              <td class="broker-engel">✓ Yes — compares all options</td>
+              <td class="broker-captive">✗ Cannot compare outside products</td>
+            </tr>
+            <tr class="broker-row">
+              <td class="broker-feature">Who they work for</td>
+              <td class="broker-engel">You, the client</td>
+              <td class="broker-captive">The insurance company</td>
+            </tr>
+            <tr class="broker-row">
+              <td class="broker-feature">Rate &amp; coverage flexibility</td>
+              <td class="broker-engel">Best available rate through competition</td>
+              <td class="broker-captive">Limited to one company's pricing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile cards (shown only on mobile) -->
+      <div class="broker-mobile-cards">
+        <div class="broker-mobile-card">
+          <div class="broker-mobile-feature">Carriers available</div>
+          <div class="broker-mobile-engel">✓ 40–50+ A-rated carriers</div>
+          <div class="broker-mobile-captive-val">✗ 1 company only (captive)</div>
+        </div>
+        <div class="broker-mobile-card">
+          <div class="broker-mobile-feature">Shops the market for you</div>
+          <div class="broker-mobile-engel">✓ Compares all options</div>
+          <div class="broker-mobile-captive-val">✗ Cannot compare outside products</div>
+        </div>
+        <div class="broker-mobile-card">
+          <div class="broker-mobile-feature">Who they work for</div>
+          <div class="broker-mobile-engel">✓ You, the client</div>
+          <div class="broker-mobile-captive-val">✗ The insurance company</div>
+        </div>
+        <div class="broker-mobile-card">
+          <div class="broker-mobile-feature">Rate &amp; coverage flexibility</div>
+          <div class="broker-mobile-engel">✓ Best available rate through competition</div>
+          <div class="broker-mobile-captive-val">✗ Limited to one company's pricing</div>
+        </div>
+      </div>
+
+      <p class="broker-trust">
+        With access to dozens of top carriers, we shop the market so you don't have to — saving you time, money, and the headache of comparing policies on your own.
+      </p>
     </div>
   </section>
 
