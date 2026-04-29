@@ -4,6 +4,9 @@ let _client = null;
 
 function getClient() {
   if (!_client) {
+    if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) {
+      throw new Error('Missing Twilio credentials in environment');
+    }
     _client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
   }
   return _client;

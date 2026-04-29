@@ -1,13 +1,7 @@
 const { checkVerification, sendSms } = require('./utils/twilio');
 const { getSupabase } = require('./utils/supabase');
 const { formatSms } = require('./utils/format-sms');
-
-function normalizePhone(raw) {
-  const digits = String(raw || '').replace(/\D/g, '');
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits[0] === '1') return `+${digits}`;
-  return null;
-}
+const { normalizePhone } = require('./utils/phone');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -21,6 +15,19 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'missing_fields' });
   }
 
+  const ALLOWED_FIELDS = [
+    'first_name','last_name','email','state','coverage_type','contact_urgency',
+    'source_page','message','age','gender','tobacco','health','beneficiary',
+    'coverage_amount','coverage_subtype','primary_goal','annual_income',
+    'income_start','retirement_savings','employment_status','mortgage_status',
+    'mortgage_balance','mortgage_co_borrower','retirement_timeline','describes_you',
+  ];
+
+  const safeData = {};
+  for (const key of ALLOWED_FIELDS) {
+    if (leadData[key] !== undefined) safeData[key] = leadData[key];
+  }
+
   try {
     const approved = await checkVerification(phone, code);
     if (!approved) {
@@ -30,7 +37,7 @@ module.exports = async function handler(req, res) {
     const supabase = getSupabase();
     const { error: dbError } = await supabase
       .from('leads')
-      .insert({ ...leadData, phone });
+      .insert({ ...safeData, phone });
     if (dbError) throw dbError;
 
     await sendSms(process.env.ANDREW_PHONE, formatSms({ ...leadData, phone }));
