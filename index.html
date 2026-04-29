@@ -985,6 +985,69 @@
       gap: 8px 6px;
       margin-bottom: 32px;
     }
+    /* ── Schedule Section ── */
+    .schedule-section {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .schedule-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .schedule-section h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    .schedule-sub {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 40px;
+    }
+
+    .btn-calendar {
+      display: inline-block;
+      padding: 16px 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+      margin-bottom: 20px;
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-calendar:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-calendar:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .schedule-reassure {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -1570,6 +1633,27 @@
     </div>
   </section>
 
+  <!-- ═══════════════ SCHEDULE ═══════════════ -->
+  <section class="schedule-section" id="schedule">
+    <div class="section-inner">
+      <div class="schedule-content">
+        <div class="section-eyebrow" style="justify-content:center; display:flex;">Book Your Free Consultation</div>
+        <h2>Ready to Get Protected?<br />Let's Talk.</h2>
+        <p class="schedule-sub">
+          Pick a time that works for you — no pressure, no commitment required. A short 15-minute call is all it takes to understand your options and what coverage looks like for your situation.
+        </p>
+        <!-- Replace PLACEHOLDER with the actual Google Calendar appointment URL when ready -->
+        <a href="https://calendar.google.com/calendar/appointments/PLACEHOLDER"
+           class="btn-calendar"
+           target="_blank"
+           rel="noopener noreferrer">
+          View My Calendar &amp; Book a Call →
+        </a>
+        <p class="schedule-reassure">Free &middot; No obligation &middot; 15 minutes</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ CTA BAND ═══════════════ -->
   <section class="cta-band">
     <div class="cta-band-inner">
@@ -1682,7 +1766,7 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.pain-card, .benefit-item, .testimonial-card, .step').forEach(el => {
+    document.querySelectorAll('.pain-card, .benefit-item, .testimonial-card, .step, .broker-table-wrap, .broker-trust, .andrew-photo, .andrew-content, .schedule-content').forEach(el => {
       el.classList.add('scroll-hidden');
       observer.observe(el);
     });
