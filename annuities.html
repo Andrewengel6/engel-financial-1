@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annuities — Guaranteed Retirement Income — Engel Financial Group</title>
+  <meta name="description" content="Annuities provide guaranteed income you can't outlive. Protect your retirement savings from market risk and ensure a predictable paycheck for life." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="#get-quote" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="#get-quote" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Annuities</span>
+    <h1>Guaranteed Income You<br /><em>Cannot Outlive.</em></h1>
+    <p>An annuity turns a lump sum into a guaranteed stream of income — for a set period or for the rest of your life. It's one of the only financial products that can guarantee you'll never run out of money in retirement.</p>
+    <div class="hero-ctas">
+      <a href="#get-quote" class="btn-dark">See If You Qualify</a>
+      <a href="tel:+18005551234" class="btn-ghost">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS IT ═══ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-content fade-up">
+      <span class="section-label">What Is an Annuity</span>
+      <h2>Your Personal Pension, Built for the Modern Era</h2>
+      <p>An annuity is a contract with an insurance company — you make a lump sum payment (or series of payments), and the insurer guarantees regular income payments back to you, starting immediately or at a future date.</p>
+      <p>Annuities come in several types: fixed annuities offer guaranteed interest rates, indexed annuities link growth to a market index with downside protection, and income annuities convert a lump sum into a lifetime paycheck. Our agents help you find the right structure for your retirement goals.</p>
+      <div class="fact-chips">
+        <span class="fact-chip">Guaranteed Income for Life</span>
+        <span class="fact-chip">Principal Protection</span>
+        <span class="fact-chip">Tax-Deferred Growth</span>
+        <span class="fact-chip">No Market Risk Options</span>
+      </div>
+    </div>
+    <div class="what-image fade-up">
+      <img src="https://placehold.co/600x420/111d2b/bd9468?text=Annuities" alt="Guaranteed retirement income annuity" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Who It's For</span>
+      <h2>Who Benefits From an Annuity</h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Pre-Retirees</h3>
+        <p>Individuals 5–15 years from retirement looking to lock in guaranteed income and protect savings from market volatility before they need it.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Recent Retirees</h3>
+        <p>People who have retired and want to convert a portion of their savings into a guaranteed paycheck that covers essential living expenses.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Conservative Savers</h3>
+        <p>Investors who prioritize protecting their principal over chasing market returns and want predictable, guaranteed growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">How It Works</span>
+      <h2 style="color:#fff">Simple. Guaranteed. <em style="font-style:italic;color:var(--gold-light)">For Life.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item fade-up">
+        <div class="step-num">1</div>
+        <h3>Choose Your Structure</h3>
+        <p>We help you select the right annuity type — fixed, indexed, or income — based on your timeline, income needs, and risk tolerance.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">2</div>
+        <h3>Fund Your Annuity</h3>
+        <p>Transfer a lump sum or roll over funds from a 401(k), IRA, or other account. The insurance company guarantees your principal and starts growing your balance.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">3</div>
+        <h3>Receive Guaranteed Income</h3>
+        <p>When your income phase begins, you receive regular payments — monthly, quarterly, or annually — for the period or lifetime you selected.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="benefits-section">
+  <div class="benefits-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Why Choose Us</span>
+      <h2>Every Advantage You <em>Deserve</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Guaranteed Income</strong><span>Receive predictable income payments you can plan around, for life or a defined period.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Principal Protection</strong><span>Fixed and indexed annuities protect your initial investment from market downturns.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Tax-Deferred Growth</strong><span>Your account grows tax-deferred — you only pay taxes when you take distributions.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>No Contribution Limits</strong><span>Unlike IRAs and 401(k)s, annuities have no annual contribution limits.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Survivor Benefits</strong><span>Many annuity options include joint-life riders ensuring your spouse continues receiving income after you pass.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Inflation Options</strong><span>Select riders that increase your payments annually to help your income keep pace with inflation.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEAD FORM ═══ -->
+<section class="form-section" id="get-quote">
+  <div class="form-section-inner">
+    <div class="form-section-header fade-up">
+      <span class="section-label" style="color:var(--gold)">Get Started</span>
+      <h2>See If an Annuity Is Right for You</h2>
+    </div>
+    <div class="form-card fade-up">
+      <div class="form-card-title">See If You Qualify</div>
+      <div class="form-card-sub">Takes under 60 seconds. No commitment required.</div>
+      <div class="form-group">
+        <label for="coverage-type">Coverage Interest</label>
+        <select id="coverage-type">
+          <option value="life">Life Insurance</option>
+          <option value="whole-life">Whole Life Insurance</option>
+          <option value="iul">IUL (Indexed Universal Life)</option>
+          <option value="annuity" selected>Annuities</option>
+          <option value="mortgage">Mortgage Protection</option>
+          <option value="retirement">Retirement Planning</option>
+          <option value="advanced">Advanced Markets / Business</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input type="text" id="zip" placeholder="90210" maxlength="5" />
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()">Get My Free Quote</button>
+      <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Common Questions</span>
+      <h2>Answers You <em>Actually Need</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>What's the difference between a fixed and indexed annuity?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">A fixed annuity pays a guaranteed interest rate regardless of market conditions. An indexed annuity links growth to a market index but protects your principal from losses. Fixed annuities prioritize certainty; indexed annuities offer more upside potential while still protecting downside.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Can I access my money before income payments start?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes, most annuities allow withdrawals during the accumulation phase, though early withdrawals may incur surrender charges or tax penalties depending on the contract terms and your age.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Are annuity payments guaranteed even if the insurance company fails?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Annuities are backed by state insurance guarantee funds that protect your benefits up to specified limits (typically $250,000–$500,000 depending on your state). We work only with highly rated, financially stable carriers.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Should I put all my retirement savings in an annuity?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Most financial plans suggest using annuities for a portion of retirement savings — enough to cover essential expenses — while keeping other assets for growth and liquidity. Our agents help you find the right balance.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>The Retirement Paycheck<br /><em>You Can't Outlive</em></h2>
+    <p>An annuity can be the foundation of a retirement income plan that gives you certainty — no matter what markets do. Let a licensed agent show you what's possible.</p>
+    <a href="#get-quote" class="btn-dark">Get My Free Quote Now</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Carriers We Work With</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+function handleSubmit() {
+  const fields = ['first-name','last-name','phone','email','zip'];
+  const missing = fields.some(id => !document.getElementById(id).value.trim());
+  if (missing) { alert('Please fill in all required fields.'); return; }
+  window.location.href = '/thank-you.html';
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
