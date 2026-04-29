@@ -180,6 +180,9 @@ All pages use the full site design system: shared nav + footer, styles.css, bran
   - Terms of Service → `/terms-of-service.html`
   - Licensing → `/licensing.html`
   - TCPA Compliance → `/tcpa-compliance.html`
+- `contact.html` — replace the current non-compliant form disclaimer with full TCPA-compliant language:
+  - **Current (non-compliant):** "By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties."
+  - **Replace with:** "By submitting this form, you consent to be contacted by Engel Financial Group and its licensed representatives by phone call, SMS/text message, and email regarding insurance products and services. Message and data rates may apply. Consent is not a condition of purchase."
 
 ### Design system
 - Nav: copy from `about.html` — company pages variant (CTA → `/contact.html`)
@@ -198,7 +201,8 @@ All pages use the full site design system: shared nav + footer, styles.css, bran
 - All 4 pages are company-type pages → Nav CTA href="/contact.html"
 
 ### TCPA consent language sync
-- The consent language on `tcpa-compliance.html` must exactly match the disclaimer on the contact.html form. Verify both during build.
+- The current contact.html disclaimer is non-compliant and must be updated (see Files to update above).
+- After updating contact.html, the TCPA page §3 consent quote must be identical to the contact.html form disclaimer — verify both match before committing.
 
 ---
 
