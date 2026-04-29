@@ -1,16 +1,19 @@
 {
-  "name": "project_andrew",
+  "name": "engel-financial-group",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "engines": { "node": "18.x" },
   "dependencies": {
-    "puppeteer": "^24.41.0"
+    "@supabase/supabase-js": "^2.43.0",
+    "twilio": "^5.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"]
   }
 }
