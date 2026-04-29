@@ -1,0 +1,32 @@
+create table leads (
+  id                 uuid        primary key default gen_random_uuid(),
+  created_at         timestamptz not null    default now(),
+  first_name         text        not null,
+  last_name          text        not null,
+  phone              text        not null,
+  email              text        not null,
+  state              text        not null,
+  coverage_type      text        not null,
+  contact_urgency    text        not null,
+  source_page        text        not null,
+  message            text,
+  age                text,
+  gender             text,
+  tobacco            text,
+  health             text,
+  beneficiary        text,
+  coverage_amount    text,
+  coverage_subtype   text,
+  primary_goal       text,
+  annual_income      text,
+  income_start       text,
+  retirement_savings text,
+  employment_status  text,
+  mortgage_status    text,
+  mortgage_balance   text,
+  mortgage_co_borrower text,
+  retirement_timeline text,
+  describes_you      text
+);
+
+alter table leads enable row level security;
