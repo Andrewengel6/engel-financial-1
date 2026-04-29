@@ -26,6 +26,11 @@ const MIME = {
 const server = http.createServer((req, res) => {
   const decodedUrl = decodeURIComponent(req.url);
   let filePath = path.join(__dirname, decodedUrl === '/' ? 'index.html' : decodedUrl);
+  if (!filePath.startsWith(__dirname)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('Forbidden');
+    return;
+  }
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME[ext] || 'application/octet-stream';
 
