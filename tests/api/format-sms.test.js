@@ -38,6 +38,10 @@ test('includes primary_goal when present', () => {
     .toContain('Goal: Tax-free retirement income');
 });
 
+test('includes tobacco when present', () => {
+  expect(formatSms({ ...base, tobacco: 'yes' })).toContain('Tobacco: yes');
+});
+
 test('omits optional fields when absent', () => {
   const msg = formatSms(base);
   expect(msg).not.toContain('Age:');
