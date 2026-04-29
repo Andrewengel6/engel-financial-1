@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Andrew Engel — Founder &amp; Independent Broker | Engel Financial Group</title>
+  <meta name="description" content="Andrew Engel built Engel Financial Group from a personal mission — ensuring no family suffers the financial devastation he witnessed growing up. Read his story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Andrew hero — photo-forward 2-col layout */
+    .andrew-hero { background: var(--navy); padding: 140px 32px 80px; position: relative; overflow: hidden; }
+    .andrew-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 30% 50%, rgba(184,115,51,.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(36,56,81,.8) 0%, transparent 50%); pointer-events:none; }
+    .andrew-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+    .andrew-hero-text .section-label { display: block; margin-bottom: 16px; }
+    .andrew-hero-text h1 { font-size: clamp(40px, 6vw, 72px); color: #fff; line-height: 1.08; margin-bottom: 20px; }
+    .andrew-hero-text p { font-size: 18px; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .andrew-hero-photo { position: relative; border-radius: 4px; overflow: hidden; }
+    .andrew-hero-photo img { width: 100%; height: 560px; object-fit: cover; object-position: top center; display: block; }
+    .andrew-hero-photo::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(17,29,43,.5) 0%, transparent 50%); mix-blend-mode: multiply; }
+    @media(max-width:800px) { .andrew-hero-inner { grid-template-columns: 1fr; gap: 40px; } .andrew-hero { padding: 120px 24px 60px; } .andrew-hero-photo img { height: 420px; } }
+
+    /* Editorial story section */
+    .story-section { background: var(--off-white); padding: 100px 32px; }
+    .story-inner { max-width: 760px; margin: 0 auto; }
+    .story-inner h2 { font-size: clamp(32px, 4vw, 48px); margin: 12px 0 32px; }
+    .story-body p { font-size: 18px; color: var(--text-mid); line-height: 1.8; margin-bottom: 24px; }
+    .story-body p.pull { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 30px); color: var(--text-dark); line-height: 1.4; font-style: italic; border-left: 3px solid var(--gold); padding-left: 24px; margin: 40px 0; }
+
+    /* Pull quote band */
+    .quote-band { background: var(--navy-mid); padding: 80px 32px; text-align: center; }
+    .quote-band blockquote { max-width: 800px; margin: 0 auto; font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3.5vw, 40px); font-style: italic; color: #fff; line-height: 1.4; }
+    .quote-band blockquote::before { content:''; display:block; height:1px; background:var(--gold); opacity:.5; margin:0 auto 28px; width:80px; }
+    .quote-band blockquote::after { content:''; display:block; height:1px; background:var(--gold); opacity:.5; margin:28px auto 0; width:80px; }
+
+    /* Mission section */
+    .mission-section { background: var(--warm-white); padding: 100px 32px; }
+    .mission-inner { max-width: 760px; margin: 0 auto; }
+    .mission-inner h2 { font-size: clamp(32px, 4vw, 48px); margin: 12px 0 32px; }
+    .mission-body p { font-size: 18px; color: var(--text-mid); line-height: 1.8; margin-bottom: 24px; }
+    .mission-close { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; color: var(--text-dark); margin-top: 40px; line-height: 1.4; }
+
+    /* Approach section uses .who-section from styles.css */
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Company
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/about.html">About</a>
+          <a href="/about-andrew.html">About Andrew</a>
+          <a href="/how-it-works.html">How It Works</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="/contact.html" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCompany(this)">
+        Company
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-company">
+        <a href="/about.html">About</a>
+        <a href="/about-andrew.html">About Andrew</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="/contact.html" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="andrew-hero">
+  <div class="andrew-hero-inner">
+    <div class="andrew-hero-text">
+      <span class="section-label">Our Founder</span>
+      <h1>This Isn't<br />Just Business.</h1>
+      <p>It's personal. And that's exactly why Andrew does it.</p>
+    </div>
+    <div class="andrew-hero-photo fade-up">
+      <img src="brand_assets/andrew business guy 7 figures..png" alt="Andrew Engel, founder of Engel Financial Group" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HIS STORY ═══ -->
+<section class="story-section">
+  <div class="story-inner">
+    <span class="section-label">Andrew's Story</span>
+    <h2>Where It All Began.</h2>
+    <div class="story-body fade-up">
+      <p>I didn't grow up around money, stability, or safety nets. My early life was shaped by a broken home, financial struggle, and uncertainty. We were on welfare at times, and something like life insurance wasn't even a conversation — it simply wasn't an option. When someone in my family passed, it didn't just bring emotional pain… it often created financial devastation. I've seen firsthand how quickly everything can fall apart when there's no protection in place.</p>
+      <p class="pull">"Those experiences are what shaped me."</p>
+      <p>They taught me that real security isn't about how much money you make — it's about what you protect, and who you protect it for.</p>
+      <p>As I got older, I realized something powerful: the people who succeed in life, especially in business, are the ones who genuinely care about others. Sales, at its core, isn't about convincing people — it's about connecting with them, understanding their situation, and helping them make the best decision for their family. That realization is what led me into the insurance industry.</p>
+      <p>Today, as an independent insurance broker and senior underwriter, I don't look at what I do as just a career — I see it as a responsibility.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PULL QUOTE BAND ═══ -->
+<section class="quote-band">
+  <blockquote class="fade-up">
+    "Insurance isn't a selfish act. It's one of the most selfless decisions a person can make."
+  </blockquote>
+</section>
+
+<!-- ═══ HIS MISSION ═══ -->
+<section class="mission-section">
+  <div class="mission-inner">
+    <span class="section-label">His Mission</span>
+    <h2>Why He Does This.</h2>
+    <div class="mission-body fade-up">
+      <p>Insurance isn't a selfish act. It's one of the most selfless decisions a person can make. It's a contract you put in place, not for yourself, but for the people you love most. It's making sure that if something unexpected happens, your family doesn't have to suffer financially on top of everything else.</p>
+      <p>I've built my business around helping families create protection, stability, and peace of mind — especially those who, like me, didn't grow up with those things. My mission is simple: to help as many people as possible avoid the same hardships I witnessed growing up, and to make sure their loved ones are taken care of no matter what.</p>
+      <p class="mission-close">This isn't just business for me. This is personal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HIS APPROACH ═══ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">How Andrew Works</span>
+      <h2>What You Can Expect.</h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Honesty First</h3>
+        <p>If a policy isn't right for you, Andrew will tell you. No pressure, no upsells — just honest guidance.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Your Family, Your Plan</h3>
+        <p>Every situation is different. Andrew listens before he recommends — your needs come first, always.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 15.92z"/></svg>
+        </div>
+        <h3>Long-Term Relationship</h3>
+        <p>Andrew doesn't disappear after the sale. He's your advocate for the life of your policy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>Let's Protect Your<br /><em>Family Together.</em></h2>
+    <p>Start with a free, no-obligation conversation.</p>
+    <a href="/contact.html" class="btn-dark">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/about-andrew.html">About Andrew</a></li>
+          <li><a href="/how-it-works.html">How It Works</a></li>
+          <li><a href="/carriers.html">Carriers We Work With</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('js-animations');
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function toggleMobileCompany(btn) {
+  const content = document.getElementById('mobile-company');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
