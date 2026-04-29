@@ -119,13 +119,13 @@ nav {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 16px);
   left: 50%;
   transform: translateX(-50%);
   background: rgba(10,18,25,0.98);
   border: 1px solid rgba(184,115,51,0.2);
   border-radius: 4px;
-  padding: 16px 0 8px;
+  padding: 8px 0;
   min-width: 230px;
   opacity: 0;
   visibility: hidden;
@@ -133,6 +133,15 @@ nav {
   transition: opacity 0.2s, visibility 0.2s;
   z-index: 200;
   backdrop-filter: blur(12px);
+}
+
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
