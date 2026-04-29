@@ -81,7 +81,7 @@ const otpForm = (() => {
         document.querySelectorAll('.otp-digit').forEach(d => { d.value = ''; });
         document.querySelector('.otp-digit').focus();
         verifyBtn.disabled = false;
-        verifyBtn.textContent = 'Verify & Submit';
+        verifyBtn.textContent = 'Try Again';
         return;
       }
       if (!res.ok || !json.ok) throw new Error('submit_failed');
@@ -110,6 +110,7 @@ const otpForm = (() => {
       _startResendTimer();
     } catch {
       link.dataset.disabled = 'false';
+      link.style.opacity = '1';
       alert('Could not resend. Please try again.');
     }
   }
