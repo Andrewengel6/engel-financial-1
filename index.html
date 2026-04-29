@@ -794,6 +794,18 @@
           <a href="/advanced-markets.html">Advanced Markets</a>
         </div>
       </div>
+      <div class="nav-dropdown" style="margin-left:32px;">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Company
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/about.html">About</a>
+          <a href="/about-andrew.html">About Andrew</a>
+          <a href="/how-it-works.html">How It Works</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
     </div>
     <div class="nav-right">
       <div class="nav-phone">
@@ -822,6 +834,18 @@
         <a href="/mortgage-protection.html">Mortgage Protection</a>
         <a href="/retirement-planning.html">Retirement Planning</a>
         <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCompany(this)">
+        Company
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-company">
+        <a href="/about.html">About</a>
+        <a href="/about-andrew.html">About Andrew</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/contact.html">Contact</a>
       </div>
     </div>
     <div class="mobile-cta-area">
@@ -1259,10 +1283,11 @@
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">How It Works</a></li>
-          <li><a href="#">Carriers We Work With</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/about-andrew.html">About Andrew</a></li>
+          <li><a href="/how-it-works.html">How It Works</a></li>
+          <li><a href="/carriers.html">Carriers We Work With</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1291,6 +1316,11 @@
     }
     function toggleMobileCoverage(btn) {
       const content = document.getElementById('mobile-coverage');
+      content.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function toggleMobileCompany(btn) {
+      const content = document.getElementById('mobile-company');
       content.classList.toggle('open');
       btn.classList.toggle('open');
     }
