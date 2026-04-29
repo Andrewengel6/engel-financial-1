@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whole Life Insurance — Engel Financial Group</title>
+  <meta name="description" content="Whole life insurance offers permanent protection and builds real cash value. No expiration, no renewals — coverage and growth for life." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="#get-quote" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="#get-quote" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Whole Life Insurance</span>
+    <h1>Permanent Protection.<br /><em>Lifelong Peace of Mind.</em></h1>
+    <p>Whole life insurance is the only coverage that never expires. It protects your family forever while building guaranteed cash value you can access during your lifetime.</p>
+    <div class="hero-ctas">
+      <a href="#get-quote" class="btn-dark">See If You Qualify</a>
+      <a href="tel:+18005551234" class="btn-ghost">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS IT ═══ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-content fade-up">
+      <span class="section-label">What Is Whole Life Insurance</span>
+      <h2>Coverage That Lasts as Long as You Do</h2>
+      <p>Whole life insurance is permanent coverage — unlike term policies, it never expires as long as you pay premiums. Your beneficiaries are guaranteed a death benefit no matter when you pass away.</p>
+      <p>Beyond the death benefit, whole life builds cash value over time at a guaranteed rate. That cash value grows tax-deferred and can be borrowed against for any purpose — retirement income, emergencies, or major expenses.</p>
+      <div class="fact-chips">
+        <span class="fact-chip">Guaranteed Cash Value</span>
+        <span class="fact-chip">Permanent Coverage</span>
+        <span class="fact-chip">Tax-Deferred Growth</span>
+        <span class="fact-chip">Borrow Against Your Policy</span>
+      </div>
+    </div>
+    <div class="what-image fade-up">
+      <img src="https://placehold.co/600x420/111d2b/bd9468?text=Whole+Life" alt="Whole life insurance protection" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Who It's For</span>
+      <h2>Built for the Long Term</h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Estate Planners</h3>
+        <p>Individuals who want to leave a guaranteed inheritance, cover estate taxes, or create a lasting legacy for the next generation.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Conservative Savers</h3>
+        <p>People who want guaranteed, predictable growth without market risk — a safe, reliable alternative to volatile investments.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Business Owners</h3>
+        <p>Entrepreneurs using whole life for buy-sell agreements, key person insurance, or executive bonus plans that attract and retain top talent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">How It Works</span>
+      <h2 style="color:#fff">Simple. Guaranteed. <em style="font-style:italic;color:var(--gold-light)">For Life.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item fade-up">
+        <div class="step-num">1</div>
+        <h3>Apply for Coverage</h3>
+        <p>We gather basic health and lifestyle information, then match you with carriers that offer the best whole life rates for your profile.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">2</div>
+        <h3>Lock In Your Rate</h3>
+        <p>Your premium is fixed for life — it never increases. Your cash value grows on a guaranteed schedule from day one.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">3</div>
+        <h3>Grow &amp; Protect</h3>
+        <p>Your policy builds cash value every year while keeping your family fully protected. Access funds anytime through a policy loan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="benefits-section">
+  <div class="benefits-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Why Choose Us</span>
+      <h2>Every Advantage You <em>Deserve</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Guaranteed Death Benefit</strong><span>Your family receives the full face amount — guaranteed, regardless of when you pass.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Cash Value Growth</strong><span>Policies build guaranteed cash value that grows tax-deferred, year after year.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Fixed Premiums for Life</strong><span>Your premium never increases, no matter your age or health changes.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Tax-Advantaged Access</strong><span>Borrow against your cash value tax-free with no repayment schedule required.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>No Expiration</strong><span>Coverage never lapses or needs renewal — it stays in force for your entire life.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Dividend Potential</strong><span>Many whole life policies pay annual dividends that can grow your cash value even faster.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEAD FORM ═══ -->
+<section class="form-section" id="get-quote">
+  <div class="form-section-inner">
+    <div class="form-section-header fade-up">
+      <span class="section-label" style="color:var(--gold)">Get Started</span>
+      <h2>See If Whole Life Fits You</h2>
+    </div>
+    <div class="form-card fade-up">
+      <div class="form-card-title">See If You Qualify</div>
+      <div class="form-card-sub">Takes under 60 seconds. No commitment required.</div>
+      <div class="form-group">
+        <label for="coverage-type">Coverage Interest</label>
+        <select id="coverage-type">
+          <option value="life">Life Insurance</option>
+          <option value="whole-life" selected>Whole Life Insurance</option>
+          <option value="iul">IUL (Indexed Universal Life)</option>
+          <option value="annuity">Annuities</option>
+          <option value="mortgage">Mortgage Protection</option>
+          <option value="retirement">Retirement Planning</option>
+          <option value="advanced">Advanced Markets / Business</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input type="text" id="zip" placeholder="90210" maxlength="5" />
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()">Get My Free Quote</button>
+      <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Common Questions</span>
+      <h2>Answers You <em>Actually Need</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>How is whole life different from term life?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Term life covers you for a set period and pays out only if you die during that term. Whole life is permanent — it covers you for life, builds cash value, and guarantees a death benefit regardless of when you pass.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>When does the cash value start building?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Cash value begins accumulating from the first year of your policy. The growth is guaranteed and follows a schedule set out in your policy document — no market risk involved.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Can I access my cash value while I'm alive?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. You can borrow against your cash value at any time for any reason — retirement income, emergencies, college funding. Policy loans have no repayment schedule and don't affect your death benefit if managed properly.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Is whole life insurance expensive?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Whole life premiums are higher than term premiums, but you're getting permanent coverage plus a savings component. Many clients find the combination of protection and guaranteed growth fits their financial plan well.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>Build Wealth While Protecting <em>Your Family</em></h2>
+    <p>Whole life insurance is the only financial product that guarantees a death benefit and guaranteed growth. Speak with a licensed agent today — no cost, no commitment.</p>
+    <a href="#get-quote" class="btn-dark">Get My Free Quote Now</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Carriers We Work With</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+function handleSubmit() {
+  const fields = ['first-name','last-name','phone','email','zip'];
+  const missing = fields.some(id => !document.getElementById(id).value.trim());
+  if (missing) { alert('Please fill in all required fields.'); return; }
+  window.location.href = '/thank-you.html';
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
