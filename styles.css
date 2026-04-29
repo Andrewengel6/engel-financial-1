@@ -105,6 +105,14 @@ nav {
 
 .nav-dropdown-trigger:hover { color: var(--gold-light); }
 
+.nav-dropdown-trigger:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-dropdown + .nav-dropdown { margin-left: 32px; }
+
 .nav-dropdown-trigger .chevron { transition: transform 0.2s; }
 
 .nav-dropdown:hover .nav-dropdown-trigger .chevron { transform: rotate(180deg); }
