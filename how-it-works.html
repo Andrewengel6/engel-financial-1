@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — Independent Life Insurance Broker Process | Engel Financial Group</title>
+  <meta name="description" content="See how Andrew Engel shops 20+ carriers to find you the best life insurance policy. Simple, transparent, and always on your side. Free consultation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* 5-step process */
+    .process-section { background: var(--warm-white); padding: 100px 32px; }
+    .process-inner { max-width: 1100px; margin: 0 auto; }
+    .process-inner .section-header { margin-bottom: 0; }
+    .process-steps { margin-top: 60px; display: flex; flex-direction: column; }
+    .process-step { display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: flex-start; padding: 40px 0; border-bottom: 1px solid rgba(17,29,43,.1); }
+    .process-step:last-child { border-bottom: none; }
+    .step-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 8px; }
+    .step-body h3 { font-size: 22px; margin-bottom: 10px; padding-top: 14px; }
+    .step-body p { color: var(--text-mid); line-height: 1.75; }
+    @media(max-width:600px) { .process-step { grid-template-columns: 56px 1fr; gap: 20px; } .step-circle { width: 52px; height: 52px; font-size: 22px; } }
+
+    /* Comparison table */
+    .compare-section { background: var(--navy); padding: 100px 32px; }
+    .compare-inner { max-width: 900px; margin: 0 auto; }
+    .compare-inner .section-header h2 { color: #fff; }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+    .compare-table th { font-family: 'Jost', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; padding: 12px 20px; text-align: left; }
+    .compare-table th:first-child { color: rgba(255,255,255,.4); }
+    .compare-table th:nth-child(2) { background: rgba(184,115,51,.15); color: var(--gold); border-radius: 6px 6px 0 0; text-align: center; }
+    .compare-table th:nth-child(3) { color: rgba(255,255,255,.4); text-align: center; }
+    .compare-table td { padding: 14px 20px; font-size: 14px; border-top: 1px solid rgba(255,255,255,.08); }
+    .compare-table td:first-child { color: rgba(255,255,255,.55); font-size: 13px; }
+    .compare-table td:nth-child(2) { background: rgba(184,115,51,.08); color: #fff; font-weight: 500; text-align: center; }
+    .compare-table td:nth-child(3) { color: rgba(255,255,255,.4); text-align: center; }
+    @media(max-width:600px) { .compare-table td, .compare-table th { padding: 10px 12px; font-size: 13px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Company
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/about.html">About</a>
+          <a href="/about-andrew.html">About Andrew</a>
+          <a href="/how-it-works.html">How It Works</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="/contact.html" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCompany(this)">
+        Company
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-company">
+        <a href="/about.html">About</a>
+        <a href="/about-andrew.html">About Andrew</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="/contact.html" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">How It Works</span>
+    <h1>Simple. Transparent.<br /><em>On Your Side.</em></h1>
+    <p>As an independent broker, Andrew shops every major carrier to find you the best policy — not the most profitable one.</p>
+    <div class="hero-ctas">
+      <a href="/contact.html" class="btn-dark">Get a Free Quote</a>
+      <a href="tel:+18005551234" class="btn-ghost">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE INDEPENDENT ADVANTAGE ═══ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-content fade-up">
+      <span class="section-label">Why Independent Matters</span>
+      <h2>We're Not Tied to Anyone —<br />Except You.</h2>
+      <p>Most insurance agents are captive agents — they're employees of a single insurance company and can only sell that company's products. Their job is to sell you their employer's policies, not to find the best deal for your family.</p>
+      <p>Independent brokers like Andrew operate differently. We're not employed by any carrier, which means we have zero incentive to favor one over another. Our only job is to find you the policy that fits your life best.</p>
+      <p>With access to 20+ top carriers, Andrew compares rates, coverage levels, and policy structures side-by-side — and presents you with the options that make sense, explained in plain language.</p>
+      <div class="fact-chips">
+        <span class="fact-chip">20+ Carriers</span>
+        <span class="fact-chip">Unbiased Recommendations</span>
+        <span class="fact-chip">100% On Your Side</span>
+      </div>
+    </div>
+    <div class="what-image fade-up">
+      <img src="https://placehold.co/600x420/111d2b/bd9468?text=Independent+Broker" alt="Independent broker comparing insurance carriers" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE 5-STEP PROCESS ═══ -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">The Process</span>
+      <h2>From First Call to<br /><em>Full Coverage.</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-circle">1</div>
+        <div class="step-body">
+          <h3>We Talk</h3>
+          <p>A free, no-pressure conversation about your situation, your family, and your goals. No forms, no commitment — just an honest conversation about what protection looks like for you.</p>
+        </div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle">2</div>
+        <div class="step-body">
+          <h3>We Assess</h3>
+          <p>Andrew reviews your needs, health profile, and budget to understand what kind of coverage makes sense for your specific situation. No one-size-fits-all recommendations here.</p>
+        </div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle">3</div>
+        <div class="step-body">
+          <h3>We Shop</h3>
+          <p>Using access to 20+ top-rated carriers, Andrew compares policies side-by-side — rates, coverage, riders, and approval requirements — to find your best option.</p>
+        </div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle">4</div>
+        <div class="step-body">
+          <h3>We Present</h3>
+          <p>Andrew walks you through the top options in plain language. No jargon, no confusion — just clear information so you can make the best decision for your family.</p>
+        </div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle">5</div>
+        <div class="step-body">
+          <h3>You're Covered</h3>
+          <p>Once you choose, Andrew handles the application and follows it through to approval. He stays with you every step of the way until your coverage is active.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPARISON TABLE ═══ -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Know the Difference</span>
+      <h2>Independent Broker<br /><em style="color:var(--gold-light)">vs. Captive Agent.</em></h2>
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Independent Broker (Andrew)</th>
+          <th>Captive Agent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Carrier access</td>
+          <td><span style="color:var(--gold)">✓</span> 20+ carriers</td>
+          <td><span style="color:rgba(255,255,255,.3)">✗</span> 1 carrier only</td>
+        </tr>
+        <tr>
+          <td>Works for</td>
+          <td><span style="color:var(--gold)">✓</span> You</td>
+          <td><span style="color:rgba(255,255,255,.3)">✗</span> Their employer</td>
+        </tr>
+        <tr>
+          <td>Recommendation bias</td>
+          <td><span style="color:var(--gold)">✓</span> None</td>
+          <td><span style="color:rgba(255,255,255,.3)">✗</span> Company-first</td>
+        </tr>
+        <tr>
+          <td>Price comparison</td>
+          <td><span style="color:var(--gold)">✓</span> Yes — across all carriers</td>
+          <td><span style="color:rgba(255,255,255,.3)">✗</span> No</td>
+        </tr>
+        <tr>
+          <td>Your advocate</td>
+          <td><span style="color:var(--gold)">✓</span> Always</td>
+          <td><span style="color:rgba(255,255,255,.3)">✗</span> Rarely</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Common Questions</span>
+      <h2>Answers You <em>Actually Need</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Do I have to commit to anything on the first call?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. The first conversation is completely free and obligation-free. Andrew will ask questions about your situation and explain your options. There's no pressure and no follow-up pitch if you decide it's not the right time.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>How long does it take to get covered?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Most clients are approved within a few days. Some policies offer same-day or next-day coverage with no medical exam required. Andrew will let you know the typical timeline for the specific carrier and product that fits your situation.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>What if I have a pre-existing condition?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Many carriers still offer excellent coverage options for people with pre-existing conditions. Because Andrew works with 20+ carriers, he can find carriers with more favorable underwriting for your specific health history — something a captive agent simply cannot do.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Does it cost more to use an independent broker?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. Andrew is compensated by the insurance carrier when a policy is issued — not by you. This means you get access to unbiased advice across 20+ carriers at no extra cost compared to going directly to an insurer.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>Ready to See What<br /><em>You Qualify For?</em></h2>
+    <p>Free consultation. No obligation. No pressure.</p>
+    <a href="/contact.html" class="btn-dark">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/about-andrew.html">About Andrew</a></li>
+          <li><a href="/how-it-works.html">How It Works</a></li>
+          <li><a href="/carriers.html">Carriers We Work With</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('js-animations');
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function toggleMobileCompany(btn) {
+  const content = document.getElementById('mobile-company');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
