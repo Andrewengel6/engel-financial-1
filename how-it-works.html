@@ -36,6 +36,8 @@
     .compare-table td:nth-child(2) { background: rgba(184,115,51,.08); color: #fff; font-weight: 500; text-align: center; }
     .compare-table td:nth-child(3) { color: rgba(255,255,255,.4); text-align: center; }
     @media(max-width:600px) { .compare-table td, .compare-table th { padding: 10px 12px; font-size: 13px; } }
+    .compare-table .check { color: var(--gold); }
+    .compare-table .cross { color: rgba(255,255,255,.3); }
   </style>
 </head>
 <body>
@@ -224,28 +226,28 @@
       <tbody>
         <tr>
           <td>Carrier access</td>
-          <td><span style="color:var(--gold)">✓</span> 20+ carriers</td>
-          <td><span style="color:rgba(255,255,255,.3)">✗</span> 1 carrier only</td>
+          <td><span class="check">✓</span> 20+ carriers</td>
+          <td><span class="cross">✗</span> 1 carrier only</td>
         </tr>
         <tr>
           <td>Works for</td>
-          <td><span style="color:var(--gold)">✓</span> You</td>
-          <td><span style="color:rgba(255,255,255,.3)">✗</span> Their employer</td>
+          <td><span class="check">✓</span> You</td>
+          <td><span class="cross">✗</span> Their employer</td>
         </tr>
         <tr>
           <td>Recommendation bias</td>
-          <td><span style="color:var(--gold)">✓</span> None</td>
-          <td><span style="color:rgba(255,255,255,.3)">✗</span> Company-first</td>
+          <td><span class="check">✓</span> None</td>
+          <td><span class="cross">✗</span> Company-first</td>
         </tr>
         <tr>
           <td>Price comparison</td>
-          <td><span style="color:var(--gold)">✓</span> Yes — across all carriers</td>
-          <td><span style="color:rgba(255,255,255,.3)">✗</span> No</td>
+          <td><span class="check">✓</span> Yes — across all carriers</td>
+          <td><span class="cross">✗</span> No</td>
         </tr>
         <tr>
           <td>Your advocate</td>
-          <td><span style="color:var(--gold)">✓</span> Always</td>
-          <td><span style="color:rgba(255,255,255,.3)">✗</span> Rarely</td>
+          <td><span class="check">✓</span> Always</td>
+          <td><span class="cross">✗</span> Rarely</td>
         </tr>
       </tbody>
     </table>
