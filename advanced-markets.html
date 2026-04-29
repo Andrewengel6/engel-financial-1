@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Markets — Business Insurance Solutions — Engel Financial Group</title>
+  <meta name="description" content="Sophisticated life insurance strategies for business owners — key person coverage, buy-sell agreements, executive benefits, and deferred compensation plans." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img" />
+    </a>
+    <div class="nav-center">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Coverage
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="/life-insurance.html">Life Insurance</a>
+          <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+          <a href="/iuls.html">IULs</a>
+          <a href="/annuities.html">Annuities</a>
+          <a href="/mortgage-protection.html">Mortgage Protection</a>
+          <a href="/retirement-planning.html">Retirement Planning</a>
+          <a href="/advanced-markets.html">Advanced Markets</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-phone">
+        <a href="tel:+18005551234" class="phone-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (800) 555-1234
+        </a>
+        <a href="#get-quote" class="btn-nav">Get a Free Quote</a>
+      </div>
+      <button class="burger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-section">
+      <button class="mobile-accordion-trigger" onclick="toggleMobileCoverage(this)">
+        Coverage
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="mobile-accordion-content" id="mobile-coverage">
+        <a href="/life-insurance.html">Life Insurance</a>
+        <a href="/whole-life-insurance.html">Whole Life Insurance</a>
+        <a href="/iuls.html">IULs</a>
+        <a href="/annuities.html">Annuities</a>
+        <a href="/mortgage-protection.html">Mortgage Protection</a>
+        <a href="/retirement-planning.html">Retirement Planning</a>
+        <a href="/advanced-markets.html">Advanced Markets</a>
+      </div>
+    </div>
+    <div class="mobile-cta-area">
+      <a href="tel:+18005551234" class="mobile-phone-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        (800) 555-1234
+      </a>
+      <a href="#get-quote" class="mobile-btn-nav">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Advanced Markets</span>
+    <h1>Sophisticated Coverage for the<br /><em>Business You've Built.</em></h1>
+    <p>Advanced market strategies use life insurance to solve complex business problems — protecting key employees, funding ownership transitions, retaining top talent, and creating tax-efficient executive compensation packages.</p>
+    <div class="hero-ctas">
+      <a href="#get-quote" class="btn-dark">See If You Qualify</a>
+      <a href="tel:+18005551234" class="btn-ghost">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS IT ═══ -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-content fade-up">
+      <span class="section-label">What Are Advanced Markets</span>
+      <h2>Life Insurance as a Business Strategy</h2>
+      <p>Advanced market solutions apply life insurance in business contexts where the stakes are highest. Whether you're a small business owner who is the single most important person in the company, a partnership that needs a transition plan, or a corporation looking to retain C-suite talent — there's a life insurance structure designed for your situation.</p>
+      <p>These strategies go well beyond simple coverage — they create tax-advantaged assets on the company balance sheet, fund legally binding buy-sell agreements, and attract executives with benefit packages that competitors can't easily match. Our agents specialize in identifying which structure delivers the most value for your specific business.</p>
+      <div class="fact-chips">
+        <span class="fact-chip">Key Person Protection</span>
+        <span class="fact-chip">Buy-Sell Funding</span>
+        <span class="fact-chip">Executive Benefits</span>
+        <span class="fact-chip">Balance Sheet Assets</span>
+      </div>
+    </div>
+    <div class="what-image fade-up">
+      <img src="https://placehold.co/600x420/111d2b/bd9468?text=Advanced+Markets" alt="Advanced market business insurance solutions" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Who It's For</span>
+      <h2>Who Advanced Markets Is Built For</h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Small Business Owners</h3>
+        <p>Owners whose business depends heavily on one or two key people, and who need a financial safety net if that person is suddenly gone.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Business Partners</h3>
+        <p>Partners in a business who need a funded buy-sell agreement to ensure a smooth, financially sound ownership transition if one partner dies.</p>
+      </div>
+      <div class="who-card fade-up">
+        <div class="who-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Corporations</h3>
+        <p>Companies looking to attract and retain senior executives using non-qualified deferred compensation or executive bonus plans funded by life insurance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">How It Works</span>
+      <h2 style="color:#fff">Strategic. Precise. <em style="font-style:italic;color:var(--gold-light)">Built for Business.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item fade-up">
+        <div class="step-num">1</div>
+        <h3>Understand Your Exposure</h3>
+        <p>We identify your key business risks — key person dependency, ownership transition gaps, or executive retention challenges — and quantify the financial exposure.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">2</div>
+        <h3>Design the Structure</h3>
+        <p>We design a life insurance strategy matched to your specific situation — whether that's key person coverage, a cross-purchase buy-sell, or a Section 162 executive bonus plan.</p>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-num">3</div>
+        <h3>Implement &amp; Document</h3>
+        <p>We coordinate with your attorney and accountant to ensure the insurance structure integrates properly with your legal agreements and tax strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="benefits-section">
+  <div class="benefits-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Why Choose Us</span>
+      <h2>Every Advantage You <em>Deserve</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Key Person Protection</strong><span>Receive a lump-sum payment if a critical employee or owner dies — covering lost revenue and recruitment costs.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Buy-Sell Funding</strong><span>Pre-fund the purchase of a deceased partner's ownership stake, preventing disputes and ensuring business continuity.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Executive Retention</strong><span>Create exclusive benefit packages that reward and retain your best people in ways standard benefits can't match.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Balance Sheet Strength</strong><span>Permanent life insurance cash value appears as an asset on the company balance sheet, improving financial position.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Tax Efficiency</strong><span>Many advanced market structures provide tax deductions on premiums or tax-free access to policy benefits.</span></div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text"><strong>Succession Planning</strong><span>Ensure the business you've built transfers smoothly to the right people — on your terms, not circumstance's.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEAD FORM ═══ -->
+<section class="form-section" id="get-quote">
+  <div class="form-section-inner">
+    <div class="form-section-header fade-up">
+      <span class="section-label" style="color:var(--gold)">Get Started</span>
+      <h2>Protect the Business You've Built</h2>
+    </div>
+    <div class="form-card fade-up">
+      <div class="form-card-title">See If You Qualify</div>
+      <div class="form-card-sub">Takes under 60 seconds. No commitment required.</div>
+      <div class="form-group">
+        <label for="coverage-type">Coverage Interest</label>
+        <select id="coverage-type">
+          <option value="life">Life Insurance</option>
+          <option value="whole-life">Whole Life Insurance</option>
+          <option value="iul">IUL (Indexed Universal Life)</option>
+          <option value="annuity">Annuities</option>
+          <option value="mortgage">Mortgage Protection</option>
+          <option value="retirement">Retirement Planning</option>
+          <option value="advanced" selected>Advanced Markets / Business</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input type="text" id="zip" placeholder="90210" maxlength="5" />
+      </div>
+      <button class="btn-primary" onclick="handleSubmit()">Get My Free Quote</button>
+      <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Common Questions</span>
+      <h2>Answers You <em>Actually Need</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>What is key person insurance and do I need it?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Key person insurance is a life insurance policy owned by the business on a critical employee or owner. If that person dies, the business receives the death benefit — funds used to cover revenue disruption, recruit a replacement, or satisfy lenders. If your business would be seriously harmed by the loss of one person, you likely need it.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>How does a buy-sell agreement work with life insurance?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">A buy-sell agreement is a legal contract that dictates what happens to a partner's ownership stake when they die. Life insurance funds the agreement — each partner is insured for their ownership value, and the death benefit gives the surviving partners the cash to purchase the deceased partner's share. Without funding, buy-sell agreements are just paper.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>What is a Section 162 executive bonus plan?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">A Section 162 plan allows a business to pay life insurance premiums on behalf of a key employee as a bonus. The premium is deductible to the business and taxable income to the employee — but the employee owns a permanent policy with growing cash value. It's a powerful retention tool for executives.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger">
+          <span>Do I need a large company to benefit from advanced market strategies?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. Some of the most impactful advanced market strategies — like key person coverage and simple buy-sell agreements — are designed specifically for small and mid-sized businesses. The strategies scale to your company size and budget.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2>Protect the Business You've<br /><em>Worked Your Life to Build</em></h2>
+    <p>Advanced market solutions require a licensed agent who understands both life insurance and business. Let's have a conversation about what your business specifically needs.</p>
+    <a href="#get-quote" class="btn-dark">Get My Free Quote Now</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="brand_assets/engel-financial-group.jpg" alt="Engel Financial Group" class="logo-img logo-img--footer" />
+        </div>
+        <p>Protecting families across America with trusted, affordable life insurance solutions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="/life-insurance.html">Life Insurance</a></li>
+          <li><a href="/whole-life-insurance.html">Whole Life Insurance</a></li>
+          <li><a href="/iuls.html">IULs</a></li>
+          <li><a href="/annuities.html">Annuities</a></li>
+          <li><a href="/mortgage-protection.html">Mortgage Protection</a></li>
+          <li><a href="/retirement-planning.html">Retirement Planning</a></li>
+          <li><a href="/advanced-markets.html">Advanced Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Carriers We Work With</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Licensing</a></li>
+          <li><a href="#">TCPA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Engel Financial Group. All rights reserved.</div>
+      <div class="footer-license">
+        <div class="license-dot"></div>
+        <span>Licensed &amp; Compliant</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function toggleMobileCoverage(btn) {
+  const content = document.getElementById('mobile-coverage');
+  content.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+function handleSubmit() {
+  const fields = ['first-name','last-name','phone','email','zip'];
+  const missing = fields.some(id => !document.getElementById(id).value.trim());
+  if (missing) { alert('Please fill in all required fields.'); return; }
+  window.location.href = '/thank-you.html';
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
