@@ -793,6 +793,15 @@
         font-size: 13px;
         color: rgba(17,29,43,0.4);
       }
+      .andrew-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .andrew-photo-img {
+        max-height: 360px;
+        object-fit: cover;
+        object-position: top center;
+      }
     }
 
     @media (max-width: 480px) {
@@ -904,6 +913,77 @@
     }
 
     .broker-mobile-cards { display: none; }
+
+    /* ── Andrew Section ── */
+    .andrew-section {
+      background: #fff;
+      padding: 100px 0;
+    }
+
+    .andrew-inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .andrew-photo-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(184,115,51,0.3);
+      box-shadow:
+        0 8px 32px rgba(17,29,43,0.12),
+        0 2px 8px rgba(17,29,43,0.06);
+    }
+
+    .andrew-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(17,29,43,0.25) 0%, transparent 50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .andrew-photo-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .andrew-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .andrew-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .andrew-bio {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 28px;
+    }
+
+    .andrew-pills {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
   </style>
 </head>
 <body>
@@ -1372,6 +1452,34 @@
           <div class="benefit-num">06 —</div>
           <h3>100% Free — No Obligation</h3>
           <p>There's no cost to speak with me or get a quote. If the coverage doesn't fit your situation, you're never obligated to move forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ MEET ANDREW ═══════════════ -->
+  <section class="andrew-section" id="meet-andrew">
+    <div class="section-inner">
+      <div class="andrew-inner">
+        <div class="andrew-photo-wrap andrew-photo">
+          <div class="andrew-photo-overlay"></div>
+          <img src="brand_assets/andrew business guy 7 figures..png" alt="Andrew Engel — Licensed Senior Underwriter" class="andrew-photo-img" />
+        </div>
+        <div class="andrew-content">
+          <div class="section-eyebrow">Who You're Working With</div>
+          <h2 class="andrew-name">Andrew Engel</h2>
+          <p class="andrew-title">Licensed Senior Underwriter &amp; Independent Insurance Broker</p>
+          <div class="gold-divider"></div>
+          <p class="andrew-bio">
+            I didn't grow up with safety nets or stability. I've seen firsthand how quickly everything can fall apart when there's no protection in place — and those experiences are what led me into this industry. Today, I help families create the kind of security I wish my own had. This isn't just a career. This is personal.
+          </p>
+          <div class="andrew-pills">
+            <span class="cred-pill">NPN 21546368</span>
+            <span class="cred-pill">Licensed in 15 States</span>
+            <span class="cred-pill">40–50+ Carrier Network</span>
+            <span class="cred-pill">Independent Broker</span>
+          </div>
+          <a href="/about-andrew.html" class="btn-dark">Learn More About Andrew →</a>
         </div>
       </div>
     </div>
