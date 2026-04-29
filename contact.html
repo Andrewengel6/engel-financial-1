@@ -4,15 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us — Engel Financial Group | Free Life Insurance Consultation</title>
-  <meta name="description" content="Talk to Andrew Engel, independent life insurance broker. Free consultation, no obligation. We help families across America find the right coverage." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "InsuranceAgency",
     "name": "Engel Financial Group",
     "description": "Independent life insurance broker serving families across America.",
     "telephone": "+18005551234",
@@ -22,6 +17,11 @@
     "priceRange": "Free consultation"
   }
   </script>
+  <meta name="description" content="Talk to Andrew Engel, independent life insurance broker. Free consultation, no obligation. We help families across America find the right coverage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
     /* Short hero */
     .contact-hero { background: var(--navy); padding: 140px 32px 80px; position: relative; overflow: hidden; text-align: center; }
@@ -187,24 +187,24 @@
         <div class="form-row">
           <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="John" />
+            <input type="text" id="first-name" name="first_name" placeholder="John" required autocomplete="given-name" />
           </div>
           <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" placeholder="Smith" />
+            <input type="text" id="last-name" name="last_name" placeholder="Smith" required autocomplete="family-name" />
           </div>
         </div>
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="(555) 000-0000" />
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" />
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="john@example.com" />
+          <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email" />
         </div>
         <div class="form-group">
           <label for="coverage-type">Coverage Interest</label>
-          <select id="coverage-type">
+          <select id="coverage-type" name="coverage_interest">
             <option value="">Select a coverage type...</option>
             <option value="life">Life Insurance</option>
             <option value="whole-life">Whole Life Insurance</option>
@@ -218,7 +218,7 @@
         </div>
         <div class="form-group">
           <label for="message">Message <span style="font-weight:400;color:var(--text-soft)">(optional)</span></label>
-          <textarea id="message" placeholder="Tell us a bit about your situation or what you're looking for..."></textarea>
+          <textarea id="message" name="message" placeholder="Tell us a bit about your situation or what you're looking for..."></textarea>
         </div>
         <button class="btn-primary" onclick="handleContactSubmit()">Send My Message</button>
         <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties.</p>
