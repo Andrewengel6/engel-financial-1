@@ -73,7 +73,7 @@ nav {
 }
 
 .logo-img {
-  height: 44px;
+  height: 52px;
   width: auto;
   object-fit: contain;
   border-radius: 2px;
@@ -133,6 +133,15 @@ nav {
   transition: opacity 0.2s, visibility 0.2s;
   z-index: 200;
   backdrop-filter: blur(12px);
+}
+
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
@@ -928,3 +937,37 @@ footer {
   .page-hero-inner { padding: 0 20px; }
   .form-section-inner { padding: 0 20px; }
 }
+
+/* ── Credential Pills ── */
+.cred-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(184,115,51,0.08);
+  border: 1px solid rgba(184,115,51,0.25);
+  border-radius: 20px;
+  padding: 5px 14px;
+  color: var(--gold);
+  margin: 0;
+}
+
+/* ── OTP VERIFICATION FLOW ── */
+.otp-digit-wrap { display: flex; gap: 10px; justify-content: center; margin: 28px 0 8px; }
+.otp-digit {
+  width: 44px; height: 56px; text-align: center; font-size: 24px; font-weight: 700;
+  font-family: 'Cormorant Garamond', serif; color: var(--navy);
+  border: 2px solid rgba(17,29,43,.2); border-radius: 8px; background: #fff;
+  outline: none; transition: border-color .15s;
+}
+.otp-digit:focus { border-color: var(--gold); }
+.otp-error-msg { color: #c0392b; font-size: 14px; margin: 0 0 12px; display: none; }
+.otp-resend-row { margin-top: 18px; font-size: 13px; color: var(--text-soft); }
+.otp-resend-row a { color: var(--gold); text-decoration: none; }
+.otp-resend-row a:hover { text-decoration: underline; }
+.success-check {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--gold);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+}
+.success-check svg { color: #fff; }

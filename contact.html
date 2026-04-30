@@ -10,7 +10,7 @@
     "@type": "InsuranceAgency",
     "name": "Engel Financial Group",
     "description": "Independent life insurance broker serving families across America.",
-    "telephone": "+18005551234",
+    "telephone": "+15016915508",
     "email": "hello@engelfinancialgroup.com",
     "url": "https://engelfinancialgroup.com",
     "areaServed": "United States",
@@ -98,9 +98,9 @@
     </div>
     <div class="nav-right">
       <div class="nav-phone">
-        <a href="tel:+18005551234" class="phone-link">
+        <a href="tel:+15016915508" class="phone-link">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-          (800) 555-1234
+          (501) 691-5508
         </a>
         <a href="/contact.html" class="btn-nav">Get a Free Quote</a>
       </div>
@@ -139,9 +139,9 @@
       </div>
     </div>
     <div class="mobile-cta-area">
-      <a href="tel:+18005551234" class="mobile-phone-link">
+      <a href="tel:+15016915508" class="mobile-phone-link">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        (800) 555-1234
+        (501) 691-5508
       </a>
       <a href="/contact.html" class="mobile-btn-nav">Get a Free Quote</a>
     </div>
@@ -166,7 +166,7 @@
       <h2>We're Here When<br />You're Ready.</h2>
       <div class="contact-phone">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        <a href="tel:+18005551234">(800) 555-1234</a>
+        <a href="tel:+15016915508">(501) 691-5508</a>
       </div>
       <div class="contact-email">
         <a href="mailto:hello@engelfinancialgroup.com">hello@engelfinancialgroup.com</a>
@@ -183,7 +183,7 @@
     </div>
     <!-- RIGHT: Contact Form -->
     <div class="contact-form-wrap fade-up">
-      <div class="form-card">
+      <div class="form-card" id="main-form">
         <div class="form-card-title">Send Us a Message</div>
         <div class="form-card-sub">We'll get back to you within 24 hours.</div>
         <div class="form-row">
@@ -205,6 +205,39 @@
           <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email" />
         </div>
         <div class="form-group">
+          <label for="state">State</label>
+          <select id="state" name="state" required>
+            <option value="">Select your state</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+            <option>Arkansas</option><option>California</option><option>Colorado</option>
+            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+            <option>Texas</option><option>Utah</option><option>Vermont</option>
+            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contact-urgency">When would you like to be contacted?</label>
+          <select id="contact-urgency" name="contact_urgency" required>
+            <option value="">Select...</option>
+            <option value="immediately">I want to be contacted immediately</option>
+            <option value="within_a_week">Within a week</option>
+            <option value="within_a_month">Within a month</option>
+            <option value="just_looking">I'm just looking around</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="coverage-type">Coverage Interest</label>
           <select id="coverage-type" name="coverage_interest">
             <option value="">Select a coverage type...</option>
@@ -222,8 +255,37 @@
           <label for="message">Message <span style="font-weight:400;color:var(--text-soft)">(optional)</span></label>
           <textarea id="message" name="message" placeholder="Tell us a bit about your situation or what you're looking for..."></textarea>
         </div>
-        <button class="btn-primary" onclick="handleContactSubmit()">Send My Message</button>
+        <button class="btn-primary" id="send-btn" onclick="otpForm.sendCode()">Send Verification Code</button>
         <p class="form-disclaimer">By submitting this form, you consent to be contacted by Engel Financial Group and its licensed representatives by phone call, SMS/text message, and email regarding insurance products and services. Message and data rates may apply. Consent is not a condition of purchase.</p>
+      </div>
+
+      <!-- OTP verification screen -->
+      <div id="otp-screen" class="form-card" style="display:none; text-align:center; padding:48px 32px;">
+        <div class="form-card-title">Verify Your Phone</div>
+        <div class="form-card-sub">We sent a 6-digit code to <strong id="otp-phone-display"></strong></div>
+        <div class="otp-digit-wrap">
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        </div>
+        <p class="otp-error-msg">That code didn't match. Please try again or resend.</p>
+        <button class="btn-primary" id="verify-btn" onclick="otpForm.verify()">Verify &amp; Submit</button>
+        <p class="otp-resend-row">
+          <a href="#" id="resend-link" onclick="otpForm.resend(event)" data-disabled="true" style="opacity:.4">Resend code</a>
+          <span id="resend-timer"></span>
+        </p>
+      </div>
+
+      <!-- Success screen -->
+      <div id="success-screen" class="form-card" style="display:none; text-align:center; padding:48px 32px;">
+        <div class="success-check">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="form-card-title">You're all set!</div>
+        <div class="form-card-sub">One of our agents will reach out to you within 24 hours.</div>
       </div>
     </div>
   </div>
@@ -306,6 +368,7 @@
   </div>
 </footer>
 
+<script src="/js/otp-form.js"></script>
 <script>
 document.body.classList.add('js-animations');
 function toggleMobileMenu() {
@@ -321,12 +384,34 @@ function toggleMobileCompany(btn) {
   content.classList.toggle('open');
   btn.classList.toggle('open');
 }
-function handleContactSubmit() {
-  const required = ['first-name','last-name','phone','email'];
-  const missing = required.some(id => !document.getElementById(id).value.trim());
-  if (missing) { alert('Please fill in all required fields.'); return; }
-  window.location.href = '/thank-you.html';
-}
+otpForm.init({
+  formCardId: 'main-form',
+  getFormData() {
+    const coverageMap = {
+      'life': 'Life Insurance', 'whole-life': 'Whole Life Insurance',
+      'iul': 'IUL', 'annuity': 'Annuities', 'mortgage': 'Mortgage Protection',
+      'retirement': 'Retirement Planning', 'advanced': 'Advanced Markets',
+      'general': 'General Inquiry',
+    };
+    const vals = {
+      first_name: document.getElementById('first-name').value.trim(),
+      last_name:  document.getElementById('last-name').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      state:      document.getElementById('state').value,
+      contact_urgency: document.getElementById('contact-urgency').value,
+      coverage_type: coverageMap[document.getElementById('coverage-type').value] || 'General Inquiry',
+      message:    document.getElementById('message').value.trim(),
+      source_page: '/contact.html',
+    };
+    const required = ['first_name','last_name','phone','email','state','contact_urgency'];
+    if (required.some(k => !vals[k])) {
+      alert('Please fill in all required fields.');
+      return null;
+    }
+    return vals;
+  },
+});
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
