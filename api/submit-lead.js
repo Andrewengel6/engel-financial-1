@@ -8,6 +8,11 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'method_not_allowed' });
   }
 
+  if (!process.env.ANDREW_PHONE) {
+    console.error('[submit-lead] ANDREW_PHONE not configured');
+    return res.status(500).json({ error: 'server_misconfigured' });
+  }
+
   const { code, ...leadData } = req.body || {};
   const phone = normalizePhone(leadData.phone);
 
@@ -40,7 +45,8 @@ module.exports = async function handler(req, res) {
       .insert({ ...safeData, phone });
     if (dbError) throw dbError;
 
-    await sendSms(process.env.ANDREW_PHONE, formatSms({ ...leadData, phone }));
+    sendSms(process.env.ANDREW_PHONE, formatSms({ ...safeData, phone }))
+      .catch(err => console.error('[submit-lead] SMS notify failed:', err.message));
 
     return res.json({ ok: true });
   } catch (err) {

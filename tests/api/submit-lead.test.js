@@ -83,3 +83,23 @@ test('passes normalised E.164 phone to checkVerification', async () => {
   await handler({ method: 'POST', body: { ...validBody, phone: '(501) 555-1234' } }, res);
   expect(checkVerification).toHaveBeenCalledWith('+15015551234', '123456');
 });
+
+test('strips unknown fields from DB insert', async () => {
+  checkVerification.mockResolvedValueOnce(true);
+  sendSms.mockResolvedValueOnce({});
+  const res = makeRes();
+  await handler({ method: 'POST', body: { ...validBody, malicious_field: 'x', __proto__: 'y' } }, res);
+  expect(mockInsert).toHaveBeenCalledWith(
+    expect.not.objectContaining({ malicious_field: 'x' })
+  );
+  expect(res.json).toHaveBeenCalledWith({ ok: true });
+});
+
+test('returns ok:true even when SMS notify fails', async () => {
+  checkVerification.mockResolvedValueOnce(true);
+  sendSms.mockRejectedValueOnce(new Error('SMS network error'));
+  const res = makeRes();
+  await handler({ method: 'POST', body: validBody }, res);
+  expect(mockInsert).toHaveBeenCalled();
+  expect(res.json).toHaveBeenCalledWith({ ok: true });
+});
