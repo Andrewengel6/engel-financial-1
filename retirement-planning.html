@@ -236,7 +236,7 @@
       <span class="section-label" style="color:var(--gold)">Get Started</span>
       <h2>Build Your Retirement Income Plan</h2>
     </div>
-    <div class="form-card fade-up">
+    <div class="form-card fade-up" id="main-form">
       <div class="form-card-title">See If You Qualify</div>
       <div class="form-card-sub">Takes under 60 seconds. No commitment required.</div>
       <div class="form-group">
@@ -270,11 +270,69 @@
         <input type="email" id="email" placeholder="john@example.com" />
       </div>
       <div class="form-group">
-        <label for="zip">Zip Code</label>
-        <input type="text" id="zip" placeholder="90210" maxlength="5" />
+        <label for="state">State</label>
+        <select id="state" name="state" required>
+          <option value="">Select your state</option>
+          <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+          <option>Arkansas</option><option>California</option><option>Colorado</option>
+          <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+          <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+          <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+          <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+          <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+          <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+          <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+          <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+          <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+          <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+          <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+          <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+          <option>Texas</option><option>Utah</option><option>Vermont</option>
+          <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+          <option>Wisconsin</option><option>Wyoming</option>
+        </select>
       </div>
-      <button class="btn-primary" onclick="handleSubmit()">Get My Free Quote</button>
+      <div class="form-group">
+        <label for="contact-urgency">When would you like to be contacted?</label>
+        <select id="contact-urgency" name="contact_urgency" required>
+          <option value="">Select...</option>
+          <option value="immediately">I want to be contacted immediately</option>
+          <option value="within_a_week">Within a week</option>
+          <option value="within_a_month">Within a month</option>
+          <option value="just_looking">I'm just looking around</option>
+        </select>
+      </div>
+      <button class="btn-primary" id="send-btn" onclick="otpForm.sendCode()">Send Verification Code</button>
       <p class="form-disclaimer">By submitting, you agree to be contacted by a licensed agent. Your information is 100% private and never sold to third parties.</p>
+    </div>
+
+    <!-- OTP verification screen -->
+    <div id="otp-screen" class="form-card" style="display:none; text-align:center; padding:48px 32px;">
+      <div class="form-card-title">Verify Your Phone</div>
+      <div class="form-card-sub">We sent a 6-digit code to <strong id="otp-phone-display"></strong></div>
+      <div class="otp-digit-wrap">
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+        <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" />
+      </div>
+      <p class="otp-error-msg">That code didn't match. Please try again or resend.</p>
+      <button class="btn-primary" id="verify-btn" onclick="otpForm.verify()">Verify &amp; Submit</button>
+      <p class="otp-resend-row">
+        <a href="#" id="resend-link" onclick="otpForm.resend(event)" data-disabled="true" style="opacity:.4">Resend code</a>
+        <span id="resend-timer"></span>
+      </p>
+    </div>
+
+    <!-- Success screen -->
+    <div id="success-screen" class="form-card" style="display:none; text-align:center; padding:48px 32px;">
+      <div class="success-check">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="form-card-title">You're all set!</div>
+      <div class="form-card-sub">One of our agents will reach out to you within 24 hours.</div>
     </div>
   </div>
 </section>
@@ -379,6 +437,7 @@
   </div>
 </footer>
 
+<script src="/js/otp-form.js"></script>
 <script>
 document.body.classList.add('js-animations');
 function toggleMobileMenu() {
@@ -402,12 +461,6 @@ document.querySelectorAll('.faq-trigger').forEach(trigger => {
     if (!wasOpen) item.classList.add('open');
   });
 });
-function handleSubmit() {
-  const fields = ['first-name','last-name','phone','email','zip'];
-  const missing = fields.some(id => !document.getElementById(id).value.trim());
-  if (missing) { alert('Please fill in all required fields.'); return; }
-  window.location.href = '/thank-you.html';
-}
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
@@ -419,6 +472,27 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+otpForm.init({
+  formCardId: 'main-form',
+  getFormData() {
+    const vals = {
+      first_name: document.getElementById('first-name').value.trim(),
+      last_name:  document.getElementById('last-name').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      state:      document.getElementById('state').value,
+      contact_urgency: document.getElementById('contact-urgency').value,
+      coverage_type: 'Retirement Planning',
+      source_page:   '/retirement-planning.html',
+    };
+    const required = ['first_name','last_name','phone','email','state','contact_urgency'];
+    if (required.some(k => !vals[k])) {
+      alert('Please fill in all required fields.');
+      return null;
+    }
+    return vals;
+  },
+});
 </script>
 </body>
 </html>
