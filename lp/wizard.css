@@ -499,9 +499,10 @@ body {
 
 /* Choice selected state (used by choiceWithNote) */
 .lp-choice--selected {
-  border-color: var(--gold);
+  border-color: var(--navy);
   background: #fffbf5;
   box-shadow: 0 4px 16px rgba(17,29,43,0.09);
+  transform: none;
 }
 
 /* Optional note field (used by choiceWithNote step) */
