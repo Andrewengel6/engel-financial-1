@@ -196,6 +196,7 @@ const lpWizard = (() => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+      if (!res.ok && res.status !== 400) throw new Error();
       const json = await res.json();
 
       if (json.error === 'invalid_code') {
@@ -207,7 +208,7 @@ const lpWizard = (() => {
         btn.textContent = 'Verify & Submit';
         return;
       }
-      if (!res.ok || !json.ok) throw new Error();
+      if (!json.ok) throw new Error();
       clearInterval(_resendInterval);
       _render(_current + 1);
     } catch {
@@ -287,6 +288,11 @@ const lpWizard = (() => {
       );
     }
 
+    if (step.type === 'dropdown' && _answers[step.field]) {
+      const sel = container.querySelector('#lp-input-' + step.field);
+      if (sel) sel.value = _answers[step.field];
+    }
+
     const nameBtn = container.querySelector('#lp-name-btn');
     if (nameBtn) nameBtn.addEventListener('click', submitName);
 
@@ -346,10 +352,11 @@ const lpWizard = (() => {
     const opts = step.options.map(o =>
       `<option value="${_h(o.value)}">${_h(o.label)}</option>`
     ).join('\n');
+    const headingId = `lp-q-${_h(step.field)}`;
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${_h(step.question)}</h2>
+      <h2 class="lp-question" id="${headingId}">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
-        <select class="lp-select" id="lp-input-${_h(step.field)}">
+        <select class="lp-select" id="lp-input-${_h(step.field)}" aria-labelledby="${headingId}">
           <option value="">Select&hellip;</option>
           ${opts}
         </select>
@@ -362,8 +369,8 @@ const lpWizard = (() => {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
-        <input type="text" class="lp-input" id="lp-first-name" placeholder="First name" autocomplete="given-name">
-        <input type="text" class="lp-input" id="lp-last-name" placeholder="Last name" autocomplete="family-name">
+        <input type="text" class="lp-input" id="lp-first-name" placeholder="First name" autocomplete="given-name" aria-label="First name">
+        <input type="text" class="lp-input" id="lp-last-name" placeholder="Last name" autocomplete="family-name" aria-label="Last name">
         <button class="lp-btn-primary" id="lp-name-btn">Continue &rarr;</button>
       </div>
     </div>`;
@@ -373,7 +380,7 @@ const lpWizard = (() => {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
-        <input type="email" class="lp-input" id="lp-email" placeholder="your@email.com" autocomplete="email">
+        <input type="email" class="lp-input" id="lp-email" placeholder="your@email.com" autocomplete="email" aria-label="Email address">
         <button class="lp-btn-primary" id="lp-email-btn">Continue &rarr;</button>
       </div>
     </div>`;
@@ -384,7 +391,7 @@ const lpWizard = (() => {
       <h2 class="lp-question">${_h(step.question)}</h2>
       <p class="lp-step-sub">We'll text you a 6-digit code to confirm your number.</p>
       <div class="lp-input-wrap">
-        <input type="tel" class="lp-input" id="lp-phone-input" placeholder="(555) 000-0000" autocomplete="tel">
+        <input type="tel" inputmode="tel" class="lp-input" id="lp-phone-input" placeholder="(555) 000-0000" autocomplete="tel" aria-label="Phone number">
         <p class="lp-err" id="lp-phone-err" style="display:none"></p>
         <button class="lp-btn-primary lp-btn-gold" id="lp-send-btn">Send My Code</button>
       </div>
