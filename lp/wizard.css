@@ -494,4 +494,5 @@ body {
 .lp-grid-card--loading {
   animation: lpPulse 0.9s ease-in-out infinite;
   cursor: wait;
+  pointer-events: none;
 }
