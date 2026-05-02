@@ -1,6 +1,9 @@
 jest.mock('../../api/utils/twilio', () => ({
   checkVerification: jest.fn(),
-  sendSms: jest.fn(),
+}));
+
+jest.mock('../../api/utils/telegram', () => ({
+  sendTelegram: jest.fn(),
 }));
 
 const mockInsert = jest.fn().mockResolvedValue({ error: null });
@@ -11,10 +14,11 @@ jest.mock('../../api/utils/supabase', () => ({
 }));
 
 const handler = require('../../api/submit-lead');
-const { checkVerification, sendSms } = require('../../api/utils/twilio');
+const { checkVerification } = require('../../api/utils/twilio');
+const { sendTelegram } = require('../../api/utils/telegram');
 
-process.env.ANDREW_PHONE = '+15010000000';
-process.env.TWILIO_FROM_NUMBER = '+15019999999';
+process.env.TELEGRAM_BOT_TOKEN = 'test-bot-token';
+process.env.TELEGRAM_CHAT_ID = '123456789';
 
 function makeRes() {
   const res = {};
@@ -64,21 +68,21 @@ test('returns 400 with invalid_code when OTP rejected', async () => {
   expect(res.json).toHaveBeenCalledWith({ ok: false, error: 'invalid_code' });
 });
 
-test('inserts lead and SMSes Andrew on valid code', async () => {
+test('inserts lead and notifies Andrew on valid code', async () => {
   checkVerification.mockResolvedValueOnce(true);
-  sendSms.mockResolvedValueOnce({});
+  sendTelegram.mockResolvedValueOnce({});
   const res = makeRes();
   await handler({ method: 'POST', body: validBody }, res);
   expect(mockInsert).toHaveBeenCalledWith(
     expect.objectContaining({ phone: '+15015551234', first_name: 'Jane' })
   );
-  expect(sendSms).toHaveBeenCalledWith('+15010000000', expect.stringContaining('Jane Doe'));
+  expect(sendTelegram).toHaveBeenCalledWith(expect.stringContaining('Jane Doe'));
   expect(res.json).toHaveBeenCalledWith({ ok: true });
 });
 
 test('passes normalised E.164 phone to checkVerification', async () => {
   checkVerification.mockResolvedValueOnce(true);
-  sendSms.mockResolvedValueOnce({});
+  sendTelegram.mockResolvedValueOnce({});
   const res = makeRes();
   await handler({ method: 'POST', body: { ...validBody, phone: '(501) 555-1234' } }, res);
   expect(checkVerification).toHaveBeenCalledWith('+15015551234', '123456');
@@ -86,7 +90,7 @@ test('passes normalised E.164 phone to checkVerification', async () => {
 
 test('strips unknown fields from DB insert', async () => {
   checkVerification.mockResolvedValueOnce(true);
-  sendSms.mockResolvedValueOnce({});
+  sendTelegram.mockResolvedValueOnce({});
   const res = makeRes();
   await handler({ method: 'POST', body: { ...validBody, malicious_field: 'x', __proto__: 'y' } }, res);
   expect(mockInsert).toHaveBeenCalledWith(
@@ -95,9 +99,9 @@ test('strips unknown fields from DB insert', async () => {
   expect(res.json).toHaveBeenCalledWith({ ok: true });
 });
 
-test('returns ok:true even when SMS notify fails', async () => {
+test('returns ok:true even when Telegram notify fails', async () => {
   checkVerification.mockResolvedValueOnce(true);
-  sendSms.mockRejectedValueOnce(new Error('SMS network error'));
+  sendTelegram.mockRejectedValueOnce(new Error('Telegram network error'));
   const res = makeRes();
   await handler({ method: 'POST', body: validBody }, res);
   expect(mockInsert).toHaveBeenCalled();

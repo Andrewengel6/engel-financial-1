@@ -1,15 +1,16 @@
-const { checkVerification, sendSms } = require('./utils/twilio');
+const { checkVerification } = require('./utils/twilio');
 const { getSupabase } = require('./utils/supabase');
 const { formatSms } = require('./utils/format-sms');
 const { normalizePhone } = require('./utils/phone');
+const { sendTelegram } = require('./utils/telegram');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'method_not_allowed' });
   }
 
-  if (!process.env.ANDREW_PHONE) {
-    console.error('[submit-lead] ANDREW_PHONE not configured');
+  if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+    console.error('[submit-lead] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not configured');
     return res.status(500).json({ error: 'server_misconfigured' });
   }
 
@@ -45,8 +46,8 @@ module.exports = async function handler(req, res) {
       .insert({ ...safeData, phone });
     if (dbError) throw dbError;
 
-    sendSms(process.env.ANDREW_PHONE, formatSms({ ...safeData, phone }))
-      .catch(err => console.error('[submit-lead] SMS notify failed:', err.message));
+    sendTelegram(formatSms({ ...safeData, phone }))
+      .catch(err => console.error('[submit-lead] Telegram notify failed:', err.message));
 
     return res.json({ ok: true });
   } catch (err) {
