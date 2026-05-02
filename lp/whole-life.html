@@ -89,6 +89,7 @@
       coverage_type: 'Whole Life Insurance',
       source_page: '/lp/whole-life',
       closingSteps: [
+        { type: 'dropdown', question: 'What state do you live in?', field: 'state', options: lpWizard.STATE_OPTIONS },
         { type: 'nameEmail', question: "Where should the licensed agent contact you?" },
         { type: 'phone', question: "Let's verify your phone number" },
         { type: 'otp' },
