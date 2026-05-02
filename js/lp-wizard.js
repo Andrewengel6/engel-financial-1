@@ -71,27 +71,96 @@ const lpWizard = (() => {
     { value: 'Wyoming', label: 'Wyoming' },
   ];
 
+  // Simple Lucide-style icons (24×24 viewBox, stroke-width 2)
+  const _SVG = (p) =>
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+
+  // Illustrated narrative icons (48×48 viewBox, stroke-width 2.5)
+  // These match the reference style: people, relationships, decorative details
+  const _I = (p) =>
+    `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+
   const ICONS = {
-    shield: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5L8 12.5V23c0 10.2 7.4 19.5 16 21.5 8.6-2 16-11.3 16-21.5V12.5z"/><polyline points="17,23 21.5,27.5 31,18"/></svg>`,
-    growth: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,38 17,22 25,29 40,12"/><polyline points="33,12 40,12 40,19"/><line x1="6" y1="38" x2="42" y2="38"/></svg>`,
-    handshake: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26l9-9h9l7 7h5l9-9"/><path d="M4 26l11 11 4-4"/><path d="M44 17L33 28l-4-4"/></svg>`,
-    question: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M20 19.5a4.5 4.5 0 0 1 8.6 1.5c0 3-4.6 4.5-4.6 7.5"/><circle cx="23.5" cy="34" r="1" fill="currentColor" stroke="none"/></svg>`,
-    heart: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 41C24 41 7 31.5 7 19a9 9 0 0 1 17-4.1A9 9 0 0 1 41 19c0 12.5-17 22-17 22z"/></svg>`,
-    coins: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="15" rx="13" ry="4.5"/><path d="M11 15v6c0 2.5 5.8 4.5 13 4.5S37 23.5 37 21v-6"/><path d="M11 21v6c0 2.5 5.8 4.5 13 4.5S37 29.5 37 27v-6"/><path d="M11 27v6c0 2.5 5.8 4.5 13 4.5S37 35.5 37 33v-6"/></svg>`,
-    clock: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><polyline points="24,14 24,24 31,29"/></svg>`,
-    document: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M30 6H14a2 2 0 0 0-2 2v32a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V14z"/><polyline points="30,6 30,14 38,14"/><line x1="18" y1="22" x2="30" y2="22"/><line x1="18" y1="28" x2="30" y2="28"/><line x1="18" y1="34" x2="24" y2="34"/></svg>`,
-    house: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24L24 9l18 15"/><path d="M12 19v23h24V19"/><rect x="19" y="31" width="10" height="11" rx="1"/></svg>`,
-    income: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><line x1="24" y1="12" x2="24" y2="36"/><path d="M30 17h-9a5 5 0 0 0 0 10h6a5 5 0 0 1 0 10H17"/></svg>`,
-    supplement: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,36 16,22 24,28 34,14"/><line x1="40" y1="8" x2="40" y2="20"/><line x1="34" y1="14" x2="44" y2="14"/><line x1="6" y1="36" x2="34" y2="36"/></svg>`,
-    family: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="13" r="5"/><path d="M5 40v-5a10 10 0 0 1 10-10h0a10 10 0 0 1 10 10v5"/><circle cx="35" cy="16" r="4"/><path d="M43 40v-4a7 7 0 0 0-14 0v4"/></svg>`,
-    person_arrow: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="12" r="6"/><path d="M8 42v-8a12 12 0 0 1 12-12"/><polyline points="26,22 34,22 34,30"/><line x1="22" y1="30" x2="34" y2="22"/></svg>`,
-    couple: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="13" r="5"/><path d="M6 38v-4a9 9 0 0 1 9-9h2"/><circle cx="32" cy="13" r="5"/><path d="M42 38v-4a9 9 0 0 0-9-9h-4a9 9 0 0 0-9 9v4"/></svg>`,
-    briefcase: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="18" width="32" height="24" rx="3"/><path d="M30 18v-4a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v4"/><line x1="8" y1="30" x2="40" y2="30"/></svg>`,
-    transfer: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 14A18 18 0 0 0 9 28"/><polyline points="40,8 40,14 34,14"/><path d="M8 34A18 18 0 0 0 39 20"/><polyline points="8,40 8,34 14,34"/></svg>`,
-    trophy: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h18v16a9 9 0 0 1-18 0z"/><path d="M15 14H8a7 7 0 0 0 7 7"/><path d="M33 14h7a7 7 0 0 1-7 7"/><line x1="19" y1="33" x2="19" y2="41"/><line x1="29" y1="33" x2="29" y2="41"/><line x1="14" y1="41" x2="34" y2="41"/></svg>`,
-    estate: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="42" x2="44" y2="42"/><line x1="4" y1="18" x2="44" y2="18"/><polygon points="24,6 4,18 44,18"/><rect x="10" y="18" width="6" height="24"/><rect x="21" y="18" width="6" height="24"/><rect x="32" y="18" width="6" height="24"/></svg>`,
-    child: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="13" r="6"/><path d="M14 42v-7a10 10 0 0 1 20 0v7"/><line x1="19" y1="30" x2="17" y2="42"/><line x1="29" y1="30" x2="31" y2="42"/></svg>`,
-    parent: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="11" r="6"/><path d="M10 42l4-14 8 8 4-14"/><path d="M32 40l4-10"/><line x1="36" y1="40" x2="36" y2="44"/></svg>`,
+    // ── Illustrated icons (48×48) ──
+
+    // Two adults side-by-side, small heart floating above — Spouse / partner
+    couple: _I(
+      `<circle cx="14" cy="27" r="5"/>` +
+      `<path d="M5 44v-4a9 9 0 0 1 9-9h1"/>` +
+      `<circle cx="34" cy="27" r="5"/>` +
+      `<path d="M43 44v-4a9 9 0 0 0-9-9h-4a9 9 0 0 0-9 9v4"/>` +
+      `<path d="M24 9C22 4 17 4 17 7C17 10 24 14 24 14C24 14 31 10 31 7C31 4 26 4 24 9Z"/>`
+    ),
+
+    // Adult with two small children on each side + sparkles — Children
+    child: _I(
+      `<circle cx="24" cy="13" r="5.5"/>` +
+      `<path d="M14 43v-5a10 10 0 0 1 10-10 10 10 0 0 1 10 10v5"/>` +
+      `<circle cx="7.5" cy="25" r="3.5"/>` +
+      `<path d="M3 43v-3a6 6 0 0 1 4.5-5.5"/>` +
+      `<circle cx="40.5" cy="25" r="3.5"/>` +
+      `<path d="M45 43v-3a6 6 0 0 0-4.5-5.5"/>` +
+      `<line x1="4" y1="12" x2="4" y2="16"/><line x1="2" y1="14" x2="6" y2="14"/>` +
+      `<line x1="44" y1="12" x2="44" y2="16"/><line x1="42" y1="14" x2="46" y2="14"/>`
+    ),
+
+    // Standing adult guiding elderly person with cane — Parent
+    parent: _I(
+      `<circle cx="13" cy="13" r="5"/>` +
+      `<path d="M4 43v-5a9 9 0 0 1 9-9h2"/>` +
+      `<circle cx="34" cy="14" r="4.5"/>` +
+      `<path d="M38 19L44 43"/>` +
+      `<path d="M34 18.5V24"/><path d="M30 24h8"/>` +
+      `<path d="M22 29C26 26 30 25 34 24"/>`
+    ),
+
+    // Heart with decorative ribbon bow — Other / legacy / love
+    heart: _I(
+      `<path d="M24 41C19 37 8 31 8 20A9 9 0 0 1 16 11C18.5 11 21 12 24 15C27 12 29.5 11 32 11A9 9 0 0 1 40 20C40 31 29 37 24 41Z"/>` +
+      `<path d="M20 14C18 11 14 11 14 11M28 14C30 11 34 11 34 11"/>` +
+      `<path d="M20 14C22 12.5 24 12 24 12C24 12 26 12.5 28 14"/>`
+    ),
+
+    // Shield outline with smaller heart inside — Protect / funeral / protection
+    shield: _I(
+      `<path d="M24 4L8 11V22C8 33.5 15 42 24 44C33 42 40 33.5 40 22V11Z"/>` +
+      `<path d="M24 33C21 30 15 27 15 22.5A6 6 0 0 1 21 16.5C22.5 16.5 23.5 17 24 18C24.5 17 25.5 16.5 27 16.5A6 6 0 0 1 33 22.5C33 27 27 30 24 33Z"/>`
+    ),
+
+    // Drawstring money bag with dollar sign — Leave inheritance / guaranteed savings
+    coins: _I(
+      `<ellipse cx="24" cy="31" rx="13" ry="12"/>` +
+      `<path d="M19.5 19.5C19.5 15.5 24 13 24 13C24 13 28.5 15.5 28.5 19.5"/>` +
+      `<path d="M19 19.5C20.5 21 23 21.5 24 21.5C25 21.5 27.5 21 29 19.5"/>` +
+      `<circle cx="24" cy="18" r="2.5"/>` +
+      `<line x1="24" y1="25" x2="24" y2="37"/>` +
+      `<path d="M21 27.5a3 3 0 0 1 3-2h1a2.5 2.5 0 0 1 0 5h-2a2.5 2.5 0 0 0 0 5h2a3 3 0 0 0 2.5-1.5"/>` +
+      `<line x1="14" y1="12" x2="17" y2="15"/><line x1="34" y1="12" x2="31" y2="15"/>`
+    ),
+
+    // Person bust with lightbulb above head — Not sure / question
+    question: _I(
+      `<circle cx="24" cy="27" r="7"/>` +
+      `<path d="M13 43v-3a11 11 0 0 1 11-11 11 11 0 0 1 11 11v3"/>` +
+      `<path d="M20 13A4 4 0 0 1 28 13C28 15.5 25.5 17 25.5 19.5H22.5C22.5 17 20 15.5 20 13Z"/>` +
+      `<line x1="22.5" y1="21" x2="25.5" y2="21"/>` +
+      `<line x1="23" y1="23" x2="25" y2="23"/>`
+    ),
+
+    // ── Simple Lucide icons (24×24) ──
+    income:       _SVG(`<circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>`),
+    growth:       _SVG(`<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>`),
+    handshake:    _SVG(`<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 0-3 3l2 2"/><path d="m21 15-3-3h-4.34"/><path d="M19 11V7.5l-2.534-2.534A1 1 0 0 0 15.757 4H14"/><path d="m3 15 3-3h4.34"/><path d="M5 11V7.5l2.534-2.534A1 1 0 0 1 8.243 4H10"/>`),
+    clock:        _SVG(`<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`),
+    document:     _SVG(`<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/>`),
+    house:        _SVG(`<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`),
+    supplement:   _SVG(`<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>`),
+    family:       _SVG(`<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`),
+    person_arrow: _SVG(`<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>`),
+    briefcase:    _SVG(`<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`),
+    transfer:     _SVG(`<path d="m17 11 4-4-4-4"/><path d="M3 12v-1a4 4 0 0 1 4-4h14"/><path d="m7 13-4 4 4 4"/><path d="M21 12v1a4 4 0 0 1-4 4H3"/>`),
+    trophy:       _SVG(`<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>`),
+    estate:       _SVG(`<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>`),
   };
 
   const CLOSING_STEPS = [
@@ -312,7 +381,9 @@ const lpWizard = (() => {
 
     document.getElementById('lp-progress-fill').style.width = pct + '%';
     document.getElementById('lp-step-label').textContent =
-      step.type === 'done' ? 'Complete!' : `Step ${n + 1} of ${total}`;
+      step.type === 'done'     ? 'Complete!'          :
+      step.type === 'redirect' ? ''                   :
+      `Step ${n + 1} of ${total}`;
 
     const backBtn = document.getElementById('lp-back-btn');
     backBtn.style.visibility = n === 0 ? 'hidden' : 'visible';
@@ -367,6 +438,19 @@ const lpWizard = (() => {
     if (interstitialNext) {
       interstitialNext.addEventListener('click', () => _render(_current + 1));
     }
+    // Bind redirect grid cards — single click fires window.location.href
+    if (step.type === 'redirect') {
+      const grid = container.querySelector('#lp-redirect-grid');
+      container.querySelectorAll('.lp-grid-card[data-href]').forEach(card => {
+        card.addEventListener('click', () => {
+          const href = card.dataset.href;
+          if (!href || grid.style.pointerEvents === 'none') return;
+          grid.style.pointerEvents = 'none';
+          card.classList.add('lp-grid-card--loading');
+          window.location.href = href;
+        });
+      });
+    }
 
     // Bind dropdown continue buttons
     const dropdownContinue = container.querySelector('.lp-dropdown-continue');
@@ -413,7 +497,7 @@ const lpWizard = (() => {
       _startResendTimer();
     }
 
-    document.getElementById('lp-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function _buildStepHtml(step) {
@@ -428,6 +512,7 @@ const lpWizard = (() => {
       case 'done':         return _doneHtml();
       case 'multiChoice':  return _multiChoiceHtml(step);
       case 'interstitial': return _interstitialHtml(step);
+      case 'redirect':     return _redirectHtml(step);
       default:             return '';
     }
   }
@@ -484,6 +569,19 @@ const lpWizard = (() => {
         <div class="lp-how-steps">${stepsHtml}</div>
       </div>
       <button class="lp-btn-primary" id="lp-interstitial-next">${_h(step.cta || 'Continue')}</button>
+    </div>`;
+  }
+
+  function _redirectHtml(step) {
+    const cards = step.choices.map(c =>
+      `<button type="button" class="lp-grid-card" data-href="${_h(c.href)}" aria-label="${_h(c.label)}">
+        <div class="lp-grid-card-icon">${c.icon || ''}</div>
+        <span class="lp-grid-card-label">${_h(c.label)}</span>
+      </button>`
+    ).join('');
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.question)}</h2>
+      <div class="lp-grid-choices" id="lp-redirect-grid">${cards}</div>
     </div>`;
   }
 
@@ -552,10 +650,15 @@ const lpWizard = (() => {
   }
 
   function _otpHtml() {
-    const display = _phone ? ` to ${_h(_phone)}` : '';
-    return `<div class="lp-step-inner">
-      <h2 class="lp-question">Enter the 6-digit code we sent${display}</h2>
-      <p class="lp-step-sub">Check your text messages. The code expires in 10 minutes.</p>
+    const phoneDisplay = _phone ? `Sent to ${_h(_phone)}.` : '';
+    return `<div class="lp-step-inner lp-otp-step">
+      <div class="lp-otp-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.82 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <h2 class="lp-question lp-question--center">Enter your 6-digit code</h2>
+      <p class="lp-step-sub lp-step-sub--center">${phoneDisplay} Check your texts — the code expires in 10 minutes.</p>
       <div class="lp-otp-row">
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" autocomplete="one-time-code" aria-label="Digit 1">
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 2">
