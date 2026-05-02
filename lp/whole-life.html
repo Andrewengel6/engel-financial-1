@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whole Life Insurance Quote — Engel Financial Group</title>
+  <meta name="description" content="Get a free whole life insurance quote in minutes. No obligation.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #111d2b;
+      --navy-mid: #1a2d3f;
+      --navy-light: #243851;
+      --gold: #b87333;
+      --gold-light: #bd9468;
+      --warm-white: #fbf3da;
+      --off-white: #f5ede0;
+      --text-dark: #111d2b;
+      --text-mid: #3c4c62;
+      --text-soft: #6b7a8d;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Progress bar */
+    .lp-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: rgba(17,29,43,0.12);
+      z-index: 200;
+    }
+    #lp-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.45s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+
+    /* Header */
+    .lp-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 0 1.25rem;
+    }
+    .lp-header-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .lp-logo img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .lp-phone-link {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-decoration: none;
+      color: var(--warm-white);
+      gap: 1px;
+    }
+    .lp-phone-link span {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+    .lp-phone-link strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .lp-phone-link:hover strong { color: var(--gold); }
+    .lp-phone-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
+
+    /* Main wizard area */
+    #lp-main {
+      min-height: calc(100vh - 60px);
+      padding: 2rem 1.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Controls bar (Back + Step label) */
+    .lp-controls {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      min-height: 36px;
+    }
+    #lp-back-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-mid);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0;
+      transition: color 0.15s;
+      visibility: hidden;
+    }
+    #lp-back-btn:hover { color: var(--gold); }
+    #lp-back-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
+    #lp-back-btn svg { width: 16px; height: 16px; }
+    #lp-step-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Step container */
+    #lp-step {
+      width: 100%;
+      max-width: 640px;
+    }
+    .lp-step-inner {
+      animation: lpStepIn 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lpStepIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .lp-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.65rem, 5vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1.75rem;
+    }
+    .lp-step-sub {
+      font-size: 0.925rem;
+      color: var(--text-soft);
+      margin-top: -1.25rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Choice buttons */
+    .lp-choices { display: flex; flex-direction: column; gap: 0.7rem; }
+    .lp-choice {
+      display: block;
+      width: 100%;
+      padding: 1.1rem 1.5rem;
+      background: white;
+      border: 2px solid rgba(17,29,43,0.09);
+      border-radius: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(17,29,43,0.05);
+    }
+    .lp-choice:hover {
+      border-color: var(--gold);
+      background: #fffbf5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(17,29,43,0.09);
+    }
+    .lp-choice:active { transform: translateY(0); }
+    .lp-choice:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 12px; }
+
+    /* Inputs */
+    .lp-input-wrap { display: flex; flex-direction: column; gap: 0.75rem; }
+    .lp-input, .lp-select {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid rgba(17,29,43,0.15);
+      border-radius: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      background: white;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .lp-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a8d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.25rem center;
+      padding-right: 3rem;
+    }
+    .lp-input:focus, .lp-select:focus { outline: none; border-color: var(--gold); }
+    .lp-input::placeholder { color: var(--text-soft); }
+
+    /* Primary button */
+    .lp-btn-primary {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--navy);
+      color: var(--warm-white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.12s;
+      letter-spacing: 0.01em;
+    }
+    .lp-btn-primary:hover { background: var(--navy-mid); transform: translateY(-1px); }
+    .lp-btn-primary:active { transform: translateY(0); }
+    .lp-btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .lp-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .lp-btn-gold { background: var(--gold); }
+    .lp-btn-gold:hover { background: #a36628; }
+
+    /* OTP */
+    .lp-otp-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .lp-otp-digit {
+      flex: 1;
+      height: 3.5rem;
+      border: 2px solid rgba(17,29,43,0.15);
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: white;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .lp-otp-digit:focus { outline: none; border-color: var(--gold); }
+    .lp-resend-row {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin-top: 1rem;
+    }
+    .lp-resend-link { color: var(--gold); text-decoration: none; }
+    .lp-resend-link:hover { text-decoration: underline; }
+
+    /* Error + disclaimer */
+    .lp-err {
+      font-size: 0.875rem;
+      color: #b92b27;
+      line-height: 1.4;
+    }
+    .lp-disclaimer {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+      margin-top: 0.5rem;
+    }
+
+    /* Shake */
+    @keyframes lpShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    .lp-shake { animation: lpShake 0.5s ease; }
+
+    /* Done screen */
+    .lp-done-screen { text-align: center; padding: 2.5rem 0; }
+    .lp-done-check {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 24px rgba(184,115,51,0.35);
+    }
+
+    /* Trust section */
+    .lp-trust {
+      background: var(--navy);
+      padding: 3.5rem 1.25rem;
+    }
+    .lp-trust-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .lp-trust h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--warm-white);
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+    .lp-trust-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+    .lp-trust-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .lp-trust-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .lp-trust-text strong { display: block; color: var(--warm-white); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .lp-trust-text p { color: var(--gold-light); font-size: 0.875rem; line-height: 1.55; }
+
+    /* Footer */
+    .lp-footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .lp-footer p { font-size: 0.72rem; color: var(--text-soft); line-height: 1.7; }
+    .lp-footer a { color: var(--gold-light); text-decoration: none; }
+    .lp-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 480px) {
+      .lp-otp-row { gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lp-progress">
+    <div id="lp-progress-fill"></div>
+  </div>
+
+  <header class="lp-header">
+    <div class="lp-header-inner">
+      <a href="/" class="lp-logo">
+        <img src="/brand_assets/engel-financial-group.jpg" alt="Engel Financial Group">
+      </a>
+      <a href="tel:+15016915508" class="lp-phone-link">
+        <span>Call us for help</span>
+        <strong>(501) 691-5508</strong>
+      </a>
+    </div>
+  </header>
+
+  <main id="lp-main">
+    <div class="lp-controls">
+      <button id="lp-back-btn" aria-label="Go back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </button>
+      <span id="lp-step-label"></span>
+    </div>
+    <div id="lp-step"></div>
+  </main>
+
+  <section class="lp-trust">
+    <div class="lp-trust-inner">
+      <h3>How it works</h3>
+      <div class="lp-trust-steps">
+        <div class="lp-trust-step">
+          <div class="lp-trust-num">1</div>
+          <div class="lp-trust-text">
+            <strong>Answer a few quick questions</strong>
+            <p>Takes about 2 minutes. No social security number or medical records required.</p>
+          </div>
+        </div>
+        <div class="lp-trust-step">
+          <div class="lp-trust-num">2</div>
+          <div class="lp-trust-text">
+            <strong>Verify your identity</strong>
+            <p>We send a quick text to confirm it's you — no spam, ever.</p>
+          </div>
+        </div>
+        <div class="lp-trust-step">
+          <div class="lp-trust-num">3</div>
+          <div class="lp-trust-text">
+            <strong>Speak with a licensed agent</strong>
+            <p>Andrew Engel, licensed insurance advisor, will personally reach out within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="lp-footer">
+    <p>
+      &copy; 2026 Engel Financial Group. All rights reserved.<br>
+      Licensed insurance professional. This site is not affiliated with or endorsed by any government agency.<br>
+      <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+      <a href="/terms-of-service.html">Terms of Service</a> &nbsp;&middot;&nbsp;
+      <a href="/tcpa-compliance.html">TCPA Compliance</a>
+    </p>
+  </footer>
+
+  <script src="/js/lp-wizard.js"></script>
+  <script>
+    document.getElementById('lp-back-btn').addEventListener('click', function() { lpWizard.back(); });
+
+    lpWizard.init({
+      coverage_type: 'Whole Life Insurance',
+      source_page: '/lp/whole-life',
+      steps: [
+        {
+          type: 'dropdown',
+          question: 'How old are you?',
+          field: 'age',
+          options: lpWizard.AGE_OPTIONS,
+        },
+        {
+          type: 'dropdown',
+          question: 'What state do you live in?',
+          field: 'state',
+          options: lpWizard.STATE_OPTIONS,
+        },
+        {
+          type: 'choice',
+          question: 'Who depends on you financially?',
+          field: 'beneficiary',
+          choices: [
+            { label: 'Spouse or partner', value: 'spouse_partner' },
+            { label: 'Children', value: 'children' },
+            { label: 'Parent', value: 'parent' },
+            { label: 'Other', value: 'other' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'What coverage amount are you looking for?',
+          field: 'coverage_amount',
+          choices: [
+            { label: '$25,000', value: '$25,000' },
+            { label: '$50,000', value: '$50,000' },
+            { label: '$100,000', value: '$100,000' },
+            { label: '$250,000+', value: '$250,000+' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'What is your gender?',
+          field: 'gender',
+          choices: [
+            { label: 'Male', value: 'male' },
+            { label: 'Female', value: 'female' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'Do you use tobacco products?',
+          field: 'tobacco',
+          choices: [
+            { label: 'No', value: 'no' },
+            { label: 'Yes', value: 'yes' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'How would you describe your overall health?',
+          field: 'health',
+          choices: [
+            { label: 'Great', value: 'great' },
+            { label: 'Fair', value: 'fair' },
+            { label: 'Poor', value: 'poor' },
+          ],
+        },
+      ],
+    });
+  </script>
+</body>
+</html>
