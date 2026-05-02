@@ -478,7 +478,7 @@ const lpWizard = (() => {
           if (!selected) return;
           _answers[step.field] = selected.dataset.value;
           const noteEl = container.querySelector('#lp-note-input');
-          _answers[step.noteField] = noteEl ? noteEl.value.trim() : '';
+          if (step.noteField) _answers[step.noteField] = noteEl ? noteEl.value.trim() : '';
           _render(_current + 1);
         });
       }
@@ -627,7 +627,7 @@ const lpWizard = (() => {
       <div class="lp-choices" id="lp-cwn-choices">${buttons}</div>
       <div class="lp-note-wrap">
         <label class="lp-note-label" for="lp-note-input">${_h(step.notePlaceholder || 'Anything else we should know? (optional)')}</label>
-        <textarea class="lp-textarea" id="lp-note-input" rows="3" aria-label="Optional notes"></textarea>
+        <textarea class="lp-textarea" id="lp-note-input" rows="3"></textarea>
       </div>
       <button class="lp-btn-primary" id="lp-cwn-continue" disabled>Continue &rarr;</button>
     </div>`;
