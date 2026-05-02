@@ -396,24 +396,26 @@ const lpWizard = (() => {
       btn.addEventListener('click', () => select(btn.dataset.field, btn.dataset.value));
     });
     // Bind multi-choice grid cards
-    container.querySelectorAll('.lp-grid-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const field = card.dataset.field;
-        const value = card.dataset.value;
-        if (!_multiAnswers[field]) _multiAnswers[field] = new Set();
-        if (_multiAnswers[field].has(value)) {
-          _multiAnswers[field].delete(value);
-          card.classList.remove('lp-grid-card--selected');
-          card.setAttribute('aria-pressed', 'false');
-        } else {
-          _multiAnswers[field].add(value);
-          card.classList.add('lp-grid-card--selected');
-          card.setAttribute('aria-pressed', 'true');
-        }
-        const nextBtn = document.getElementById('lp-multi-next');
-        if (nextBtn) nextBtn.disabled = _multiAnswers[field].size === 0;
+    if (step.type === 'multiChoice') {
+      container.querySelectorAll('.lp-grid-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const field = card.dataset.field;
+          const value = card.dataset.value;
+          if (!_multiAnswers[field]) _multiAnswers[field] = new Set();
+          if (_multiAnswers[field].has(value)) {
+            _multiAnswers[field].delete(value);
+            card.classList.remove('lp-grid-card--selected');
+            card.setAttribute('aria-pressed', 'false');
+          } else {
+            _multiAnswers[field].add(value);
+            card.classList.add('lp-grid-card--selected');
+            card.setAttribute('aria-pressed', 'true');
+          }
+          const nextBtn = document.getElementById('lp-multi-next');
+          if (nextBtn) nextBtn.disabled = _multiAnswers[field].size === 0;
+        });
       });
-    });
+    }
     // Restore multi-select state on back navigation
     if (step.type === 'multiChoice' && _multiAnswers[step.field] && _multiAnswers[step.field].size > 0) {
       _multiAnswers[step.field].forEach(val => {
@@ -574,7 +576,7 @@ const lpWizard = (() => {
 
   function _redirectHtml(step) {
     const cards = step.choices.map(c =>
-      `<button type="button" class="lp-grid-card" data-href="${_h(c.href)}" aria-label="${_h(c.label)}">
+      `<button type="button" class="lp-grid-card" data-href="${_h(_safeHref(c.href))}" aria-label="${_h(c.label)}">
         <div class="lp-grid-card-icon">${c.icon || ''}</div>
         <span class="lp-grid-card-label">${_h(c.label)}</span>
       </button>`
@@ -707,6 +709,13 @@ const lpWizard = (() => {
     void el.offsetWidth;
     el.classList.add('lp-shake');
     el.focus();
+  }
+
+  function _safeHref(href) {
+    try {
+      const u = new URL(href, window.location.href);
+      return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : '#';
+    } catch { return '#'; }
   }
 
   return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
