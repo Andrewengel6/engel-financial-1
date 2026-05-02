@@ -184,7 +184,7 @@ const lpWizard = (() => {
 
   function init(config) {
     _config = config;
-    _steps = [...config.steps, ...CLOSING_STEPS];
+    _steps = [...config.steps, ...(config.closingSteps ?? CLOSING_STEPS)];
     _current = 0;
     _answers = {};
     _multiAnswers = {};
@@ -392,9 +392,11 @@ const lpWizard = (() => {
     container.innerHTML = _buildStepHtml(step);
 
     // Bind choice buttons
-    container.querySelectorAll('.lp-choice').forEach(btn => {
-      btn.addEventListener('click', () => select(btn.dataset.field, btn.dataset.value));
-    });
+    if (step.type !== 'choiceWithNote') {
+      container.querySelectorAll('.lp-choice').forEach(btn => {
+        btn.addEventListener('click', () => select(btn.dataset.field, btn.dataset.value));
+      });
+    }
     // Bind multi-choice grid cards
     if (step.type === 'multiChoice') {
       container.querySelectorAll('.lp-grid-card').forEach(card => {
@@ -452,6 +454,34 @@ const lpWizard = (() => {
           window.location.href = href;
         });
       });
+    }
+    // Bind choiceWithNote — highlights selection, enables Continue, saves both answers
+    if (step.type === 'choiceWithNote') {
+      const continueBtn = container.querySelector('#lp-cwn-continue');
+      container.querySelectorAll('.lp-choice-pick').forEach(btn => {
+        btn.addEventListener('click', () => {
+          container.querySelectorAll('.lp-choice-pick').forEach(b => b.classList.remove('lp-choice--selected'));
+          btn.classList.add('lp-choice--selected');
+          if (continueBtn) continueBtn.disabled = false;
+        });
+      });
+      // Restore state on back navigation
+      if (_answers[step.field]) {
+        const prev = container.querySelector(`.lp-choice-pick[data-value="${CSS.escape(_answers[step.field])}"]`);
+        if (prev) { prev.classList.add('lp-choice--selected'); if (continueBtn) continueBtn.disabled = false; }
+        const noteEl = container.querySelector('#lp-note-input');
+        if (noteEl && _answers[step.noteField]) noteEl.value = _answers[step.noteField];
+      }
+      if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+          const selected = container.querySelector('.lp-choice-pick.lp-choice--selected');
+          if (!selected) return;
+          _answers[step.field] = selected.dataset.value;
+          const noteEl = container.querySelector('#lp-note-input');
+          _answers[step.noteField] = noteEl ? noteEl.value.trim() : '';
+          _render(_current + 1);
+        });
+      }
     }
 
     // Bind dropdown continue buttons
@@ -514,8 +544,9 @@ const lpWizard = (() => {
       case 'done':         return _doneHtml();
       case 'multiChoice':  return _multiChoiceHtml(step);
       case 'interstitial': return _interstitialHtml(step);
-      case 'redirect':     return _redirectHtml(step);
-      default:             return '';
+      case 'redirect':        return _redirectHtml(step);
+      case 'choiceWithNote':  return _choiceWithNoteHtml(step);
+      default:                return '';
     }
   }
 
@@ -584,6 +615,21 @@ const lpWizard = (() => {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-grid-choices" id="lp-redirect-grid">${cards}</div>
+    </div>`;
+  }
+
+  function _choiceWithNoteHtml(step) {
+    const buttons = step.choices.map(c =>
+      `<button type="button" class="lp-choice lp-choice-pick" data-field="${_h(step.field)}" data-value="${_h(c.value)}">${_h(c.label)}</button>`
+    ).join('\n');
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.question)}</h2>
+      <div class="lp-choices" id="lp-cwn-choices">${buttons}</div>
+      <div class="lp-note-wrap">
+        <label class="lp-note-label" for="lp-note-input">${_h(step.notePlaceholder || 'Anything else we should know? (optional)')}</label>
+        <textarea class="lp-textarea" id="lp-note-input" rows="3" aria-label="Optional notes"></textarea>
+      </div>
+      <button class="lp-btn-primary" id="lp-cwn-continue" disabled>Continue &rarr;</button>
     </div>`;
   }
 
