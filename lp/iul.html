@@ -353,6 +353,90 @@
     @media (min-width: 480px) {
       .lp-otp-row { gap: 0.75rem; }
     }
+
+    /* 2×2 multi-choice grid */
+    .lp-grid-choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .lp-grid-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1.25rem 0.75rem 1rem;
+      background: white;
+      border: 2px solid rgba(17,29,43,0.1);
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      min-height: 110px;
+      font-family: 'Jost', sans-serif;
+    }
+    .lp-grid-card:hover { border-color: var(--gold); background: #fffbf5; box-shadow: 0 4px 12px rgba(17,29,43,0.08); }
+    .lp-grid-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 14px; }
+    .lp-grid-card--selected { border-color: var(--navy); box-shadow: 0 2px 8px rgba(17,29,43,0.1); }
+    .lp-grid-card-icon { color: var(--navy); display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; }
+    .lp-grid-card-icon svg { width: 34px; height: 34px; }
+    .lp-grid-card-label { font-size: 0.8rem; font-weight: 500; color: var(--text-dark); line-height: 1.3; }
+    .lp-grid-card-check {
+      position: absolute;
+      top: 0.55rem; right: 0.55rem;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(17,29,43,0.2);
+      background: white;
+      transition: all 0.15s;
+    }
+    .lp-grid-card--selected .lp-grid-card-check {
+      background: var(--navy);
+      border-color: var(--navy);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpolyline points='2,6 5,9 10,3' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* Interstitial step */
+    .lp-how-it-works {
+      background: rgba(17,29,43,0.04);
+      border: 1px solid rgba(17,29,43,0.09);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .lp-how-label-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border: 1px solid rgba(17,29,43,0.2);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 1.25rem;
+      font-family: 'Jost', sans-serif;
+    }
+    .lp-how-steps { display: flex; flex-direction: column; }
+    .lp-how-step { display: flex; align-items: center; gap: 0.85rem; padding: 0.2rem 0; }
+    .lp-how-connector { width: 1.5px; height: 22px; background: rgba(17,29,43,0.15); margin-left: 14px; }
+    .lp-how-num {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+    }
+    .lp-how-step--active .lp-how-num { background: var(--navy); color: white; }
+    .lp-how-step--upcoming .lp-how-num { background: transparent; border: 1.5px solid rgba(17,29,43,0.2); color: var(--text-soft); }
+    .lp-how-step-label { font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text-dark); font-weight: 500; }
+    .lp-how-step--upcoming .lp-how-step-label { color: var(--text-soft); font-weight: 400; }
   </style>
 </head>
 <body>
@@ -434,29 +518,35 @@
       source_page: '/lp/iul',
       steps: [
         {
-          type: 'number',
-          question: 'How old are you?',
-          field: 'age',
-          min: 18,
-          max: 99,
-          placeholder: 'Enter your age',
-        },
-        {
-          type: 'dropdown',
-          question: 'What state do you live in?',
-          field: 'state',
-          options: lpWizard.STATE_OPTIONS,
-        },
-        {
-          type: 'choice',
-          question: "What's your primary goal?",
+          type: 'multiChoice',
+          question: "What are your goals for an IUL policy?",
+          subtext: 'Select all that apply.',
           field: 'primary_goal',
           choices: [
-            { label: 'Tax-free retirement income', value: 'Tax-free retirement income' },
-            { label: 'Protect my family', value: 'Protect my family' },
-            { label: 'Build tax-free wealth', value: 'Build tax-free wealth' },
-            { label: 'Not sure', value: 'Not sure' },
+            { label: 'Tax-free retirement income', value: 'Tax-free retirement income', icon: lpWizard.ICONS.income },
+            { label: 'Protect & grow my savings', value: 'Protect and grow savings', icon: lpWizard.ICONS.shield },
+            { label: 'Supplement my retirement plan', value: 'Supplement retirement', icon: lpWizard.ICONS.supplement },
+            { label: 'Leave a tax-free legacy', value: 'Leave a tax-free legacy', icon: lpWizard.ICONS.heart },
           ],
+        },
+        {
+          type: 'multiChoice',
+          question: 'Who depends on you financially?',
+          subtext: 'Select all that apply.',
+          field: 'beneficiary',
+          choices: [
+            { label: 'Spouse or partner', value: 'spouse_partner', icon: lpWizard.ICONS.couple },
+            { label: 'Children', value: 'children', icon: lpWizard.ICONS.child },
+            { label: 'Parent', value: 'parent', icon: lpWizard.ICONS.parent },
+            { label: 'Other', value: 'other', icon: lpWizard.ICONS.heart },
+          ],
+        },
+        {
+          type: 'interstitial',
+          headline: "Great! You're one step closer.",
+          subtext: "Andrew Engel and the Engel Financial Group team will personally review your needs and reach out within 24 hours.",
+          steps: ["Tell us about yourself", "Connect with your licensed advisor"],
+          cta: "Continue",
         },
         {
           type: 'choice',
@@ -467,6 +557,12 @@
             { label: '$100k–$200k', value: '$100k–$200k' },
             { label: '$200k+', value: '$200k+' },
           ],
+        },
+        {
+          type: 'dropdown',
+          question: 'What state do you live in?',
+          field: 'state',
+          options: lpWizard.STATE_OPTIONS,
         },
         {
           type: 'choice',
@@ -495,6 +591,14 @@
             { label: 'Fair', value: 'fair' },
             { label: 'Poor', value: 'poor' },
           ],
+        },
+        {
+          type: 'number',
+          question: 'How old are you?',
+          field: 'age',
+          min: 18,
+          max: 99,
+          placeholder: 'Enter your age',
         },
       ],
     });

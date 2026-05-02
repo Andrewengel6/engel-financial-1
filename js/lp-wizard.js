@@ -6,6 +6,7 @@ const lpWizard = (() => {
   let _config = {};
   let _phone = '';
   let _resendInterval = null;
+  let _multiAnswers = {};
 
   const AGE_OPTIONS = [
     { value: '18–24', label: '18–24' },
@@ -70,6 +71,29 @@ const lpWizard = (() => {
     { value: 'Wyoming', label: 'Wyoming' },
   ];
 
+  const ICONS = {
+    shield: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5L8 12.5V23c0 10.2 7.4 19.5 16 21.5 8.6-2 16-11.3 16-21.5V12.5z"/><polyline points="17,23 21.5,27.5 31,18"/></svg>`,
+    growth: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,38 17,22 25,29 40,12"/><polyline points="33,12 40,12 40,19"/><line x1="6" y1="38" x2="42" y2="38"/></svg>`,
+    handshake: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26l9-9h9l7 7h5l9-9"/><path d="M4 26l11 11 4-4"/><path d="M44 17L33 28l-4-4"/></svg>`,
+    question: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M20 19.5a4.5 4.5 0 0 1 8.6 1.5c0 3-4.6 4.5-4.6 7.5"/><circle cx="23.5" cy="34" r="1" fill="currentColor" stroke="none"/></svg>`,
+    heart: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 41C24 41 7 31.5 7 19a9 9 0 0 1 17-4.1A9 9 0 0 1 41 19c0 12.5-17 22-17 22z"/></svg>`,
+    coins: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="15" rx="13" ry="4.5"/><path d="M11 15v6c0 2.5 5.8 4.5 13 4.5S37 23.5 37 21v-6"/><path d="M11 21v6c0 2.5 5.8 4.5 13 4.5S37 29.5 37 27v-6"/><path d="M11 27v6c0 2.5 5.8 4.5 13 4.5S37 35.5 37 33v-6"/></svg>`,
+    clock: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><polyline points="24,14 24,24 31,29"/></svg>`,
+    document: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M30 6H14a2 2 0 0 0-2 2v32a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V14z"/><polyline points="30,6 30,14 38,14"/><line x1="18" y1="22" x2="30" y2="22"/><line x1="18" y1="28" x2="30" y2="28"/><line x1="18" y1="34" x2="24" y2="34"/></svg>`,
+    house: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24L24 9l18 15"/><path d="M12 19v23h24V19"/><rect x="19" y="31" width="10" height="11" rx="1"/></svg>`,
+    income: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><line x1="24" y1="12" x2="24" y2="36"/><path d="M30 17h-9a5 5 0 0 0 0 10h6a5 5 0 0 1 0 10H17"/></svg>`,
+    supplement: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,36 16,22 24,28 34,14"/><line x1="40" y1="8" x2="40" y2="20"/><line x1="34" y1="14" x2="44" y2="14"/><line x1="6" y1="36" x2="34" y2="36"/></svg>`,
+    family: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="13" r="5"/><path d="M5 40v-5a10 10 0 0 1 10-10h0a10 10 0 0 1 10 10v5"/><circle cx="35" cy="16" r="4"/><path d="M43 40v-4a7 7 0 0 0-14 0v4"/></svg>`,
+    person_arrow: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="12" r="6"/><path d="M8 42v-8a12 12 0 0 1 12-12"/><polyline points="26,22 34,22 34,30"/><line x1="22" y1="30" x2="34" y2="22"/></svg>`,
+    couple: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="13" r="5"/><path d="M6 38v-4a9 9 0 0 1 9-9h2"/><circle cx="32" cy="13" r="5"/><path d="M42 38v-4a9 9 0 0 0-9-9h-4a9 9 0 0 0-9 9v4"/></svg>`,
+    briefcase: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="18" width="32" height="24" rx="3"/><path d="M30 18v-4a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v4"/><line x1="8" y1="30" x2="40" y2="30"/></svg>`,
+    transfer: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 14A18 18 0 0 0 9 28"/><polyline points="40,8 40,14 34,14"/><path d="M8 34A18 18 0 0 0 39 20"/><polyline points="8,40 8,34 14,34"/></svg>`,
+    trophy: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8h18v16a9 9 0 0 1-18 0z"/><path d="M15 14H8a7 7 0 0 0 7 7"/><path d="M33 14h7a7 7 0 0 1-7 7"/><line x1="19" y1="33" x2="19" y2="41"/><line x1="29" y1="33" x2="29" y2="41"/><line x1="14" y1="41" x2="34" y2="41"/></svg>`,
+    estate: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="42" x2="44" y2="42"/><line x1="4" y1="18" x2="44" y2="18"/><polygon points="24,6 4,18 44,18"/><rect x="10" y="18" width="6" height="24"/><rect x="21" y="18" width="6" height="24"/><rect x="32" y="18" width="6" height="24"/></svg>`,
+    child: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="13" r="6"/><path d="M14 42v-7a10 10 0 0 1 20 0v7"/><line x1="19" y1="30" x2="17" y2="42"/><line x1="29" y1="30" x2="31" y2="42"/></svg>`,
+    parent: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="11" r="6"/><path d="M10 42l4-14 8 8 4-14"/><path d="M32 40l4-10"/><line x1="36" y1="40" x2="36" y2="44"/></svg>`,
+  };
+
   const CLOSING_STEPS = [
     {
       type: 'choice',
@@ -94,6 +118,7 @@ const lpWizard = (() => {
     _steps = [...config.steps, ...CLOSING_STEPS];
     _current = 0;
     _answers = {};
+    _multiAnswers = {};
     _phone = '';                     // reset phone state
     clearInterval(_resendInterval);  // cancel any running timer
     _resendInterval = null;          // reset interval handle
@@ -299,6 +324,50 @@ const lpWizard = (() => {
     container.querySelectorAll('.lp-choice').forEach(btn => {
       btn.addEventListener('click', () => select(btn.dataset.field, btn.dataset.value));
     });
+    // Bind multi-choice grid cards
+    container.querySelectorAll('.lp-grid-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const field = card.dataset.field;
+        const value = card.dataset.value;
+        if (!_multiAnswers[field]) _multiAnswers[field] = new Set();
+        if (_multiAnswers[field].has(value)) {
+          _multiAnswers[field].delete(value);
+          card.classList.remove('lp-grid-card--selected');
+          card.setAttribute('aria-pressed', 'false');
+        } else {
+          _multiAnswers[field].add(value);
+          card.classList.add('lp-grid-card--selected');
+          card.setAttribute('aria-pressed', 'true');
+        }
+        const nextBtn = document.getElementById('lp-multi-next');
+        if (nextBtn) nextBtn.disabled = _multiAnswers[field].size === 0;
+      });
+    });
+    // Restore multi-select state on back navigation
+    if (step.type === 'multiChoice' && _multiAnswers[step.field] && _multiAnswers[step.field].size > 0) {
+      _multiAnswers[step.field].forEach(val => {
+        const card = container.querySelector(`.lp-grid-card[data-value="${CSS.escape(val)}"]`);
+        if (card) { card.classList.add('lp-grid-card--selected'); card.setAttribute('aria-pressed', 'true'); }
+      });
+      const nextBtn = document.getElementById('lp-multi-next');
+      if (nextBtn) nextBtn.disabled = false;
+    }
+    // Bind multi-next button
+    const multiNext = container.querySelector('#lp-multi-next');
+    if (multiNext && step.type === 'multiChoice') {
+      const f = step.field;
+      multiNext.addEventListener('click', () => {
+        if (!_multiAnswers[f] || _multiAnswers[f].size === 0) return;
+        _answers[f] = [..._multiAnswers[f]].join(',');
+        _render(_current + 1);
+      });
+    }
+    // Bind interstitial continue
+    const interstitialNext = container.querySelector('#lp-interstitial-next');
+    if (interstitialNext) {
+      interstitialNext.addEventListener('click', () => _render(_current + 1));
+    }
+
     // Bind dropdown continue buttons
     const dropdownContinue = container.querySelector('.lp-dropdown-continue');
     if (dropdownContinue) {
@@ -355,9 +424,11 @@ const lpWizard = (() => {
       case 'name':     return _nameHtml(step);
       case 'email':    return _emailHtml(step);
       case 'phone':    return _phoneHtml(step);
-      case 'otp':      return _otpHtml();
-      case 'done':     return _doneHtml();
-      default:         return '';
+      case 'otp':          return _otpHtml();
+      case 'done':         return _doneHtml();
+      case 'multiChoice':  return _multiChoiceHtml(step);
+      case 'interstitial': return _interstitialHtml(step);
+      default:             return '';
     }
   }
 
@@ -377,6 +448,42 @@ const lpWizard = (() => {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-choices">${choices}</div>
+    </div>`;
+  }
+
+  function _multiChoiceHtml(step) {
+    const cards = step.choices.map(c =>
+      `<button type="button" class="lp-grid-card" data-field="${_h(step.field)}" data-value="${_h(c.value)}" aria-pressed="false">
+        <div class="lp-grid-card-icon">${c.icon || ''}</div>
+        <span class="lp-grid-card-label">${_h(c.label)}</span>
+        <div class="lp-grid-card-check"></div>
+      </button>`
+    ).join('');
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.question)}</h2>
+      ${step.subtext ? `<p class="lp-step-sub">${_h(step.subtext)}</p>` : ''}
+      <div class="lp-grid-choices">${cards}</div>
+      <button class="lp-btn-primary lp-multi-next" id="lp-multi-next" disabled>Next &rarr;</button>
+    </div>`;
+  }
+
+  function _interstitialHtml(step) {
+    const stepsHtml = step.steps.map((s, i) => {
+      const cls = i === 0 ? 'lp-how-step--active' : 'lp-how-step--upcoming';
+      const connector = i < step.steps.length - 1 ? '<div class="lp-how-connector"></div>' : '';
+      return `<div class="lp-how-step ${cls}">
+        <div class="lp-how-num">${i + 1}</div>
+        <span class="lp-how-step-label">${_h(s)}</span>
+      </div>${connector}`;
+    }).join('');
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.headline)}</h2>
+      <p class="lp-step-sub">${_h(step.subtext)}</p>
+      <div class="lp-how-it-works">
+        <span class="lp-how-label-tag">HOW IT WORKS</span>
+        <div class="lp-how-steps">${stepsHtml}</div>
+      </div>
+      <button class="lp-btn-primary" id="lp-interstitial-next">${_h(step.cta || 'Continue')}</button>
     </div>`;
   }
 
@@ -499,5 +606,5 @@ const lpWizard = (() => {
     el.focus();
   }
 
-  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS };
+  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
 })();
