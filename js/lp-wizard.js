@@ -158,7 +158,16 @@ const lpWizard = (() => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: rawPhone }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        btn.disabled = false;
+        btn.textContent = 'Send My Code';
+        errEl.textContent = errJson.error === 'too_many_attempts'
+          ? 'Too many attempts. Please wait a few minutes and try again.'
+          : 'Something went wrong sending your code. Please try again.';
+        errEl.style.display = '';
+        return;
+      }
       _render(_current + 1);
     } catch {
       btn.disabled = false;
@@ -214,7 +223,7 @@ const lpWizard = (() => {
     } catch {
       btn.disabled = false;
       btn.textContent = 'Verify & Submit';
-      errEl.textContent = 'Something went wrong. Please try again.';
+      errEl.textContent = 'Something went wrong submitting your information. Please call us at (501) 691-5508 or try again.';
       errEl.style.display = '';
     }
   }
@@ -261,6 +270,7 @@ const lpWizard = (() => {
 
   function _render(n) {
     if (n >= _steps.length) return;
+    clearInterval(_resendInterval);
     _current = n;
     const step = _steps[n];
     const total = _steps.length - 1;
@@ -405,7 +415,7 @@ const lpWizard = (() => {
       <h2 class="lp-question">Enter the 6-digit code we sent${display}</h2>
       <p class="lp-step-sub">Check your text messages. The code expires in 10 minutes.</p>
       <div class="lp-otp-row">
-        <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 1">
+        <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" autocomplete="one-time-code" aria-label="Digit 1">
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 2">
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 3">
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 4">
