@@ -94,6 +94,9 @@ const lpWizard = (() => {
     _steps = [...config.steps, ...CLOSING_STEPS];
     _current = 0;
     _answers = {};
+    _phone = '';                     // reset phone state
+    clearInterval(_resendInterval);  // cancel any running timer
+    _resendInterval = null;          // reset interval handle
     _render(0);
   }
 
@@ -137,7 +140,9 @@ const lpWizard = (() => {
     const rawPhone = document.getElementById('lp-phone-input').value.trim();
     if (!rawPhone) { _shake(document.getElementById('lp-phone-input')); return; }
     const digits = rawPhone.replace(/\D/g, '');
-    if (digits.length < 10) { _shake(document.getElementById('lp-phone-input')); return; }
+    if (digits.length !== 10 && !(digits.length === 11 && digits[0] === '1')) {
+      _shake(document.getElementById('lp-phone-input')); return;
+    }
     _phone = rawPhone;
     _answers.phone = rawPhone;
 
@@ -227,6 +232,7 @@ const lpWizard = (() => {
       _startResendTimer();
     } catch {
       link.dataset.disabled = 'false';
+      link.style.opacity = '1';
     }
   }
 
@@ -253,6 +259,7 @@ const lpWizard = (() => {
   }
 
   function _render(n) {
+    if (n >= _steps.length) return;
     _current = n;
     const step = _steps[n];
     const total = _steps.length - 1;
@@ -267,6 +274,18 @@ const lpWizard = (() => {
 
     const container = document.getElementById('lp-step');
     container.innerHTML = _buildStepHtml(step);
+
+    // Bind choice buttons
+    container.querySelectorAll('.lp-choice').forEach(btn => {
+      btn.addEventListener('click', () => select(btn.dataset.field, btn.dataset.value));
+    });
+    // Bind dropdown continue buttons
+    const dropdownContinue = container.querySelector('.lp-dropdown-continue');
+    if (dropdownContinue) {
+      dropdownContinue.addEventListener('click', () =>
+        continueFromInput(dropdownContinue.dataset.field, dropdownContinue.dataset.inputId)
+      );
+    }
 
     if (step.type === 'otp') {
       _bindOtpInputs();
@@ -289,39 +308,44 @@ const lpWizard = (() => {
     }
   }
 
-  function _esc(str) {
-    return String(str).replace(/'/g, "\\'");
+  function _h(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   function _choiceHtml(step) {
     const choices = step.choices.map(c =>
-      `<button class="lp-choice" onclick="lpWizard.select('${_esc(step.field)}', '${_esc(c.value)}')">${c.label}</button>`
+      `<button class="lp-choice" data-field="${_h(step.field)}" data-value="${_h(c.value)}">${_h(c.label)}</button>`
     ).join('\n');
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${step.question}</h2>
+      <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-choices">${choices}</div>
     </div>`;
   }
 
   function _dropdownHtml(step) {
     const opts = step.options.map(o =>
-      `<option value="${o.value}">${o.label}</option>`
+      `<option value="${_h(o.value)}">${_h(o.label)}</option>`
     ).join('\n');
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${step.question}</h2>
+      <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
-        <select class="lp-select" id="lp-input-${step.field}">
+        <select class="lp-select" id="lp-input-${_h(step.field)}">
           <option value="">Select&hellip;</option>
           ${opts}
         </select>
-        <button class="lp-btn-primary" onclick="lpWizard.continueFromInput('${_esc(step.field)}', 'lp-input-${step.field}')">Continue &rarr;</button>
+        <button class="lp-btn-primary lp-dropdown-continue" data-field="${_h(step.field)}" data-input-id="lp-input-${_h(step.field)}">Continue &rarr;</button>
       </div>
     </div>`;
   }
 
   function _nameHtml(step) {
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${step.question}</h2>
+      <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
         <input type="text" class="lp-input" id="lp-first-name" placeholder="First name" autocomplete="given-name">
         <input type="text" class="lp-input" id="lp-last-name" placeholder="Last name" autocomplete="family-name">
@@ -332,7 +356,7 @@ const lpWizard = (() => {
 
   function _emailHtml(step) {
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${step.question}</h2>
+      <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
         <input type="email" class="lp-input" id="lp-email" placeholder="your@email.com" autocomplete="email">
         <button class="lp-btn-primary" onclick="lpWizard.submitEmail()">Continue &rarr;</button>
@@ -342,7 +366,7 @@ const lpWizard = (() => {
 
   function _phoneHtml(step) {
     return `<div class="lp-step-inner">
-      <h2 class="lp-question">${step.question}</h2>
+      <h2 class="lp-question">${_h(step.question)}</h2>
       <p class="lp-step-sub">We'll text you a 6-digit code to confirm your number.</p>
       <div class="lp-input-wrap">
         <input type="tel" class="lp-input" id="lp-phone-input" placeholder="(555) 000-0000" autocomplete="tel">
@@ -354,7 +378,7 @@ const lpWizard = (() => {
   }
 
   function _otpHtml() {
-    const display = _phone ? ` to ${_phone}` : '';
+    const display = _phone ? ` to ${_h(_phone)}` : '';
     return `<div class="lp-step-inner">
       <h2 class="lp-question">Enter the 6-digit code we sent${display}</h2>
       <p class="lp-step-sub">Check your text messages. The code expires in 10 minutes.</p>
@@ -375,7 +399,7 @@ const lpWizard = (() => {
   function _doneHtml() {
     return `<div class="lp-step-inner lp-done-screen">
       <div class="lp-done-check">&#10003;</div>
-      <h2 class="lp-question">You're all set, ${_answers.first_name}!</h2>
+      <h2 class="lp-question">You're all set, ${_h(_answers.first_name || '')}!</h2>
       <p class="lp-step-sub">A licensed agent from Engel Financial Group will reach out to you within 24 hours. We look forward to helping you.</p>
     </div>`;
   }
