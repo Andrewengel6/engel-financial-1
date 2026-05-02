@@ -239,6 +239,19 @@ const lpWizard = (() => {
     _render(_current + 1);
   }
 
+  function submitNameEmail() {
+    const first = document.getElementById('lp-first-name').value.trim();
+    const last  = document.getElementById('lp-last-name').value.trim();
+    const email = document.getElementById('lp-email').value.trim();
+    if (!first) { _shake(document.getElementById('lp-first-name')); return; }
+    if (!last)  { _shake(document.getElementById('lp-last-name'));  return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { _shake(document.getElementById('lp-email')); return; }
+    _answers.first_name = first;
+    _answers.last_name  = last;
+    _answers.email      = email;
+    _render(_current + 1);
+  }
+
   async function sendCode() {
     const rawPhone = document.getElementById('lp-phone-input').value.trim();
     if (!rawPhone) { _shake(document.getElementById('lp-phone-input')); return; }
@@ -378,12 +391,14 @@ const lpWizard = (() => {
     const step = _steps[n];
     const total = _steps.length - 1;
     const pct = Math.round((n / total) * 100);
+    const numberedTotal = _steps.filter(s => s.type !== 'done' && s.type !== 'redirect' && s.type !== 'otp').length;
 
     document.getElementById('lp-progress-fill').style.width = pct + '%';
     document.getElementById('lp-step-label').textContent =
-      step.type === 'done'     ? 'Complete!'          :
-      step.type === 'redirect' ? ''                   :
-      `Step ${n + 1} of ${total}`;
+      step.type === 'done'     ? 'Complete!'               :
+      step.type === 'redirect' ? ''                        :
+      step.type === 'otp'      ? ''                        :
+      `Step ${n + 1} of ${numberedTotal}`;
 
     const backBtn = document.getElementById('lp-back-btn');
     backBtn.style.visibility = n === 0 ? 'hidden' : 'visible';
@@ -515,6 +530,9 @@ const lpWizard = (() => {
     const emailBtn = container.querySelector('#lp-email-btn');
     if (emailBtn) emailBtn.addEventListener('click', submitEmail);
 
+    const nameEmailBtn = container.querySelector('#lp-name-email-btn');
+    if (nameEmailBtn) nameEmailBtn.addEventListener('click', submitNameEmail);
+
     const sendBtnEl = container.querySelector('#lp-send-btn');
     if (sendBtnEl) sendBtnEl.addEventListener('click', sendCode);
 
@@ -546,6 +564,7 @@ const lpWizard = (() => {
       case 'interstitial': return _interstitialHtml(step);
       case 'redirect':        return _redirectHtml(step);
       case 'choiceWithNote':  return _choiceWithNoteHtml(step);
+      case 'nameEmail':       return _nameEmailHtml(step);
       default:                return '';
     }
   }
@@ -684,6 +703,18 @@ const lpWizard = (() => {
     </div>`;
   }
 
+  function _nameEmailHtml(step) {
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.question || "Where should the licensed agent contact you?")}</h2>
+      <div class="lp-input-wrap">
+        <input type="text" class="lp-input" id="lp-first-name" placeholder="First name" autocomplete="given-name" aria-label="First name">
+        <input type="text" class="lp-input" id="lp-last-name" placeholder="Last name" autocomplete="family-name" aria-label="Last name">
+        <input type="email" class="lp-input" id="lp-email" placeholder="your@email.com" autocomplete="email" aria-label="Email address">
+        <button class="lp-btn-primary" id="lp-name-email-btn">Continue &rarr;</button>
+      </div>
+    </div>`;
+  }
+
   function _phoneHtml(step) {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
@@ -764,5 +795,5 @@ const lpWizard = (() => {
     } catch { return '#'; }
   }
 
-  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
+  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, submitNameEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
 })();
