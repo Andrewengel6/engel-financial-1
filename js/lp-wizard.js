@@ -287,6 +287,21 @@ const lpWizard = (() => {
       );
     }
 
+    const nameBtn = container.querySelector('#lp-name-btn');
+    if (nameBtn) nameBtn.addEventListener('click', submitName);
+
+    const emailBtn = container.querySelector('#lp-email-btn');
+    if (emailBtn) emailBtn.addEventListener('click', submitEmail);
+
+    const sendBtnEl = container.querySelector('#lp-send-btn');
+    if (sendBtnEl) sendBtnEl.addEventListener('click', sendCode);
+
+    const verifyBtn = container.querySelector('#lp-verify-btn');
+    if (verifyBtn) verifyBtn.addEventListener('click', verifyOtp);
+
+    const resendLinkEl = container.querySelector('#lp-resend-link');
+    if (resendLinkEl) resendLinkEl.addEventListener('click', resendCode);
+
     if (step.type === 'otp') {
       _bindOtpInputs();
       _startResendTimer();
@@ -349,7 +364,7 @@ const lpWizard = (() => {
       <div class="lp-input-wrap">
         <input type="text" class="lp-input" id="lp-first-name" placeholder="First name" autocomplete="given-name">
         <input type="text" class="lp-input" id="lp-last-name" placeholder="Last name" autocomplete="family-name">
-        <button class="lp-btn-primary" onclick="lpWizard.submitName()">Continue &rarr;</button>
+        <button class="lp-btn-primary" id="lp-name-btn">Continue &rarr;</button>
       </div>
     </div>`;
   }
@@ -359,7 +374,7 @@ const lpWizard = (() => {
       <h2 class="lp-question">${_h(step.question)}</h2>
       <div class="lp-input-wrap">
         <input type="email" class="lp-input" id="lp-email" placeholder="your@email.com" autocomplete="email">
-        <button class="lp-btn-primary" onclick="lpWizard.submitEmail()">Continue &rarr;</button>
+        <button class="lp-btn-primary" id="lp-email-btn">Continue &rarr;</button>
       </div>
     </div>`;
   }
@@ -371,7 +386,7 @@ const lpWizard = (() => {
       <div class="lp-input-wrap">
         <input type="tel" class="lp-input" id="lp-phone-input" placeholder="(555) 000-0000" autocomplete="tel">
         <p class="lp-err" id="lp-phone-err" style="display:none"></p>
-        <button class="lp-btn-primary lp-btn-gold" id="lp-send-btn" onclick="lpWizard.sendCode()">Send My Code</button>
+        <button class="lp-btn-primary lp-btn-gold" id="lp-send-btn">Send My Code</button>
       </div>
       <p class="lp-disclaimer">By providing your number you consent to receive SMS texts from Engel Financial Group. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
     </div>`;
@@ -391,8 +406,8 @@ const lpWizard = (() => {
         <input type="text" inputmode="numeric" maxlength="1" class="lp-otp-digit" aria-label="Digit 6">
       </div>
       <p class="lp-err" id="lp-otp-err" style="display:none"></p>
-      <button class="lp-btn-primary" id="lp-verify-btn" onclick="lpWizard.verifyOtp()">Verify &amp; Submit</button>
-      <p class="lp-resend-row">Didn't get it? <a href="#" class="lp-resend-link" id="lp-resend-link" data-disabled="true" onclick="lpWizard.resendCode(event)" style="opacity:.4">Resend code</a> <span id="lp-resend-timer"></span></p>
+      <button class="lp-btn-primary" id="lp-verify-btn">Verify &amp; Submit</button>
+      <p class="lp-resend-row">Didn't get it? <a href="#" class="lp-resend-link" id="lp-resend-link" data-disabled="true" style="opacity:.4">Resend code</a> <span id="lp-resend-timer"></span></p>
     </div>`;
   }
 
