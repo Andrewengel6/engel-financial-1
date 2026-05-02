@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
       .insert({ ...safeData, phone });
     if (dbError) throw dbError;
 
-    sendTelegram(formatSms({ ...safeData, phone }))
+    await sendTelegram(formatSms({ ...safeData, phone }))
       .catch(err => console.error('[submit-lead] Telegram notify failed:', err.message));
 
     return res.json({ ok: true });
