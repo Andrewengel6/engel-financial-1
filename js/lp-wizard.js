@@ -109,6 +109,15 @@ const lpWizard = (() => {
     _render(_current + 1);
   }
 
+  function continueFromNumber(field, inputId, min, max) {
+    const el = document.getElementById(inputId);
+    const val = el ? el.value.trim() : '';
+    const num = parseInt(val, 10);
+    if (!val || isNaN(num) || num < min || num > max) { _shake(el); return; }
+    _answers[field] = String(num);
+    _render(_current + 1);
+  }
+
   function continueFromInput(field, inputId) {
     const el = document.getElementById(inputId);
     const val = el ? el.value.trim() : '';
@@ -297,10 +306,22 @@ const lpWizard = (() => {
         continueFromInput(dropdownContinue.dataset.field, dropdownContinue.dataset.inputId)
       );
     }
+    // Bind number input continue buttons
+    const numberContinue = container.querySelector('.lp-number-continue');
+    if (numberContinue) {
+      const nField = numberContinue.dataset.field;
+      const nInputId = numberContinue.dataset.inputId;
+      const nMin = parseInt(numberContinue.dataset.min, 10);
+      const nMax = parseInt(numberContinue.dataset.max, 10);
+      numberContinue.addEventListener('click', () => continueFromNumber(nField, nInputId, nMin, nMax));
+      // Also allow Enter key to advance
+      const nInput = container.querySelector('#' + nInputId);
+      if (nInput) nInput.addEventListener('keydown', e => { if (e.key === 'Enter') continueFromNumber(nField, nInputId, nMin, nMax); });
+    }
 
-    if (step.type === 'dropdown' && _answers[step.field]) {
-      const sel = container.querySelector('#lp-input-' + step.field);
-      if (sel) sel.value = _answers[step.field];
+    if ((step.type === 'dropdown' || step.type === 'number') && _answers[step.field]) {
+      const el = container.querySelector('#lp-input-' + step.field);
+      if (el) el.value = _answers[step.field];
     }
 
     const nameBtn = container.querySelector('#lp-name-btn');
@@ -330,6 +351,7 @@ const lpWizard = (() => {
     switch (step.type) {
       case 'choice':   return _choiceHtml(step);
       case 'dropdown': return _dropdownHtml(step);
+      case 'number':   return _numberHtml(step);
       case 'name':     return _nameHtml(step);
       case 'email':    return _emailHtml(step);
       case 'phone':    return _phoneHtml(step);
@@ -371,6 +393,19 @@ const lpWizard = (() => {
           ${opts}
         </select>
         <button class="lp-btn-primary lp-dropdown-continue" data-field="${_h(step.field)}" data-input-id="lp-input-${_h(step.field)}">Continue &rarr;</button>
+      </div>
+    </div>`;
+  }
+
+  function _numberHtml(step) {
+    const min = step.min !== undefined ? step.min : 18;
+    const max = step.max !== undefined ? step.max : 99;
+    const headingId = `lp-q-${_h(step.field)}`;
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question" id="${headingId}">${_h(step.question)}</h2>
+      <div class="lp-input-wrap">
+        <input type="number" inputmode="numeric" class="lp-input" id="lp-input-${_h(step.field)}" min="${min}" max="${max}" placeholder="${_h(step.placeholder || '')}" aria-labelledby="${headingId}">
+        <button class="lp-btn-primary lp-number-continue" data-field="${_h(step.field)}" data-input-id="lp-input-${_h(step.field)}" data-min="${min}" data-max="${max}">Continue &rarr;</button>
       </div>
     </div>`;
   }
@@ -464,5 +499,5 @@ const lpWizard = (() => {
     el.focus();
   }
 
-  return { init, back, select, continueFromInput, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS };
+  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS };
 })();

@@ -434,10 +434,12 @@
       source_page: '/lp/annuities',
       steps: [
         {
-          type: 'dropdown',
+          type: 'number',
           question: 'How old are you?',
           field: 'age',
-          options: lpWizard.AGE_OPTIONS,
+          min: 18,
+          max: 99,
+          placeholder: 'Enter your age',
         },
         {
           type: 'dropdown',

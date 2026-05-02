@@ -434,10 +434,12 @@
       source_page: '/lp/mortgage-protection',
       steps: [
         {
-          type: 'dropdown',
+          type: 'number',
           question: 'How old are you?',
           field: 'age',
-          options: lpWizard.AGE_OPTIONS,
+          min: 18,
+          max: 99,
+          placeholder: 'Enter your age',
         },
         {
           type: 'dropdown',
@@ -447,34 +449,24 @@
         },
         {
           type: 'choice',
-          question: 'What is your mortgage status?',
-          field: 'mortgage_status',
+          question: 'What type of coverage are you looking for?',
+          field: 'coverage_subtype',
           choices: [
-            { label: 'I have an active mortgage', value: 'Active mortgage' },
-            { label: 'I just closed', value: 'Just closed' },
-            { label: "I'm refinancing soon", value: 'Refinancing soon' },
-            { label: "I'm planning to buy", value: 'Planning to buy' },
+            { label: 'Mortgage Protection', value: 'Mortgage Protection' },
+            { label: 'Term Life Insurance', value: 'Term' },
+            { label: 'Whole Life Insurance', value: 'Whole Life' },
+            { label: 'Not sure — need help deciding', value: 'Not sure' },
           ],
         },
         {
           type: 'choice',
-          question: 'What is your approximate mortgage balance?',
-          field: 'mortgage_balance',
+          question: 'Who depends on you financially?',
+          field: 'beneficiary',
           choices: [
-            { label: '$50k–$150k', value: '$50k–$150k' },
-            { label: '$150k–$300k', value: '$150k–$300k' },
-            { label: '$300k–$500k', value: '$300k–$500k' },
-            { label: '$500k+', value: '$500k+' },
-          ],
-        },
-        {
-          type: 'choice',
-          question: 'Who else is on the mortgage?',
-          field: 'mortgage_co_borrower',
-          choices: [
-            { label: 'Just me', value: 'Just me' },
-            { label: 'Spouse or partner', value: 'Spouse or partner' },
-            { label: 'Other', value: 'Other' },
+            { label: 'Spouse or partner', value: 'spouse_partner' },
+            { label: 'Children', value: 'children' },
+            { label: 'Parent', value: 'parent' },
+            { label: 'Other', value: 'other' },
           ],
         },
         {
