@@ -46,12 +46,12 @@ Add a `redirect` case to `_buildStepHtml` and a corresponding renderer `_redirec
 **Behavior:**
 - Renders the same 2×N icon grid as `multiChoice` (reuses `.lp-grid-choices` / `.lp-grid-card` CSS)
 - No "Next" button — each card is a single-action trigger
-- On click: add `.lp-grid-card--loading` class to the clicked card (visual feedback), then `window.location.href = choice.href`
+- On click: add `.lp-grid-card--loading` class to the clicked card, set `pointer-events: none` on the `.lp-grid-choices` container (prevents any second tap on any card), then `window.location.href = choice.href`
 - No field/answer stored — this step is purely navigational
 - Back button is hidden on step 0 (same as existing behavior)
 
 **Loading state (lp/wizard.css):**
-Add `.lp-grid-card--loading` style: reduce opacity to 0.6, show a subtle pulse animation on the card. Prevents double-click and signals to the user their tap registered.
+Add `.lp-grid-card--loading` style: reduce opacity to 0.6, show a subtle pulse animation on the card. The parent `.lp-grid-choices` gets `pointer-events: none` on first click to block double-taps.
 
 ### Changes to lp/life-insurance.html
 
