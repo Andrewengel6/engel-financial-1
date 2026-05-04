@@ -3,6 +3,39 @@ const { getSupabase } = require('./utils/supabase');
 const { formatSms } = require('./utils/format-sms');
 const { normalizePhone } = require('./utils/phone');
 const { sendTelegram } = require('./utils/telegram');
+const crypto = require('crypto');
+
+function _sha256(val) {
+  return crypto.createHash('sha256').update((val || '').trim().toLowerCase()).digest('hex');
+}
+
+async function sendCapi({ email, phone, sourceUrl }) {
+  const pixelId     = process.env.META_PIXEL_ID;
+  const accessToken = process.env.META_ACCESS_TOKEN;
+  if (!pixelId || !accessToken) return; // silently skip if not configured
+
+  const body = JSON.stringify({
+    data: [{
+      event_name:       'CompleteRegistration',
+      event_time:       Math.floor(Date.now() / 1000),
+      action_source:    'website',
+      event_source_url: sourceUrl || 'https://engelfinancialgroup.com/lp/life-insurance',
+      user_data: {
+        em: [_sha256(email)],
+        ph: [_sha256(phone)],
+      },
+    }],
+  });
+
+  const res = await fetch(
+    `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,
+    { method: 'POST', headers: { 'Content-Type': 'application/json' }, body }
+  );
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`CAPI responded ${res.status}: ${text}`);
+  }
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -22,11 +55,17 @@ module.exports = async function handler(req, res) {
   }
 
   const ALLOWED_FIELDS = [
-    'first_name','last_name','email','state','coverage_type','contact_urgency',
-    'source_page','message','age','gender','tobacco','health','beneficiary',
-    'coverage_amount','coverage_subtype','primary_goal','annual_income',
-    'income_start','retirement_savings','employment_status','mortgage_status',
-    'mortgage_balance','mortgage_co_borrower','retirement_timeline','describes_you',
+    // existing fields
+    'first_name', 'last_name', 'email', 'state', 'coverage_type', 'contact_urgency',
+    'source_page', 'message', 'age', 'gender', 'tobacco', 'health', 'beneficiary',
+    'coverage_amount', 'coverage_subtype', 'primary_goal', 'annual_income',
+    'income_start', 'retirement_savings', 'employment_status', 'mortgage_status',
+    'mortgage_balance', 'mortgage_co_borrower', 'retirement_timeline', 'describes_you',
+    // new campaign fields
+    'coverage_for', 'product_interest', 'main_reason', 'contact_timing',
+    // UTM / attribution fields
+    'landing_page_url', 'query_string',
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_adset', 'utm_content', 'utm_term',
   ];
 
   const safeData = {};
@@ -45,6 +84,13 @@ module.exports = async function handler(req, res) {
       .from('leads')
       .insert({ ...safeData, phone });
     if (dbError) throw dbError;
+
+    // Fire server-side CAPI event — fire-and-forget, never fail the request
+    sendCapi({
+      email:     safeData.email || '',
+      phone,
+      sourceUrl: safeData.landing_page_url || '',
+    }).catch(err => console.error('[submit-lead] CAPI failed:', err.message));
 
     await sendTelegram(formatSms({ ...safeData, phone }))
       .catch(err => console.error('[submit-lead] Telegram notify failed:', err.message));
