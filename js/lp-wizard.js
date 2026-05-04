@@ -187,6 +187,7 @@ const lpWizard = (() => {
     _steps = [...config.steps, ...(config.closingSteps ?? CLOSING_STEPS)];
     _current = 0;
     _answers = {};
+    Object.assign(_answers, _captureUtm());
     _multiAnswers = {};
     _phone = '';                     // reset phone state
     clearInterval(_resendInterval);  // cancel any running timer
@@ -793,6 +794,24 @@ const lpWizard = (() => {
       const u = new URL(href, window.location.href);
       return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : '#';
     } catch { return '#'; }
+  }
+
+  function _captureUtm() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        landing_page_url: window.location.href,
+        query_string:     window.location.search || '',
+        utm_source:       params.get('utm_source')   || '',
+        utm_medium:       params.get('utm_medium')   || '',
+        utm_campaign:     params.get('utm_campaign') || '',
+        utm_adset:        params.get('utm_adset')    || '',
+        utm_content:      params.get('utm_content')  || '',
+        utm_term:         params.get('utm_term')     || '',
+      };
+    } catch {
+      return {};
+    }
   }
 
   return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, submitNameEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
