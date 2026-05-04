@@ -22,13 +22,13 @@ async function sendCapi({ email, phone, sourceUrl }) {
       event_source_url: sourceUrl || 'https://engelfinancialgroup.com/lp/life-insurance',
       user_data: {
         em: [_sha256(email)],
-        ph: [_sha256(phone)],
+        ph: [_sha256(phone.replace(/\D/g, ''))],
       },
     }],
   });
 
   const res = await fetch(
-    `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,
+    `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`,
     { method: 'POST', headers: { 'Content-Type': 'application/json' }, body }
   );
   if (!res.ok) {
