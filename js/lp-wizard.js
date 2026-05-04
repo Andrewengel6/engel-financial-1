@@ -253,6 +253,64 @@ const lpWizard = (() => {
     _render(_current + 1);
   }
 
+  async function submitContactCapture() {
+    const first = document.getElementById('lp-first-name').value.trim();
+    const last  = document.getElementById('lp-last-name').value.trim();
+    const email = document.getElementById('lp-email').value.trim();
+    const rawPhone = document.getElementById('lp-phone-input').value.trim();
+
+    if (!first)  { _shake(document.getElementById('lp-first-name')); return; }
+    if (!last)   { _shake(document.getElementById('lp-last-name'));  return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      _shake(document.getElementById('lp-email')); return;
+    }
+    const digits = rawPhone.replace(/\D/g, '');
+    if (!rawPhone || (digits.length !== 10 && !(digits.length === 11 && digits[0] === '1'))) {
+      _shake(document.getElementById('lp-phone-input')); return;
+    }
+
+    _answers.first_name = first;
+    _answers.last_name  = last;
+    _answers.email      = email;
+    _answers.phone      = rawPhone;
+    _phone = rawPhone;
+
+    const btn   = document.getElementById('lp-contact-capture-btn');
+    const errEl = document.getElementById('lp-phone-err');
+    btn.disabled = true;
+    btn.textContent = 'Sending code…';
+    errEl.style.display = 'none';
+
+    // Fire Lead pixel event — contact info captured
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+
+    try {
+      const res = await fetch('/api/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: rawPhone }),
+      });
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        btn.disabled = false;
+        btn.textContent = 'Continue →';
+        errEl.textContent = errJson.error === 'too_many_attempts'
+          ? 'Too many attempts. Please wait a few minutes and try again.'
+          : 'Something went wrong sending your code. Please try again.';
+        errEl.style.display = '';
+        return;
+      }
+      _render(_current + 1);
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Continue →';
+      errEl.textContent = 'Something went wrong sending your code. Please try again.';
+      errEl.style.display = '';
+    }
+  }
+
   async function sendCode() {
     const rawPhone = document.getElementById('lp-phone-input').value.trim();
     if (!rawPhone) { _shake(document.getElementById('lp-phone-input')); return; }
@@ -534,6 +592,9 @@ const lpWizard = (() => {
     const nameEmailBtn = container.querySelector('#lp-name-email-btn');
     if (nameEmailBtn) nameEmailBtn.addEventListener('click', submitNameEmail);
 
+    const contactCaptureBtn = container.querySelector('#lp-contact-capture-btn');
+    if (contactCaptureBtn) contactCaptureBtn.addEventListener('click', submitContactCapture);
+
     const sendBtnEl = container.querySelector('#lp-send-btn');
     if (sendBtnEl) sendBtnEl.addEventListener('click', sendCode);
 
@@ -566,6 +627,7 @@ const lpWizard = (() => {
       case 'redirect':        return _redirectHtml(step);
       case 'choiceWithNote':  return _choiceWithNoteHtml(step);
       case 'nameEmail':       return _nameEmailHtml(step);
+      case 'contactCapture':  return _contactCaptureHtml(step); // ← add this line
       default:                return '';
     }
   }
@@ -716,6 +778,21 @@ const lpWizard = (() => {
     </div>`;
   }
 
+  function _contactCaptureHtml(step) {
+    return `<div class="lp-step-inner">
+      <h2 class="lp-question">${_h(step.question || "Where should the licensed agent reach you?")}</h2>
+      <div class="lp-input-wrap">
+        <input type="text"  class="lp-input" id="lp-first-name"    placeholder="First name"        autocomplete="given-name"  aria-label="First name">
+        <input type="text"  class="lp-input" id="lp-last-name"     placeholder="Last name"         autocomplete="family-name" aria-label="Last name">
+        <input type="email" class="lp-input" id="lp-email"         placeholder="your@email.com"    autocomplete="email"       aria-label="Email address">
+        <input type="tel"   inputmode="tel" class="lp-input" id="lp-phone-input" placeholder="(555) 000-0000" autocomplete="tel" aria-label="Phone number">
+        <p class="lp-err" id="lp-phone-err" style="display:none"></p>
+        <button class="lp-btn-primary lp-btn-gold" id="lp-contact-capture-btn">Continue &rarr;</button>
+      </div>
+      <p class="lp-disclaimer">By providing your information and clicking Continue, you consent to be contacted by a licensed insurance advisor from Engel Financial Group by phone, email, or SMS. By providing your phone number you consent to receive SMS texts. Msg &amp; data rates may apply. Reply STOP to opt out. Your information will not be sold or shared with unaffiliated third parties for their own marketing purposes.</p>
+    </div>`;
+  }
+
   function _phoneHtml(step) {
     return `<div class="lp-step-inner">
       <h2 class="lp-question">${_h(step.question)}</h2>
@@ -814,5 +891,5 @@ const lpWizard = (() => {
     }
   }
 
-  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, submitNameEmail, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
+  return { init, back, select, continueFromInput, continueFromNumber, submitName, submitEmail, submitNameEmail, submitContactCapture, sendCode, verifyOtp, resendCode, AGE_OPTIONS, STATE_OPTIONS, ICONS };
 })();
