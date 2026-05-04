@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Life Insurance Quote — Engel Financial Group</title>
-  <meta name="description" content="Get a free life insurance quote in minutes. No obligation.">
+  <title>Life Insurance Review — Engel Financial Group</title>
+  <meta name="description" content="Start your free life insurance review in minutes. A licensed advisor will reach out within 24 hours. No obligation.">
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/lp/wizard.css">
+  <!-- Meta Pixel base code -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_PLACEHOLDER');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_PLACEHOLDER&ev=PageView&noscript=1"
+  /></noscript>
 </head>
 <body>
 
@@ -49,22 +62,22 @@
         <div class="lp-trust-step">
           <div class="lp-trust-num">1</div>
           <div class="lp-trust-text">
-            <strong>Choose your coverage type</strong>
-            <p>Select the service that fits your needs — we'll take you to a short, tailored quote form.</p>
+            <strong>Answer a few quick questions</strong>
+            <p>Takes about 3 minutes. No social security number or medical records required.</p>
           </div>
         </div>
         <div class="lp-trust-step">
           <div class="lp-trust-num">2</div>
           <div class="lp-trust-text">
-            <strong>Answer a few quick questions</strong>
-            <p>Takes about 2 minutes. No social security number or medical records required.</p>
+            <strong>Verify your phone number</strong>
+            <p>We send a quick text to confirm it's you — no spam, ever.</p>
           </div>
         </div>
         <div class="lp-trust-step">
           <div class="lp-trust-num">3</div>
           <div class="lp-trust-text">
-            <strong>Speak with a licensed agent</strong>
-            <p>Andrew Engel, licensed insurance advisor, will personally reach out within 24 hours.</p>
+            <strong>Speak with a licensed advisor</strong>
+            <p>Andrew Engel, licensed insurance advisor, will personally reach out within 24 hours to walk through your options.</p>
           </div>
         </div>
       </div>
@@ -86,17 +99,91 @@
     document.getElementById('lp-back-btn').addEventListener('click', function() { lpWizard.back(); });
 
     lpWizard.init({
+      source_page: '/lp/life-insurance',
+      closingSteps: [
+        { type: 'contactCapture', question: 'Where should the licensed advisor reach you?' },
+        { type: 'otp' },
+        { type: 'done' },
+      ],
       steps: [
         {
-          type: 'redirect',
-          question: "Which type of coverage interests you?",
+          type: 'dropdown',
+          question: 'What state do you live in?',
+          field: 'state',
+          options: lpWizard.STATE_OPTIONS,
+        },
+        {
+          type: 'number',
+          question: 'What is your age?',
+          field: 'age',
+          min: 18,
+          max: 85,
+          placeholder: 'Enter your age',
+        },
+        {
+          type: 'choice',
+          question: 'Who are you getting this coverage for?',
+          field: 'coverage_for',
           choices: [
-            { label: 'Whole Life Insurance',  icon: lpWizard.ICONS.shield, href: '/lp/whole-life.html' },
-            { label: 'IUL / Cash Value Life', icon: lpWizard.ICONS.growth, href: '/lp/iul.html' },
-            { label: 'Annuities',             icon: lpWizard.ICONS.income, href: '/lp/annuities.html' },
-            { label: 'Mortgage Protection',   icon: lpWizard.ICONS.house,  href: '/lp/mortgage-protection.html' },
-            { label: 'Retirement Planning',   icon: lpWizard.ICONS.clock,  href: '/lp/retirement-planning.html' },
-            { label: 'Advanced Markets',      icon: lpWizard.ICONS.trophy, href: '/lp/advanced-markets.html' },
+            { label: 'Myself',              value: 'self' },
+            { label: 'My spouse / partner', value: 'spouse' },
+            { label: 'My children',         value: 'children' },
+            { label: 'Other',               value: 'other' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'What type of coverage are you looking for?',
+          field: 'product_interest',
+          choices: [
+            { label: 'Term Life',             value: 'term_life' },
+            { label: 'Whole Life',            value: 'whole_life' },
+            { label: 'IUL / Cash Value Life', value: 'iul_cash_value' },
+            { label: 'Final Expense',         value: 'final_expense' },
+            { label: 'Not sure yet',          value: 'not_sure' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: "What's your main reason for looking?",
+          field: 'main_reason',
+          choices: [
+            { label: 'Protect my family',          value: 'protect_family' },
+            { label: 'Cover mortgage / debt',      value: 'cover_mortgage' },
+            { label: 'Leave money behind',         value: 'leave_money' },
+            { label: 'Cover final expenses',       value: 'final_expenses' },
+            { label: 'Build long-term protection', value: 'long_term_protection' },
+            { label: 'Not sure yet',               value: 'not_sure' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'How would you describe your overall health?',
+          field: 'health',
+          choices: [
+            { label: 'Great', value: 'great' },
+            { label: 'Fair',  value: 'fair' },
+            { label: 'Poor',  value: 'poor' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'Do you currently use tobacco products?',
+          field: 'tobacco',
+          choices: [
+            { label: 'No',  value: 'no' },
+            { label: 'Yes', value: 'yes' },
+          ],
+        },
+        {
+          type: 'choice',
+          question: 'When would you like to speak with a licensed advisor?',
+          field: 'contact_timing',
+          choices: [
+            { label: 'As soon as possible', value: 'immediately' },
+            { label: 'This week',           value: 'this_week' },
+            { label: 'Within a month',      value: 'within_a_month' },
+            { label: 'Just looking around', value: 'just_looking' },
           ],
         },
       ],
