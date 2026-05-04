@@ -193,6 +193,10 @@ const lpWizard = (() => {
     clearInterval(_resendInterval);  // cancel any running timer
     _resendInterval = null;          // reset interval handle
     _render(0);
+    // Fire ViewContent — prospect entered the funnel
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent');
+    }
   }
 
   function back() {
@@ -394,6 +398,9 @@ const lpWizard = (() => {
       }
       if (!json.ok) throw new Error();
       clearInterval(_resendInterval);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'CompleteRegistration');
+      }
       _render(_current + 1);
     } catch {
       btn.disabled = false;
