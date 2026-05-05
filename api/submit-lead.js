@@ -26,7 +26,11 @@ async function sendCapi({ email, phone, sourceUrl, eventId }) {
   };
   if (eventId) eventData.event_id = eventId;
 
-  const body = JSON.stringify({ data: [eventData] });
+  const payload = { data: [eventData] };
+  const testCode = process.env.META_TEST_EVENT_CODE;
+  if (testCode) payload.test_event_code = testCode;
+
+  const body = JSON.stringify(payload);
 
   const res = await fetch(
     `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`,
