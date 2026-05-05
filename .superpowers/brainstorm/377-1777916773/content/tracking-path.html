@@ -1,0 +1,40 @@
+<h2>Tracking Setup — Launch Path Decision</h2>
+<p class="subtitle">The pixel is not installed. This decision determines the conversion objective and how fast we can launch.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Install Pixel First — Then Launch (Recommended)</h3>
+      <p><em>Install Meta Pixel + set up custom events → launch Website Conversions campaign</em></p>
+      <p>Install the pixel across the site, then fire custom events at key wizard steps:</p>
+      <ul style="margin: 8px 0 0 16px; line-height: 1.8; font-size: 14px;">
+        <li><strong>ViewContent</strong> — wizard page loaded</li>
+        <li><strong>Lead</strong> — contact info submitted (name, phone, email)</li>
+        <li><strong>CompleteRegistration</strong> — OTP verified + wizard completed</li>
+      </ul>
+      <p style="margin-top: 10px;">Use <strong>CompleteRegistration</strong> as the optimization event — this is your OTP-verified qualified lead. Meta optimizes for the people most likely to complete the full wizard, not just click.</p>
+      <p><strong>Also add:</strong> Conversions API (server-side) for iOS signal resilience — your API already handles lead submissions so CAPI is a natural add-on.</p>
+      <p><strong>Launch delay:</strong> 3–5 days to install + verify events<br>
+      <strong>Quality:</strong> Maximum — full funnel tracking from day one</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Launch Now with Meta Instant Forms — Add Pixel Later</h3>
+      <p><em>Use Meta's native Lead Ads (no website redirect) while pixel is being set up</em></p>
+      <p>Meta Instant Forms open natively inside Facebook/Instagram — no website visit required. Fast load, pre-populated with user data, high completion rate.</p>
+      <p><strong>Downsides for your use case:</strong></p>
+      <ul style="margin: 8px 0 0 16px; line-height: 1.8; font-size: 14px;">
+        <li>No multi-step qualification wizard — form is flat, limited filtering</li>
+        <li>No OTP verification — lead quality harder to control</li>
+        <li>Can't A/B test your wizard flow</li>
+        <li>Lead data goes into Meta, not your Supabase system directly</li>
+      </ul>
+      <p><strong>Launch delay:</strong> Immediate<br>
+      <strong>Quality:</strong> Lower — no wizard qualification, no OTP</p>
+    </div>
+  </div>
+</div>

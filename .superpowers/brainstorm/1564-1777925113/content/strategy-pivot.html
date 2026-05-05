@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Pivot</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 28px 20px 80px; }
+
+  h1 { font-size: 21px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #8a9aaa; margin-bottom: 28px; }
+
+  /* Change summary */
+  .changes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  @media(max-width:640px){ .changes { grid-template-columns: 1fr; } }
+  .change-card { border-radius: 8px; padding: 16px 18px; }
+  .change-old { background: rgba(200,80,80,0.07); border: 1px solid rgba(200,80,80,0.2); }
+  .change-new { background: rgba(93,184,122,0.07); border: 1px solid rgba(93,184,122,0.25); }
+  .change-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+  .change-old .change-label { color: #c85050; }
+  .change-new .change-label { color: #5db87a; }
+  .change-row { font-size: 12px; color: #a0b0b8; line-height: 1.6; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 8px; }
+  .change-row:last-child { border-bottom: none; }
+  .change-row .key { color: #6a8a9a; min-width: 90px; flex-shrink: 0; font-size: 11px; }
+
+  /* Page impact */
+  .pages-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 32px; }
+  @media(max-width:640px){ .pages-grid { grid-template-columns: 1fr; } }
+  .page-card { border-radius: 8px; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); }
+  .page-card.rebuild { border-color: rgba(93,184,122,0.3); background: rgba(93,184,122,0.05); }
+  .page-card.keep    { border-color: rgba(184,115,51,0.2); background: rgba(184,115,51,0.04); }
+  .page-card.ads     { border-color: rgba(74,158,218,0.25); background: rgba(74,158,218,0.04); }
+  .page-status { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  .rebuild .page-status { color: #5db87a; }
+  .keep .page-status    { color: #b87333; }
+  .ads .page-status     { color: #4a9eda; }
+  .page-path { font-size: 12px; font-weight: 600; color: #e8e0d4; font-family: monospace; margin-bottom: 4px; }
+  .page-desc { font-size: 11px; color: #6a8a9a; line-height: 1.6; }
+
+  /* Wizard flow */
+  .wizard-wrap { display: flex; flex-direction: column; gap: 0; }
+  .step-row { display: flex; gap: 0; align-items: stretch; }
+  .step-num-col { display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .step-line { width: 2px; flex: 1; min-height: 12px; }
+  .step-content { flex: 1; padding: 0 0 20px 14px; }
+  .step-q { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 5px; }
+  .step-choices { display: flex; flex-wrap: wrap; gap: 6px; }
+  .step-pill { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 11px; font-size: 11px; color: #a0b8c0; }
+  .step-meta { font-size: 11px; color: #5a7a8a; margin-top: 5px; }
+  .step-type-badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px; }
+
+  /* Step type colours */
+  .qual { --c: #b87333; }
+  .contact-step { --c: #4a9eda; }
+  .otp-step { --c: #5db87a; }
+
+  .qual .step-num       { background: rgba(184,115,51,0.15); color: #b87333; }
+  .qual .step-line      { background: rgba(184,115,51,0.2); }
+  .qual .step-type-badge{ background: rgba(184,115,51,0.15); color: #b87333; }
+
+  .contact-step .step-num  { background: rgba(74,158,218,0.15); color: #4a9eda; }
+  .contact-step .step-line { background: rgba(74,158,218,0.2); }
+  .contact-step .step-type-badge { background: rgba(74,158,218,0.12); color: #4a9eda; }
+
+  .otp-step .step-num  { background: rgba(93,184,122,0.15); color: #5db87a; }
+  .otp-step .step-line { background: rgba(93,184,122,0.2); }
+  .otp-step .step-type-badge { background: rgba(93,184,122,0.12); color: #5db87a; }
+
+  /* Lead fields */
+  .fields-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 8px; margin-bottom: 24px; }
+  .field-tag { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 12px; font-size: 12px; color: #a0b8c0; font-family: monospace; }
+  .field-tag .f-label { font-size: 10px; color: #5a7a8a; margin-bottom: 2px; font-family: 'Segoe UI', system-ui; text-transform: uppercase; letter-spacing: .06em; }
+  .field-tag.new { border-color: rgba(93,184,122,0.3); background: rgba(93,184,122,0.06); color: #5db87a; }
+
+  /* Implementation notes */
+  .impl-box { background: rgba(20,40,60,0.5); border: 1px solid rgba(74,158,218,0.2); border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; }
+  .impl-box h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #5b9bd4; margin-bottom: 12px; }
+  .impl-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .impl-list li { font-size: 12px; color: #8a9aaa; display: flex; gap: 8px; line-height: 1.5; }
+  .impl-list li .icon { flex-shrink: 0; }
+
+  .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #5a7a8a; margin: 28px 0 14px; }
+  .warn { background: rgba(200,112,64,0.08); border-left: 3px solid #c87040; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: #c8a080; line-height: 1.6; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Strategy Pivot — Life Insurance Funnel</h1>
+<p class="subtitle">Broader targeting · product discovery inside the wizard · same OTP · all lead fields updated</p>
+
+<!-- What changed -->
+<div class="section-title">What Changes</div>
+<div class="changes">
+  <div class="change-card change-old">
+    <div class="change-label">Before</div>
+    <div class="change-row"><span class="key">Ad target</span> Whole life intent only</div>
+    <div class="change-row"><span class="key">Landing page</span> /lp/whole-life.html (product-specific)</div>
+    <div class="change-row"><span class="key">Wizard purpose</span> Qualify for whole life</div>
+    <div class="change-row"><span class="key">Segmentation</span> None — already filtered to WL</div>
+    <div class="change-row"><span class="key">Ad copy</span> Whole life hooks + legacy angle</div>
+    <div class="change-row"><span class="key">Lead fields</span> Intent, goal, budget, key concern</div>
+  </div>
+  <div class="change-card change-new">
+    <div class="change-label">After</div>
+    <div class="change-row"><span class="key">Ad target</span> Broad life insurance / family protection</div>
+    <div class="change-row"><span class="key">Landing page</span> /lp/life-insurance.html (general)</div>
+    <div class="change-row"><span class="key">Wizard purpose</span> Discover + qualify across all products</div>
+    <div class="change-row"><span class="key">Segmentation</span> Coverage type question inside wizard</div>
+    <div class="change-row"><span class="key">Ad copy</span> Life insurance review / family protection</div>
+    <div class="change-row"><span class="key">Lead fields</span> State, age, who for, coverage type, reason, health, tobacco, timing</div>
+  </div>
+</div>
+
+<!-- Page impact -->
+<div class="section-title">Page Impact</div>
+<div class="pages-grid">
+  <div class="page-card rebuild">
+    <div class="page-status">Rebuild</div>
+    <div class="page-path">/lp/life-insurance.html</div>
+    <div class="page-desc">Replace redirect wizard with full 10-step general qualification wizard. All campaign ads point here.</div>
+  </div>
+  <div class="page-card keep">
+    <div class="page-status">Keep As-Is</div>
+    <div class="page-path">/lp/whole-life.html</div>
+    <div class="page-desc">Stays live for organic/direct traffic. May later be updated or retired. Not used in new campaign.</div>
+  </div>
+  <div class="page-card ads">
+    <div class="page-status">Update All</div>
+    <div class="page-path">All campaign ads</div>
+    <div class="page-desc">CTAs now point to /lp/life-insurance.html. Ad copy updated to broad life insurance hooks.</div>
+  </div>
+</div>
+
+<!-- Wizard flow -->
+<div class="section-title">New Wizard Flow — /lp/life-insurance.html</div>
+<div class="wizard-wrap">
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">1</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Dropdown</div>
+      <div class="step-q">What state do you live in?</div>
+      <div class="step-meta">All 50 states listed · If state is outside Andrew's 15 licensed states → show "not available" message rather than collect the lead</div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">2</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Number</div>
+      <div class="step-q">What is your age?</div>
+      <div class="step-meta">Min 18 · Max 85 · Validates input before advancing</div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">3</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">Who are you getting this coverage for?</div>
+      <div class="step-choices">
+        <span class="step-pill">Myself</span>
+        <span class="step-pill">My spouse / partner</span>
+        <span class="step-pill">My children</span>
+        <span class="step-pill">Other</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">4</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">What type of coverage are you looking for?</div>
+      <div class="step-choices">
+        <span class="step-pill">Term Life</span>
+        <span class="step-pill">Whole Life</span>
+        <span class="step-pill">IUL / Cash Value Life</span>
+        <span class="step-pill">Mortgage Protection</span>
+        <span class="step-pill">Final Expense</span>
+        <span class="step-pill">Not sure yet</span>
+      </div>
+      <div class="step-meta">This field drives post-lead segmentation — Andrew reviews based on this answer</div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">5</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">What's your main reason for looking?</div>
+      <div class="step-choices">
+        <span class="step-pill">Protect my family</span>
+        <span class="step-pill">Cover mortgage / debt</span>
+        <span class="step-pill">Leave money behind</span>
+        <span class="step-pill">Cover final expenses</span>
+        <span class="step-pill">Build long-term protection</span>
+        <span class="step-pill">Not sure yet</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">6</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">How would you describe your overall health?</div>
+      <div class="step-choices">
+        <span class="step-pill">Great</span>
+        <span class="step-pill">Fair</span>
+        <span class="step-pill">Poor</span>
+      </div>
+      <div class="step-meta">Used for underwriting pre-qualification — helps Andrew prepare the right carrier options</div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">7</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">Do you currently use tobacco products?</div>
+      <div class="step-choices">
+        <span class="step-pill">No</span>
+        <span class="step-pill">Yes</span>
+      </div>
+      <div class="step-meta">Standard underwriting question — affects carrier selection and rate class</div>
+    </div>
+  </div>
+
+  <div class="step-row qual">
+    <div class="step-num-col"><div class="step-num">8</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Choice</div>
+      <div class="step-q">When would you like to speak with a licensed agent?</div>
+      <div class="step-choices">
+        <span class="step-pill">As soon as possible</span>
+        <span class="step-pill">This week</span>
+        <span class="step-pill">Within a month</span>
+        <span class="step-pill">Just looking around</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-row contact-step">
+    <div class="step-num-col"><div class="step-num">9</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Contact Capture</div>
+      <div class="step-q">Where should the licensed agent reach you?</div>
+      <div class="step-choices">
+        <span class="step-pill">Full name</span>
+        <span class="step-pill">Email address</span>
+        <span class="step-pill">Phone number</span>
+      </div>
+      <div class="step-meta">TCPA consent language displayed below form fields before submission. Requires new combined step type in lp-wizard.js (nameEmailPhone) — or split into existing nameEmail → phone steps with TCPA on phone step.</div>
+    </div>
+  </div>
+
+  <div class="step-row otp-step">
+    <div class="step-num-col"><div class="step-num">10</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-type-badge">OTP — Unchanged</div>
+      <div class="step-q">Let's verify your phone number</div>
+      <div class="step-meta">Existing OTP flow stays exactly in place. CompleteRegistration pixel event fires here.</div>
+    </div>
+  </div>
+
+  <div class="step-row otp-step">
+    <div class="step-num-col"><div class="step-num">✓</div></div>
+    <div class="step-content">
+      <div class="step-type-badge">Done</div>
+      <div class="step-q">Review submitted — Andrew will reach out within 24 hours</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lead fields -->
+<div class="section-title">Lead Record — Supabase Fields</div>
+<div class="fields-grid">
+  <div class="field-tag new"><div class="f-label">New</div>state</div>
+  <div class="field-tag new"><div class="f-label">New</div>age</div>
+  <div class="field-tag new"><div class="f-label">New</div>coverage_for</div>
+  <div class="field-tag new"><div class="f-label">New · Key</div>coverage_type</div>
+  <div class="field-tag new"><div class="f-label">New</div>main_reason</div>
+  <div class="field-tag new"><div class="f-label">New</div>health</div>
+  <div class="field-tag new"><div class="f-label">New</div>tobacco</div>
+  <div class="field-tag new"><div class="f-label">New</div>contact_timing</div>
+  <div class="field-tag"><div class="f-label">Existing</div>first_name</div>
+  <div class="field-tag"><div class="f-label">Existing</div>last_name</div>
+  <div class="field-tag"><div class="f-label">Existing</div>email</div>
+  <div class="field-tag"><div class="f-label">Existing</div>phone</div>
+  <div class="field-tag"><div class="f-label">Existing</div>otp_verified</div>
+  <div class="field-tag"><div class="f-label">Existing</div>utm_campaign</div>
+  <div class="field-tag"><div class="f-label">Existing</div>utm_adset</div>
+  <div class="field-tag"><div class="f-label">Existing</div>utm_ad</div>
+  <div class="field-tag"><div class="f-label">Existing</div>utm_content</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>contacted</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>booked_call</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>showed</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>qualified</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>quoted</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>sold</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>premium_amount</div>
+  <div class="field-tag"><div class="f-label">Pipeline</div>reason_unqualified</div>
+</div>
+
+<!-- Implementation decisions -->
+<div class="impl-box">
+  <h3>Key Implementation Decisions to Confirm</h3>
+  <ul class="impl-list">
+    <li><span class="icon">①</span> State validation: if user selects a state outside Andrew's 15 licensed states, show a polite "we're not available in your state yet" screen rather than collecting a lead we can't service</li>
+    <li><span class="icon">②</span> Step 9 format: combine name + email + phone into one screen (requires new step type in lp-wizard.js), or keep existing nameEmail → phone split (2 screens, TCPA on phone screen)</li>
+    <li><span class="icon">③</span> Supabase migration: existing leads table needs 8 new columns (state, age, coverage_for, coverage_type, main_reason, health, tobacco, contact_timing) — nullable so existing whole-life records aren't broken</li>
+    <li><span class="icon">④</span> /lp/whole-life.html: keep alive for organic traffic — do not redirect, do not remove. It remains a separate product-specific page.</li>
+    <li><span class="icon">⑤</span> Ad copy: all 4 angles rewritten to broad life insurance hooks. Whole-life specific copy stays in the spec as reference but is no longer used in campaign ads.</li>
+  </ul>
+</div>
+
+<div class="warn">
+  ⚠ The Supabase migration must run before the new life-insurance.html wizard goes live — otherwise lead submissions will fail on the new fields. Migration should add all 8 columns as nullable with no default, preserving existing whole-life lead records.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<h2>Question 1: How should service selection work?</h2>
+<p class="subtitle">When a user picks a service on the general insurance page, how should they interact with it?</p>
+
+<div class="options">
+  <div class="option" data-choice="single" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single-select → Instant redirect</h3>
+      <p>User clicks one service tile and is <strong>immediately redirected</strong> to that service's landing page. No "Next" button needed. Fast, frictionless, one tap = done.</p>
+      <div style="margin-top:12px; padding:12px; background:#1e2a3a; border-radius:8px; font-size:13px; color:#aac4e0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">🛡 Whole Life</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">📈 IUL</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">💰 Annuities</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">🏠 Mortgage</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">⏰ Retirement</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">🏆 Advanced</div>
+        </div>
+        <div style="text-align:center;margin-top:8px;font-size:11px;color:#6b8cae;">↑ Tap one → instantly go to that form</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="multi" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Multi-select → Redirect to best match</h3>
+      <p>User can select <strong>multiple services</strong>, then tap "Next" — they're redirected to the most relevant page (first selection, or most common). Keeps current multi-select UX.</p>
+      <div style="margin-top:12px; padding:12px; background:#1e2a3a; border-radius:8px; font-size:13px; color:#aac4e0;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="padding:8px;background:#2d4a6b;border:2px solid #b87333;border-radius:6px;text-align:center;">✓ 🛡 Whole Life</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">📈 IUL</div>
+          <div style="padding:8px;background:#2d4a6b;border:2px solid #b87333;border-radius:6px;text-align:center;">✓ 💰 Annuities</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">🏠 Mortgage</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">⏰ Retirement</div>
+          <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;">🏆 Advanced</div>
+        </div>
+        <div style="text-align:center;margin-top:8px;padding:6px;background:#b87333;border-radius:4px;font-size:11px;color:#fff;">Next → (redirects to Whole Life form)</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audience Targeting</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 32px 24px 60px; }
+
+  h1 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #8a9aaa; margin-bottom: 32px; }
+
+  .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #5a7a8a; margin: 32px 0 14px; }
+
+  /* Shared geo strip */
+  .geo-strip { background: rgba(184,115,51,0.08); border: 1px solid rgba(184,115,51,0.2); border-radius: 8px; padding: 16px 20px; margin-bottom: 32px; }
+  .geo-strip .geo-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #b87333; margin-bottom: 8px; }
+  .geo-states { display: flex; flex-wrap: wrap; gap: 6px; }
+  .state-tag { background: rgba(184,115,51,0.12); border-radius: 4px; padding: 3px 9px; font-size: 12px; color: #d4a870; }
+  .geo-note { font-size: 12px; color: #6a8a9a; margin-top: 10px; }
+
+  /* Ad set cards */
+  .adset-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .adset-cards { grid-template-columns: 1fr; } }
+
+  .adset-card { border-radius: 10px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
+  .card-c1    { border-color: rgba(184,115,51,0.3); background: rgba(184,115,51,0.05); }
+  .card-ret   { border-color: rgba(232,168,74,0.3);  background: rgba(232,168,74,0.04); }
+  .card-fin   { border-color: rgba(74,158,218,0.3);  background: rgba(74,158,218,0.04); }
+  .card-fam   { border-color: rgba(93,184,122,0.3);  background: rgba(93,184,122,0.04); }
+
+  .card-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+  .card-c1 .card-label   { color: #b87333; }
+  .card-ret .card-label  { color: #e8a84a; }
+  .card-fin .card-label  { color: #4a9eda; }
+  .card-fam .card-label  { color: #5db87a; }
+
+  .card-name { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 14px; }
+
+  .attr-list { display: flex; flex-direction: column; gap: 8px; }
+  .attr { display: flex; flex-direction: column; gap: 3px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .attr:last-child { border-bottom: none; padding-bottom: 0; }
+  .attr-key { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: #5a7a8a; }
+  .attr-val { font-size: 12px; color: #c8c0b8; line-height: 1.5; }
+  .attr-val .tag { display: inline-block; background: rgba(255,255,255,0.07); border-radius: 3px; padding: 1px 6px; font-size: 11px; margin: 1px 2px 1px 0; }
+  .attr-val .ex { color: #e05050; font-size: 11px; }
+
+  .warn { font-size: 11px; color: #c87040; margin-top: 8px; background: rgba(200,112,64,0.1); border-radius: 4px; padding: 6px 10px; }
+
+  /* Custom audiences section */
+  .ca-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .ca-grid { grid-template-columns: 1fr; } }
+  .ca-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 14px 16px; }
+  .ca-card .ca-name { font-size: 13px; font-weight: 600; color: #e8e0d4; margin-bottom: 4px; }
+  .ca-card .ca-desc { font-size: 12px; color: #6a8a9a; line-height: 1.5; margin-bottom: 6px; }
+  .ca-card .ca-use  { font-size: 11px; color: #b87333; }
+
+  .launch-note { margin-top: 24px; background: rgba(20,40,60,0.4); border: 1px solid rgba(91,155,212,0.2); border-radius: 8px; padding: 16px 20px; }
+  .launch-note h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #5b9bd4; margin-bottom: 10px; }
+  .launch-note p { font-size: 12px; color: #8a9aaa; line-height: 1.7; }
+  .launch-note p + p { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Section 2 — Audience Targeting</h1>
+<p class="subtitle">4 ad sets · each tests a distinct variable · geo and age are fixed across all</p>
+
+<!-- Shared geo -->
+<div class="geo-strip">
+  <div class="geo-label">Geo Target — All Ad Sets</div>
+  <div class="geo-states">
+    <span class="state-tag">AR</span><span class="state-tag">FL</span><span class="state-tag">IA</span>
+    <span class="state-tag">KS</span><span class="state-tag">MI</span><span class="state-tag">MN</span>
+    <span class="state-tag">MO</span><span class="state-tag">MT</span><span class="state-tag">NC</span>
+    <span class="state-tag">OH</span><span class="state-tag">OK</span><span class="state-tag">SC</span>
+    <span class="state-tag">TN</span><span class="state-tag">TX</span><span class="state-tag">VA</span>
+  </div>
+  <div class="geo-note">Age: 35–65 · Gender: All · Language: English</div>
+</div>
+
+<!-- 4 ad set cards -->
+<div class="section-title">Ad Set Targeting — Breakdown</div>
+<div class="adset-cards">
+
+  <!-- C1: Legacy Broad -->
+  <div class="adset-card card-c1">
+    <div class="card-label">Campaign 1 · $93/day</div>
+    <div class="card-name">Legacy — Advantage+ Broad</div>
+    <div class="attr-list">
+      <div class="attr">
+        <div class="attr-key">Audience mode</div>
+        <div class="attr-val">Advantage+ — Meta controls all interest/behavior signals internally</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Hard constraints you set</div>
+        <div class="attr-val">15 states · Age 35–65 · English</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">What qualifies the lead instead</div>
+        <div class="attr-val">The ad creative (legacy angle) + the 9-step wizard + OTP verification — not audience filters</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Exclude</div>
+        <div class="attr-val"><span class="ex">✗</span> People who already completed OTP (existing leads list from Supabase)</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Bid strategy</div>
+        <div class="attr-val">Lowest cost (let Meta optimise) · Switch to cost cap once CPL baseline established after 2 weeks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ad Set 1: Retargeting -->
+  <div class="adset-card card-ret">
+    <div class="card-label">Campaign 2 · Ad Set 1 · $21/day</div>
+    <div class="card-name">Retargeting — Warm Visitors</div>
+    <div class="attr-list">
+      <div class="attr">
+        <div class="attr-key">Custom audience</div>
+        <div class="attr-val">Visited <strong>/lp/whole-life</strong> in past 30 days — did not fire CompleteRegistration</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Audience size expectation</div>
+        <div class="attr-val">Small at first. Needs ~7–10 days of pixel data before audience is usable. Launch this ad set in Week 2.</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Angle</div>
+        <div class="attr-val">Legacy — but more direct. They've already seen the wizard. Messaging can reference "you started exploring" without being creepy.</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Exclude</div>
+        <div class="attr-val"><span class="ex">✗</span> CompleteRegistration event fired (existing OTP-verified leads)</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Frequency cap</div>
+        <div class="attr-val">Max 3 impressions per person per week — small audience, avoid burnout</div>
+      </div>
+    </div>
+    <div class="warn">⚠ Launch in Week 2 — pixel must be live 7–10 days first to build the retargeting pool</div>
+  </div>
+
+  <!-- Ad Set 2: Cash Value -->
+  <div class="adset-card card-fin">
+    <div class="card-label">Campaign 2 · Ad Set 2 · $17/day</div>
+    <div class="card-name">Cash Value — Financial Interests</div>
+    <div class="attr-list">
+      <div class="attr">
+        <div class="attr-key">Interest targeting</div>
+        <div class="attr-val">
+          <span class="tag">Financial planning</span>
+          <span class="tag">Retirement planning</span>
+          <span class="tag">Estate planning</span>
+          <span class="tag">Investment</span>
+          <span class="tag">Wealth management</span>
+          <span class="tag">Life insurance</span>
+        </div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Do not narrow further</div>
+        <div class="attr-val">Layer interests with OR logic (any match), not AND. Stacking AND filters shrinks the audience below Meta's learning threshold.</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Angle</div>
+        <div class="attr-val">Cash value — simple, compliant. "Builds cash value over time." No investment language, no guaranteed-return claims.</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Exclude</div>
+        <div class="attr-val"><span class="ex">✗</span> Existing OTP-verified leads · <span class="ex">✗</span> Retargeting pool (wizard visitors)</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Expected audience size</div>
+        <div class="attr-val">Moderate — financial interests are widely available in Meta across your 15 states</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ad Set 3: Soft Protection -->
+  <div class="adset-card card-fam">
+    <div class="card-label">Campaign 2 · Ad Set 3 · $11/day · Signal Test</div>
+    <div class="card-name">Soft Protection — Family / Homeowner</div>
+    <div class="attr-list">
+      <div class="attr">
+        <div class="attr-key">Interest targeting</div>
+        <div class="attr-val">
+          <span class="tag">Homeownership</span>
+          <span class="tag">Parenting</span>
+          <span class="tag">Family</span>
+          <span class="tag">Home improvement</span>
+          <span class="tag">Life milestones</span>
+          <span class="tag">Mortgage</span>
+        </div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Behavioral signals (if available)</div>
+        <div class="attr-val">Recently moved · New homeowner · Likely to move — use if Meta still offers these in your geo, but do not depend on them</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Angle</div>
+        <div class="attr-val">Family peace-of-mind. Not fear. Not "cheap coverage." Not term-style urgency. Permanent protection framed as responsibility, not risk.</div>
+      </div>
+      <div class="attr">
+        <div class="attr-key">Exclude</div>
+        <div class="attr-val"><span class="ex">✗</span> Existing leads · <span class="ex">✗</span> Retargeting pool · <span class="ex">✗</span> Financial interests audience (Ad Set 2)</div>
+      </div>
+    </div>
+    <div class="warn">⚠ 30-Day Signal Test — $11/day is insufficient for statistical conclusions at 14 days. Collect data. Do not cut or scale until Week 4+.</div>
+  </div>
+
+</div>
+
+<!-- Custom Audiences to build -->
+<div class="section-title">Custom Audiences to Build in Meta Before Launch</div>
+<div class="ca-grid">
+  <div class="ca-card">
+    <div class="ca-name">Wizard Visitors (30-day)</div>
+    <div class="ca-desc">Everyone who visited /lp/whole-life in the past 30 days — pixel ViewContent event. Used for retargeting exclusion from day 1, retargeting targeting from Week 2.</div>
+    <div class="ca-use">Used by: Ad Set 1 (target) · All other ad sets (exclude)</div>
+  </div>
+  <div class="ca-card">
+    <div class="ca-name">OTP-Verified Leads (existing)</div>
+    <div class="ca-desc">Upload Supabase lead list (phone/email hashed) as a Customer List custom audience. Excludes existing leads from seeing ads — avoids wasted spend on people already in the funnel.</div>
+    <div class="ca-use">Used by: All ad sets (exclude)</div>
+  </div>
+  <div class="ca-card">
+    <div class="ca-name">CompleteRegistration Event (ongoing)</div>
+    <div class="ca-desc">Auto-built by Meta from the pixel event — grows as new OTP-verified leads come in. Back-stop exclusion audience in addition to the manual upload.</div>
+    <div class="ca-use">Used by: All ad sets (exclude) · Future lookalike seed</div>
+  </div>
+  <div class="ca-card">
+    <div class="ca-name">Lookalike 1–3% (Week 4+)</div>
+    <div class="ca-desc">Once you have 50+ CompleteRegistration events, build a 1–3% Lookalike from that seed. This will likely outperform both broad and interest targeting. Plan for Week 4 launch.</div>
+    <div class="ca-use">Future ad set — not at launch</div>
+  </div>
+</div>
+
+<div class="launch-note">
+  <h3>Launch Sequence</h3>
+  <p><strong>Day 1:</strong> Campaign 1 (Legacy Broad) + Ad Set 2 (Financial) + Ad Set 3 (Soft Protection) go live. Pixel fires. Audiences begin building.</p>
+  <p><strong>Day 7–10:</strong> Check wizard visitor pool size in Meta. If audience &gt; 1,000 people, launch Ad Set 1 (Retargeting). If still too small, wait until Day 14.</p>
+  <p><strong>Day 14:</strong> First data review — CPL, cost per CompleteRegistration, contact rate. Adjust Campaign 1 creative if underperforming. Do not make structural changes yet.</p>
+  <p><strong>Day 30:</strong> Full review across all 4 ad sets including Soft Protection. Budget reallocation decisions. Lookalike audience build if event volume qualifies.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Architecture</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 32px 24px 60px; min-height: 100vh; }
+
+  h1 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #8a9aaa; margin-bottom: 32px; }
+
+  .budget-bar { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 36px; height: 44px; }
+  .budget-seg { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+  .seg-main { background: #b87333; color: #fff; flex: 65; }
+  .seg-test { background: #2a4a6b; color: #a8c4e0; flex: 35; }
+  .budget-labels { display: flex; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .budget-label { font-size: 12px; color: #8a9aaa; }
+  .budget-label strong { color: #e8e0d4; display: block; font-size: 15px; }
+
+  .campaigns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .campaigns { grid-template-columns: 1fr; } }
+
+  .camp { border-radius: 10px; padding: 24px; border: 1px solid rgba(255,255,255,0.08); }
+  .camp-main { background: rgba(184,115,51,0.08); border-color: rgba(184,115,51,0.3); }
+  .camp-test { background: rgba(42,74,107,0.2); border-color: rgba(42,74,107,0.5); }
+
+  .camp-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+  .camp-main .camp-label { color: #b87333; }
+  .camp-test .camp-label { color: #5b9bd4; }
+
+  .camp-title { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .camp-sub { font-size: 13px; color: #8a9aaa; margin-bottom: 20px; }
+
+  .camp-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .meta-row { display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 7px; }
+  .meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .meta-key { color: #8a9aaa; }
+  .meta-val { color: #e8e0d4; font-weight: 500; text-align: right; }
+
+  .adsets { display: flex; flex-direction: column; gap: 10px; }
+  .adset { background: rgba(255,255,255,0.04); border-radius: 7px; padding: 14px 16px; border-left: 3px solid; }
+  .adset-legacy { border-color: #b87333; }
+  .adset-cashvalue { border-color: #4a9eda; }
+  .adset-protection { border-color: #5db87a; }
+
+  .adset-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+  .adset-detail { font-size: 12px; color: #8a9aaa; }
+  .adset-budget { font-size: 12px; color: #b87333; font-weight: 600; margin-top: 4px; }
+  .adset-cashvalue .adset-budget { color: #4a9eda; }
+  .adset-protection .adset-budget { color: #5db87a; }
+
+  .obj-badge { display: inline-block; background: rgba(255,255,255,0.07); border-radius: 4px; padding: 3px 8px; font-size: 11px; color: #a0b4c8; margin-top: 6px; }
+
+  .total-row { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 14px 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .total-row .label { font-size: 13px; color: #8a9aaa; }
+  .total-row .val { font-size: 18px; font-weight: 700; color: #b87333; }
+
+  .note { font-size: 12px; color: #5a7a8a; margin-top: 24px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<h1>Campaign Architecture</h1>
+<p class="subtitle">2 campaigns · 4 ad sets · $1,000/week · 15 states · Website Conversions objective</p>
+
+<div class="budget-bar">
+  <div class="budget-seg seg-main">Campaign 1 — Legacy Broad &nbsp;65%</div>
+  <div class="budget-seg seg-test">Campaign 2 — Audience Tests &nbsp;35%</div>
+</div>
+
+<div class="campaigns">
+
+  <!-- Campaign 1 -->
+  <div class="camp camp-main">
+    <div class="camp-label">Campaign 1 · Primary</div>
+    <div class="camp-title">Legacy — Broad Scale</div>
+    <div class="camp-sub">Let Meta find the converters with creative as the qualifier</div>
+
+    <div class="camp-meta">
+      <div class="meta-row"><span class="meta-key">Objective</span><span class="meta-val">Website Conversions</span></div>
+      <div class="meta-row"><span class="meta-key">Optimize for</span><span class="meta-val">CompleteRegistration (OTP-verified)</span></div>
+      <div class="meta-row"><span class="meta-key">Audience</span><span class="meta-val">Advantage+ Broad</span></div>
+      <div class="meta-row"><span class="meta-key">Hard filters</span><span class="meta-val">15 states · Age 30–65</span></div>
+      <div class="meta-row"><span class="meta-key">Angle</span><span class="meta-val">Legacy</span></div>
+      <div class="meta-row"><span class="meta-key">Ad variations</span><span class="meta-val">3–5 creatives</span></div>
+      <div class="meta-row"><span class="meta-key">Weekly budget</span><span class="meta-val">$650 (~$93/day)</span></div>
+    </div>
+    <span class="obj-badge">1 ad set inside this campaign</span>
+  </div>
+
+  <!-- Campaign 2 -->
+  <div class="camp camp-test">
+    <div class="camp-label">Campaign 2 · Testing</div>
+    <div class="camp-title">Audience Tests</div>
+    <div class="camp-sub">Manual targeting to isolate what audience + angle combination yields the highest qualified rate</div>
+
+    <div class="adsets">
+      <div class="adset adset-legacy">
+        <div class="adset-name">Ad Set 1 — Legacy · Broad Qualified</div>
+        <div class="adset-detail">15 states · Age 35–60 · No interest filters · Legacy angle</div>
+        <div class="adset-budget">$150/week · ~$21/day</div>
+      </div>
+      <div class="adset adset-cashvalue">
+        <div class="adset-name">Ad Set 2 — Cash Value · Financial Interests</div>
+        <div class="adset-detail">Financial planning, retirement, estate planning interests · Cash value angle</div>
+        <div class="adset-budget">$120/week · ~$17/day</div>
+      </div>
+      <div class="adset adset-protection">
+        <div class="adset-name">Ad Set 3 — Soft Protection · Family/Homeowner</div>
+        <div class="adset-detail">Homeownership, family, life milestones interests · Peace-of-mind angle</div>
+        <div class="adset-budget">$80/week · ~$11/day</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <span class="obj-badge">Objective: Website Conversions → CompleteRegistration</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="total-row">
+  <span class="label">Total weekly spend</span>
+  <span class="val">$1,000 / week</span>
+</div>
+
+<p class="note">
+  Decision rule: After 14 days, compare <strong>cost per OTP-verified lead</strong> and <strong>qualified rate</strong> across all 4 ad sets — not just CPL. If Campaign 1 drives volume but Campaign 2 drives quality, shift budget accordingly. Never optimize on CPL alone.
+</p>
+
+</body>
+</html>

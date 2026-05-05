@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Copy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 32px 24px 80px; }
+
+  h1 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #8a9aaa; margin-bottom: 32px; }
+
+  .angle-block { margin-bottom: 48px; }
+  .angle-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 6px; }
+  .angle-label.legacy    { color: #b87333; }
+  .angle-label.cashvalue { color: #4a9eda; }
+  .angle-label.protection{ color: #5db87a; }
+  .angle-label.retarget  { color: #e8a84a; }
+
+  .angle-title { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .angle-note  { font-size: 12px; color: #6a8a9a; margin-bottom: 20px; line-height: 1.6; }
+
+  /* Ad previews */
+  .ad-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+
+  .ad-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+  .ad-header { padding: 12px 14px 8px; display: flex; align-items: center; gap: 10px; }
+  .ad-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .ad-avatar.legacy    { background: #b87333; }
+  .ad-avatar.cashvalue { background: #2a5c8a; }
+  .ad-avatar.protection{ background: #2a6a45; }
+  .ad-avatar.retarget  { background: #8a6a2a; }
+  .ad-account { font-size: 13px; font-weight: 600; color: #1c1e21; line-height: 1.2; }
+  .ad-account span { display: block; font-size: 11px; font-weight: 400; color: #65676b; }
+  .ad-body { padding: 0 14px 10px; font-size: 13px; color: #1c1e21; line-height: 1.55; }
+  .ad-body .see-more { color: #65676b; font-size: 12px; }
+  .ad-image { background: #e8e0d4; height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .ad-image-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+  .ad-image.legacy-img     { background: linear-gradient(135deg, #1a1205 0%, #3d2a10 50%, #1a1205 100%); }
+  .ad-image.cashvalue-img  { background: linear-gradient(135deg, #0a1a2a 0%, #1a3a5a 50%, #0a1a2a 100%); }
+  .ad-image.protection-img { background: linear-gradient(135deg, #0a1a10 0%, #1a3a25 50%, #0a1a10 100%); }
+  .ad-image.retarget-img   { background: linear-gradient(135deg, #1a1205 0%, #3d2a10 50%, #1a1205 100%); }
+  .img-headline { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.25; }
+  .img-sub { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .img-badge { position: absolute; bottom: 12px; right: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; padding: 3px 8px; border-radius: 3px; }
+  .legacy-badge    { background: rgba(184,115,51,0.9); color: #fff; }
+  .cashvalue-badge { background: rgba(74,158,218,0.9); color: #fff; }
+  .protection-badge{ background: rgba(93,184,122,0.9); color: #fff; }
+  .retarget-badge  { background: rgba(232,168,74,0.9); color: #1a1205; }
+  .ad-cta-row { background: #f0f2f5; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .ad-cta-domain { font-size: 11px; color: #65676b; text-transform: uppercase; }
+  .ad-cta-btn { background: #1877f2; color: #fff; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; border: none; cursor: default; }
+
+  /* Headlines list */
+  .headlines-block { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 16px 20px; }
+  .headlines-block h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #5a7a8a; margin-bottom: 12px; }
+  .headline-list { display: flex; flex-direction: column; gap: 8px; }
+  .headline-item { display: flex; gap: 10px; align-items: flex-start; }
+  .h-num { font-size: 11px; color: #5a7a8a; min-width: 18px; padding-top: 1px; }
+  .h-text { font-size: 14px; color: #e8e0d4; font-weight: 500; }
+  .h-note { font-size: 11px; color: #6a8a9a; margin-top: 2px; }
+
+  .compliance-note { margin-top: 10px; background: rgba(200,112,64,0.08); border-left: 3px solid #c87040; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 12px; color: #c8a080; line-height: 1.6; }
+  .section-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<h1>Section 3 — Ad Copy</h1>
+<p class="subtitle">4 ad angles · primary text variations · headline options · CTA · compliance notes · all pointing to /lp/whole-life</p>
+
+<!-- ═══════════════════════════════════ LEGACY ═══════════════════════════════════ -->
+<div class="angle-block">
+  <div class="angle-label legacy">Campaign 1 + Ad Set 1 (retargeting variant) · 65% of budget</div>
+  <div class="angle-title">Legacy Angle — 3 Primary Text Variations</div>
+  <div class="angle-note">Tone: Long-term thinking. Family responsibility. Pride, not fear. Speaks to people who've already accepted that planning ahead is the right move. Andrew's story lives in this angle even without his face in the ads.</div>
+
+  <div class="ad-row">
+
+    <!-- Legacy V1 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar legacy">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored · <svg width="10" height="10" viewBox="0 0 24 24" fill="#65676b"><circle cx="12" cy="12" r="10"/></svg></span></div>
+      </div>
+      <div class="ad-body">
+        Most people think about life insurance when something happens to someone they know. By then, the window to lock in the best rate has quietly closed.<br><br>
+        Whole life insurance doesn't expire. It's there for your family permanently — and it builds real cash value while you're alive.<br><br>
+        Takes 5 minutes to see if you qualify. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image legacy-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Protect Your Family. Forever.</div>
+          <div class="img-sub">Permanent coverage · No expiration · Builds cash value</div>
+        </div>
+        <div class="img-badge legacy-badge">Variation 1</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+    <!-- Legacy V2 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar legacy">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        The people who love you don't just need your income. They need to know they'll be okay — permanently.<br><br>
+        Whole life insurance is one decision you make once. It protects your family forever. No expiration. No renewals. Rates lock in at your age today.<br><br>
+        See if you qualify in under 5 minutes. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image legacy-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Leave More Than Memories</div>
+          <div class="img-sub">Coverage that lasts a lifetime · Lock in your rate today</div>
+        </div>
+        <div class="img-badge legacy-badge">Variation 2</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+    <!-- Legacy V3 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar legacy">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        There's a version of your story where your family never has to worry about money if something happens to you.<br><br>
+        Whole life insurance makes that version real. Permanent coverage. Builds cash value. Your rate never increases. It never expires.<br><br>
+        5 minutes to see if you qualify → <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image legacy-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Permanent Protection for the People You Love</div>
+          <div class="img-sub">One decision. Lifetime coverage.</div>
+        </div>
+        <div class="img-badge legacy-badge">Variation 3</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="headlines-block">
+    <h3>Legacy — Headline Options (use one per ad, rotate to test)</h3>
+    <div class="headline-list">
+      <div class="headline-item"><div class="h-num">1</div><div><div class="h-text">Protect Your Family. Forever.</div><div class="h-note">Direct, permanent, emotionally clear</div></div></div>
+      <div class="headline-item"><div class="h-num">2</div><div><div class="h-text">Leave More Than Memories</div><div class="h-note">Legacy framing — aspirational, not fear</div></div></div>
+      <div class="headline-item"><div class="h-num">3</div><div><div class="h-text">Coverage That Lasts a Lifetime</div><div class="h-note">Differentiates from term — permanence is the benefit</div></div></div>
+      <div class="headline-item"><div class="h-num">4</div><div><div class="h-text">Permanent Protection for the People You Love</div><div class="h-note">Family-focused, warm, responsible tone</div></div></div>
+      <div class="headline-item"><div class="h-num">5</div><div><div class="h-text">See If You Qualify for Whole Life Coverage</div><div class="h-note">Direct response — sets expectation of qualification</div></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════ CASH VALUE ═══════════════════════════════════ -->
+<div class="angle-block">
+  <div class="angle-label cashvalue">Campaign 2 · Ad Set 2 · Financial Interests · $17/day</div>
+  <div class="angle-title">Cash Value Angle — 2 Primary Text Variations</div>
+  <div class="angle-note">Tone: Calm, informative, financially credible. Never use "investment," "guaranteed returns," "wealth-building," or "ROI." Position cash value as a feature of the policy — not the primary financial product. Compliant framing: "builds cash value over time," "accessible during your lifetime," "not subject to market risk."</div>
+
+  <div class="ad-row">
+
+    <!-- CV V1 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar cashvalue">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        Unlike term insurance, whole life never expires — and it builds cash value over time that you can access during your lifetime.<br><br>
+        Permanent protection that also works for you while you're alive. No market risk. No expiration.<br><br>
+        See if you qualify. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image cashvalue-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Builds Cash Value Over Time</div>
+          <div class="img-sub">Permanent coverage · No market risk · Access during your lifetime</div>
+        </div>
+        <div class="img-badge cashvalue-badge">Variation 1</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+    <!-- CV V2 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar cashvalue">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        Whole life insurance does two things: protects your family permanently and builds cash value over time you can borrow against if you ever need it.<br><br>
+        Simple. Permanent. No expiration. Your rate is locked in at your age today.<br><br>
+        See if you qualify → <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image cashvalue-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Insurance That Works While You Live</div>
+          <div class="img-sub">Permanent coverage + cash value you can access</div>
+        </div>
+        <div class="img-badge cashvalue-badge">Variation 2</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="compliance-note">
+    ⚠ Compliance check: Do not use "investment," "guaranteed returns," "builds wealth," "ROI," or "asset." Approved language: "builds cash value over time," "access during your lifetime," "borrow against," "not subject to market risk," "rate locked in at your age today." Review all cash value copy against your state DOI guidelines before running.
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════ SOFT PROTECTION ═══════════════════════════════════ -->
+<div class="angle-block">
+  <div class="angle-label protection">Campaign 2 · Ad Set 3 · Family/Homeowner · $11/day · 30-Day Signal Test</div>
+  <div class="angle-title">Soft Protection Angle — 2 Primary Text Variations</div>
+  <div class="angle-note">Tone: Warm, responsible, calm. Family peace-of-mind — not fear, not urgency, not "cheap coverage." The distinction from Legacy: Legacy focuses on what you leave behind. Soft Protection focuses on the ongoing sense of security your family has while you're alive.</div>
+
+  <div class="ad-row">
+
+    <!-- SP V1 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar protection">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        Peace of mind for your family isn't a luxury.<br><br>
+        Whole life insurance means your loved ones are always protected — without worrying about coverage expiring or premiums changing. Permanent. Predictable. Yours for life.<br><br>
+        See if you qualify. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image protection-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Your Family. Always Protected.</div>
+          <div class="img-sub">No expiration · No renewals · Coverage for life</div>
+        </div>
+        <div class="img-badge protection-badge">Variation 1</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+    <!-- SP V2 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar protection">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        Your family's security shouldn't depend on a policy with an expiration date.<br><br>
+        Whole life insurance gives them permanent protection and gives you the peace of mind that no matter what life brings — they're covered.<br><br>
+        5 minutes to see if you qualify. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image protection-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Coverage That Never Expires</div>
+          <div class="img-sub">Give your family permanent peace of mind</div>
+        </div>
+        <div class="img-badge protection-badge">Variation 2</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">See If You Qualify</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════ RETARGETING ═══════════════════════════════════ -->
+<div class="angle-block">
+  <div class="angle-label retarget">Campaign 2 · Ad Set 1 · Warm Audience · $21/day · Launch Week 2</div>
+  <div class="angle-title">Retargeting Angle — 2 Primary Text Variations</div>
+  <div class="angle-note">Tone: Direct, low-pressure, a little personal. These people have already seen the wizard — don't reintroduce whole life from scratch. Acknowledge they were looking, remove friction, make it easy to finish. One variation is softer (reminder), one is more direct (time/rate angle).</div>
+
+  <div class="ad-row">
+
+    <!-- RT V1 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar retarget">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        You were looking into whole life insurance — we're still here.<br><br>
+        It takes less than 5 minutes to complete your qualification and speak with a licensed advisor who can find the right policy for your family.<br><br>
+        No obligation. No pressure. Just answers. <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image retarget-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Still Thinking About Coverage?</div>
+          <div class="img-sub">Complete your qualification in under 5 minutes</div>
+        </div>
+        <div class="img-badge retarget-badge">Warm — Soft Reminder</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">Complete Your Qualification</button>
+      </div>
+    </div>
+
+    <!-- RT V2 -->
+    <div class="ad-card">
+      <div class="ad-header">
+        <div class="ad-avatar retarget">EF</div>
+        <div class="ad-account">Engel Financial Group <span>Sponsored</span></div>
+      </div>
+      <div class="ad-body">
+        Your whole life rate is based on your age today — not tomorrow.<br><br>
+        Every month you wait is a month of permanently higher premiums. If you were already looking at coverage, finishing the qualification takes under 5 minutes.<br><br>
+        Pick up where you left off → <span class="see-more">See more</span>
+      </div>
+      <div class="ad-image retarget-img">
+        <div class="ad-image-inner">
+          <div class="img-headline">Your Rate is Based on Your Age Today</div>
+          <div class="img-sub">Finish your qualification — takes under 5 minutes</div>
+        </div>
+        <div class="img-badge retarget-badge">Warm — Rate Urgency</div>
+      </div>
+      <div class="ad-cta-row">
+        <div class="ad-cta-domain">engelfinancialgroup.com</div>
+        <button class="ad-cta-btn">Complete Your Qualification</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="compliance-note">
+    ⚠ Retargeting note: "Your rate is based on your age today" is factually accurate for whole life and not considered a misleading urgency claim — age-based underwriting is standard. Do not add artificial deadlines like "offer expires" or "limited spots." Keep urgency grounded in real underwriting facts only.
+  </div>
+</div>
+
+</body>
+</html>

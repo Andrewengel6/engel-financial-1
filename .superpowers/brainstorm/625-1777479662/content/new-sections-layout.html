@@ -1,0 +1,221 @@
+<style>
+  body { background: #0f1922; color: #fff; font-family: system-ui, sans-serif; }
+  .page { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+  h2 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .subtitle { color: rgba(255,255,255,0.55); font-size: 14px; margin-bottom: 28px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #B8893A; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(184,137,58,0.25); }
+  .options { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+  .option { border: 1.5px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; cursor: pointer; transition: border-color 0.2s; background: rgba(255,255,255,0.03); }
+  .option:hover { border-color: rgba(184,137,58,0.5); }
+  .option.selected { border-color: #B8893A; background: rgba(184,137,58,0.07); }
+  .option-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #B8893A; margin-bottom: 10px; }
+  .option-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .option-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 12px; }
+
+  /* Mockup styles */
+  .mock { border-radius: 6px; overflow: hidden; background: #111D2B; }
+  .mock-inner { padding: 20px; }
+  .gold { color: #B8893A; }
+  .navy { background: #111D2B; }
+  .eyebrow-mock { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #B8893A; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .eyebrow-mock::before { content: ''; display: block; width: 16px; height: 1px; background: #B8893A; }
+  .h2-mock { font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+  .sub-mock { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 14px; }
+
+  /* Table mockup */
+  .table-mock { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .table-mock thead { background: rgba(184,137,58,0.12); }
+  .table-mock th { padding: 8px 10px; text-align: left; font-weight: 600; color: #B8893A; letter-spacing: 0.08em; }
+  .table-mock th:first-child { color: rgba(255,255,255,0.4); }
+  .table-mock td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); }
+  .table-mock td.check { color: #B8893A; font-weight: 700; }
+  .table-mock td.cross { color: rgba(255,255,255,0.25); }
+  .table-mock td:nth-child(2) { background: rgba(184,137,58,0.04); }
+
+  /* Split mockup */
+  .split-mock { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .split-left { }
+  .split-right { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,137,58,0.2); border-radius: 4px; padding: 14px; }
+  .bullet { display: flex; gap: 8px; margin-bottom: 7px; font-size: 11px; color: rgba(255,255,255,0.75); }
+  .bullet::before { content: '✓'; color: #B8893A; font-weight: 700; flex-shrink: 0; }
+  .captive-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+  .captive-bullet { display: flex; gap: 8px; margin-bottom: 6px; font-size: 11px; color: rgba(255,255,255,0.35); }
+  .captive-bullet::before { content: '✗'; color: rgba(255,255,255,0.2); flex-shrink: 0; }
+
+  /* Cards mockup */
+  .cards-mock { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .card-mock { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,137,58,0.15); border-radius: 4px; padding: 12px; }
+  .card-num { font-size: 24px; font-weight: 700; color: rgba(184,137,58,0.25); margin-bottom: 4px; font-family: Georgia, serif; }
+  .card-h { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .card-p { font-size: 10px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* Andrew section mockups */
+  .photo-block { width: 80px; height: 80px; background: rgba(184,137,58,0.15); border: 1px solid rgba(184,137,58,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(184,137,58,0.7); flex-shrink: 0; }
+  .photo-block-lg { width: 100%; height: 120px; background: rgba(184,137,58,0.1); border: 1px solid rgba(184,137,58,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(184,137,58,0.5); margin-bottom: 10px; }
+  .andrew-split { display: grid; grid-template-columns: 140px 1fr; gap: 14px; align-items: start; }
+  .andrew-right { }
+  .cred-pill { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(184,137,58,0.15); color: #B8893A; border: 1px solid rgba(184,137,58,0.25); border-radius: 20px; padding: 3px 9px; margin: 0 4px 4px 0; }
+</style>
+
+<div class="page">
+  <h2>Layout Options for the 2 New Sections</h2>
+  <p class="subtitle">Click to select your preferred layout for each. You can pick one per section.</p>
+
+  <!-- SECTION 1: BROKER COMPARISON -->
+  <div class="section-label">Section 1 — Independent Broker vs Captive Agent</div>
+  <div class="options" data-multiselect>
+
+    <div class="option" data-choice="broker-table" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content">
+        <div class="option-name">Comparison Table</div>
+        <div class="option-desc">Side-by-side table: Independent Broker vs Captive Agent. Scannable, persuasive, easy to skim. Strong for decision-stage visitors.</div>
+        <div class="mock">
+          <div class="mock-inner">
+            <div class="eyebrow-mock">Why It Matters</div>
+            <div class="h2-mock">Independent Broker vs.<br>Captive Agent</div>
+            <div class="sub-mock">Not all insurance agents work the same way. Here's what that means for you.</div>
+            <table class="table-mock">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>✦ Engel Financial (Independent)</th>
+                  <th>Captive Agent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Carriers available</td><td class="check">40–50+ A-rated carriers</td><td class="cross">1 company only</td></tr>
+                <tr><td>Shopping the market</td><td class="check">Compares all options for you</td><td class="cross">Can't compare outside products</td></tr>
+                <tr><td>Who they work for</td><td class="check">You, the client</td><td class="cross">The insurance company</td></tr>
+                <tr><td>Pricing power</td><td class="check">Finds the best available rate</td><td class="cross">Limited to one company's pricing</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="option" data-choice="broker-split" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content">
+        <div class="option-name">Split Layout — Benefits Left, Contrast Right</div>
+        <div class="option-desc">Left column lists the advantages of an independent broker. Right column shows what captive agents can't do. Clean, editorial feel.</div>
+        <div class="mock">
+          <div class="mock-inner">
+            <div class="eyebrow-mock">The Difference</div>
+            <div class="h2-mock">Why Work With an<br>Independent Broker?</div>
+            <div class="split-mock">
+              <div class="split-left">
+                <div style="font-size:11px; font-weight:600; color:#B8893A; margin-bottom:8px;">What you get with us:</div>
+                <div class="bullet">Access to 40–50+ A-rated carriers</div>
+                <div class="bullet">We shop the market for the best rate</div>
+                <div class="bullet">We work for you, not the insurer</div>
+                <div class="bullet">Better pricing through competition</div>
+              </div>
+              <div class="split-right">
+                <div class="captive-label">Captive agents are limited to:</div>
+                <div class="captive-bullet">One company's products only</div>
+                <div class="captive-bullet">Can't compare outside options</div>
+                <div class="captive-bullet">Incentivized to sell their carrier's plans</div>
+                <div class="captive-bullet">No rate shopping available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="option" data-choice="broker-cards" onclick="toggleSelect(this)">
+      <div class="letter">C</div>
+      <div class="content">
+        <div class="option-name">3-Card Feature Grid</div>
+        <div class="option-desc">Three numbered benefit cards below a headline. Lighter, more visual. Works better if you want a softer, less confrontational tone.</div>
+        <div class="mock">
+          <div class="mock-inner">
+            <div class="eyebrow-mock">The Advantage</div>
+            <div class="h2-mock">Why an Independent Broker<br>Gets You More</div>
+            <div class="cards-mock">
+              <div class="card-mock">
+                <div class="card-num">50+</div>
+                <div class="card-h">Carriers Available</div>
+                <div class="card-p">We shop across dozens of A-rated insurers to find your best rate.</div>
+              </div>
+              <div class="card-mock">
+                <div class="card-num">1st</div>
+                <div class="card-h">You Come First</div>
+                <div class="card-p">Our loyalty is to you, not any single insurance company.</div>
+              </div>
+              <div class="card-mock">
+                <div class="card-num">$$$</div>
+                <div class="card-h">Real Rate Shopping</div>
+                <div class="card-p">Competition between carriers means you pay less for the same protection.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: WHY CHOOSE ANDREW -->
+  <div class="section-label">Section 2 — Why Choose Andrew (Personal Trust Section)</div>
+  <div class="options" data-multiselect>
+
+    <div class="option" data-choice="andrew-sidebar" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content">
+        <div class="option-name">Photo Left, Story Right — Credential Pills</div>
+        <div class="option-desc">Andrew's photo on the left with bio text right. Credential badges (Licensed, 15 States, etc.) below the text. Personal and professional.</div>
+        <div class="mock">
+          <div class="mock-inner" style="background:#f5f3ef;">
+            <div class="eyebrow-mock" style="color:#B8893A;">Who You're Working With</div>
+            <div class="andrew-split">
+              <div>
+                <div class="photo-block-lg" style="background: rgba(184,137,58,0.12);">Andrew's Photo</div>
+                <div style="font-size:10px; font-weight:700; color:#111D2B; text-align:center;">Andrew Engel</div>
+                <div style="font-size:9px; color:rgba(17,29,43,0.5); text-align:center;">Licensed Senior Underwriter</div>
+              </div>
+              <div class="andrew-right">
+                <div style="font-size:16px; font-weight:700; color:#111D2B; margin-bottom:6px;">Andrew Engel</div>
+                <div style="font-size:10px; line-height:1.6; color:rgba(17,29,43,0.65); margin-bottom:10px;">Short bio paragraph goes here — background, mission, why he does this work, and what clients can expect from working with him directly...</div>
+                <div>
+                  <span class="cred-pill" style="background:rgba(17,29,43,0.06); color:#111D2B; border-color:rgba(17,29,43,0.12);">NPN 21546368</span>
+                  <span class="cred-pill" style="background:rgba(17,29,43,0.06); color:#111D2B; border-color:rgba(17,29,43,0.12);">Licensed in 15 States</span>
+                  <span class="cred-pill" style="background:rgba(17,29,43,0.06); color:#111D2B; border-color:rgba(17,29,43,0.12);">A-Rated Carriers Only</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="option" data-choice="andrew-dark" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content">
+        <div class="option-name">Navy Background — Large Photo Right</div>
+        <div class="option-desc">Dark navy section (matching the hero). Large photo on the right, content/bio on the left. More premium, high-contrast feel.</div>
+        <div class="mock navy">
+          <div class="mock-inner" style="display:grid; grid-template-columns:1fr 100px; gap:16px; align-items:center;">
+            <div>
+              <div class="eyebrow-mock">Who You're Working With</div>
+              <div class="h2-mock">Andrew Engel,<br>Senior Underwriter</div>
+              <div class="sub-mock">Bio text about Andrew's background, mission, and what clients can expect...</div>
+              <div>
+                <span class="cred-pill">NPN 21546368</span>
+                <span class="cred-pill">15 States</span>
+                <span class="cred-pill">7 Years Experience</span>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:90px; height:110px; background:rgba(184,137,58,0.12); border:1px solid rgba(184,137,58,0.25); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:10px; color:rgba(184,137,58,0.5);">Andrew's<br>Photo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:8px;">Let me know your picks in the terminal — or I'll go with A for both if no preference.</p>
+</div>

@@ -1,0 +1,43 @@
+<h2>What does life-insurance.html become?</h2>
+<p class="subtitle">Right now it has ~10 questions after the service picker. With single-select redirect, those become unreachable. How should the page work?</p>
+
+<div class="options">
+  <div class="option" data-choice="pure-gateway" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Pure gateway / router</h3>
+      <p>life-insurance.html shows <strong>only Q1</strong> (pick a service → redirected). Nothing else. The rest of the form questions are removed — each specific LP handles its own full flow.</p>
+      <div style="margin-top:12px;padding:12px;background:#1e2a3a;border-radius:8px;font-size:12px;color:#aac4e0;">
+        <div style="color:#b87333;font-weight:600;margin-bottom:6px;">life-insurance.html</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;margin-bottom:6px;">Q1: Which service? → click → redirect to /lp/[service].html</div>
+        <div style="color:#6b8cae;font-size:11px;">That's it. No further questions here.</div>
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#1a2d3f;border-radius:6px;font-size:11px;color:#7eb8a4;">
+        ✓ Clean &amp; focused<br>✓ Consistent with industry standard (Policygenius, SelectQuote)<br>✓ Forces users to commit to a service upfront
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="gateway-with-fallback" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Gateway + "Not sure" fallback</h3>
+      <p>Q1 has the 6 service tiles (→ redirect) <strong>plus a 7th option: "Not sure — help me decide"</strong> that continues through the full general form on this page.</p>
+      <div style="margin-top:12px;padding:12px;background:#1e2a3a;border-radius:8px;font-size:12px;color:#aac4e0;">
+        <div style="color:#b87333;font-weight:600;margin-bottom:6px;">life-insurance.html</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;">
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">🛡 Whole Life → redirect</div>
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">📈 IUL → redirect</div>
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">💰 Annuities → redirect</div>
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">🏠 Mortgage → redirect</div>
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">⏰ Retirement → redirect</div>
+          <div style="padding:6px;background:#243851;border-radius:4px;text-align:center;font-size:11px;">🏆 Advanced → redirect</div>
+        </div>
+        <div style="padding:8px;background:#2d4a6b;border:2px dashed #b87333;border-radius:6px;text-align:center;font-size:11px;">❓ Not sure — continues full form here</div>
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#1a2d3f;border-radius:6px;font-size:11px;color:#7eb8a4;">
+        ✓ Catches undecided visitors<br>✓ General form stays alive as fallback<br>~ Slightly more complex logic
+      </div>
+    </div>
+  </div>
+</div>

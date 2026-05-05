@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Strategy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 28px 20px 80px; }
+
+  h1 { font-size: 21px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #8a9aaa; margin-bottom: 28px; }
+
+  .sec { margin-bottom: 36px; }
+  .sec-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #5a7a8a; margin-bottom: 14px; }
+
+  /* Creative mix bar */
+  .mix-bar { height: 48px; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 10px; }
+  .mix-video  { background: #b87333; display: flex; align-items: center; justify-content: center; flex: 65; font-size: 14px; font-weight: 700; color: #fff; gap: 8px; }
+  .mix-static { background: #2a5c8a; display: flex; align-items: center; justify-content: center; flex: 35; font-size: 14px; font-weight: 700; color: #a8c4e0; gap: 8px; }
+  .mix-legend { display: flex; gap: 24px; font-size: 12px; color: #8a9aaa; margin-bottom: 4px; }
+  .mix-legend strong { color: #e8e0d4; }
+  .mix-note { font-size: 11px; color: #5a7a8a; line-height: 1.6; }
+
+  /* Aspect ratio cards */
+  .ratio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  @media(max-width:600px){ .ratio-grid { grid-template-columns: 1fr 1fr; } }
+
+  .ratio-card { border-radius: 10px; padding: 16px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); text-align: center; }
+  .ratio-card.primary { border-color: rgba(184,115,51,0.35); background: rgba(184,115,51,0.07); }
+  .ratio-card.secondary { border-color: rgba(74,158,218,0.25); background: rgba(74,158,218,0.05); }
+  .ratio-card.backup { border-color: rgba(255,255,255,0.06); opacity: 0.7; }
+
+  .ratio-visual { margin: 0 auto 10px; border-radius: 4px; background: rgba(255,255,255,0.08); }
+  .r-916  { width: 32px; height: 57px; }
+  .r-45   { width: 40px; height: 50px; }
+  .r-11   { width: 44px; height: 44px; }
+  .ratio-label { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+  .ratio-px    { font-size: 11px; color: #6a8a9a; margin-bottom: 6px; }
+  .ratio-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; }
+  .badge-primary   { background: rgba(184,115,51,0.2); color: #b87333; }
+  .badge-secondary { background: rgba(74,158,218,0.15); color: #4a9eda; }
+  .badge-backup    { background: rgba(255,255,255,0.06); color: #6a8a9a; }
+  .ratio-placements { font-size: 11px; color: #8a9aaa; line-height: 1.7; }
+
+  /* Placement table */
+  .placement-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .placement-table thead th { background: rgba(255,255,255,0.04); color: #6a8a9a; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .placement-table tbody td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #b8c8d0; vertical-align: top; }
+  .placement-table tbody tr:last-child td { border-bottom: none; }
+  .placement-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+  .pl-name { font-weight: 600; color: #e8e0d4; }
+  .pl-priority { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 2px 7px; border-radius: 3px; }
+  .pri-high { background: rgba(184,115,51,0.18); color: #b87333; }
+  .pri-med  { background: rgba(74,158,218,0.12); color: #4a9eda; }
+  .pri-low  { background: rgba(255,255,255,0.06); color: #6a8a9a; }
+
+  /* Video requirements */
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:600px){ .req-grid { grid-template-columns: 1fr; } }
+  .req-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 14px 16px; }
+  .req-card.critical { border-color: rgba(184,115,51,0.25); background: rgba(184,115,51,0.04); }
+  .req-icon { font-size: 18px; margin-bottom: 6px; }
+  .req-title { font-size: 13px; font-weight: 600; color: #e8e0d4; margin-bottom: 4px; }
+  .req-desc  { font-size: 12px; color: #7a9aaa; line-height: 1.6; }
+  .req-spec  { font-size: 11px; color: #b87333; margin-top: 5px; font-family: monospace; }
+
+  /* Decision rules */
+  .metrics-block { background: rgba(20,40,60,0.4); border: 1px solid rgba(74,158,218,0.2); border-radius: 8px; padding: 18px 20px; }
+  .metrics-block h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #5b9bd4; margin-bottom: 14px; }
+  .metric-funnel { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin-bottom: 14px; }
+  .mf-stage { background: rgba(255,255,255,0.04); border-radius: 4px; padding: 6px 11px; font-size: 11px; color: #a0b8c0; }
+  .mf-stage.key { background: rgba(184,115,51,0.15); color: #c8903a; }
+  .mf-arrow { color: #3a5a6a; font-size: 13px; margin: 0 3px; }
+  .decision-rules { display: flex; flex-direction: column; gap: 8px; }
+  .drule { font-size: 12px; color: #8a9aaa; display: flex; gap: 8px; line-height: 1.5; }
+  .drule .di { color: #b87333; flex-shrink: 0; }
+
+  /* Advantage+ note */
+  .adv-box { background: rgba(93,184,122,0.06); border: 1px solid rgba(93,184,122,0.2); border-radius: 8px; padding: 14px 18px; }
+  .adv-box h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #5db87a; margin-bottom: 8px; }
+  .adv-box p  { font-size: 12px; color: #8acea0; line-height: 1.7; }
+
+  .warn { background: rgba(200,112,64,0.08); border-left: 3px solid #c87040; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 12px; color: #c8a080; line-height: 1.6; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Section 3b — Video + Static Placement Strategy</h1>
+<p class="subtitle">Mobile-first · video-led · placement-specific assets · quality-weighted decision rules</p>
+
+<!-- 1. Creative mix -->
+<div class="sec">
+  <div class="sec-title">1. Launch Creative Mix</div>
+  <div class="mix-bar">
+    <div class="mix-video">▶ Video &nbsp; 65%</div>
+    <div class="mix-static">▣ Static &nbsp; 35%</div>
+  </div>
+  <div class="mix-legend">
+    <span><strong>Video (65%)</strong> — AI avatar, advisor-led delivery, Reels + Stories primary</span>
+    <span><strong>Static (35%)</strong> — Image ads, Feed + Stories backup</span>
+  </div>
+  <div class="mix-note">Rationale: Meta's algorithm currently rewards video with lower CPMs in Reels and Stories placements. Video also pre-frames the advisor relationship better than static for a life insurance review funnel. Static carries the budget where video hasn't warmed the audience yet.</div>
+</div>
+
+<!-- 2+3. Aspect ratios -->
+<div class="sec">
+  <div class="sec-title">2. Video Aspect Ratio Plan</div>
+  <div class="ratio-grid" style="margin-bottom:24px;">
+
+    <div class="ratio-card primary">
+      <div class="ratio-visual r-916"></div>
+      <div class="ratio-label">9:16</div>
+      <div class="ratio-px">1080 × 1920</div>
+      <div class="ratio-badge badge-primary">Master Format</div>
+      <div class="ratio-placements">Instagram Reels<br>Facebook Reels<br>Instagram Stories<br>Facebook Stories</div>
+    </div>
+
+    <div class="ratio-card secondary">
+      <div class="ratio-visual r-45"></div>
+      <div class="ratio-label">4:5</div>
+      <div class="ratio-px">1080 × 1350</div>
+      <div class="ratio-badge badge-secondary">Feed Adapted</div>
+      <div class="ratio-placements">Instagram Feed<br>Facebook Feed<br>Adapted from 9:16 master</div>
+    </div>
+
+    <div class="ratio-card backup">
+      <div class="ratio-visual r-11"></div>
+      <div class="ratio-label">1:1</div>
+      <div class="ratio-px">1080 × 1080</div>
+      <div class="ratio-badge badge-backup">Backup Only</div>
+      <div class="ratio-placements">If 4:5 unavailable<br>Do not produce unless needed</div>
+    </div>
+
+  </div>
+
+  <div class="sec-title">3. Static Aspect Ratio Plan</div>
+  <div class="ratio-grid">
+
+    <div class="ratio-card primary">
+      <div class="ratio-visual r-45"></div>
+      <div class="ratio-label">4:5</div>
+      <div class="ratio-px">1080 × 1350</div>
+      <div class="ratio-badge badge-primary">Primary Static</div>
+      <div class="ratio-placements">Instagram Feed<br>Facebook Feed<br>Primary static format</div>
+    </div>
+
+    <div class="ratio-card secondary">
+      <div class="ratio-visual r-916"></div>
+      <div class="ratio-label">9:16</div>
+      <div class="ratio-px">1080 × 1920</div>
+      <div class="ratio-badge badge-secondary">Stories/Reels</div>
+      <div class="ratio-placements">Instagram Stories<br>Facebook Stories<br>Static fallback for Reels</div>
+    </div>
+
+    <div class="ratio-card backup">
+      <div class="ratio-visual r-11"></div>
+      <div class="ratio-label">1:1</div>
+      <div class="ratio-px">1080 × 1080</div>
+      <div class="ratio-badge badge-backup">Backup Only</div>
+      <div class="ratio-placements">Square feed fallback<br>Produce only if required</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 4. Placement priority table -->
+<div class="sec">
+  <div class="sec-title">4. Primary Placements — Design Priority</div>
+  <table class="placement-table">
+    <thead>
+      <tr>
+        <th>Placement</th>
+        <th>Priority</th>
+        <th>Format</th>
+        <th>Asset required</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="pl-name">Instagram Reels</div></td>
+        <td><span class="pl-priority pri-high">High</span></td>
+        <td>Video</td>
+        <td>9:16 · 1080×1920</td>
+        <td>Highest organic reach overlap · Hook must land in 2 sec · Captions required</td>
+      </tr>
+      <tr>
+        <td><div class="pl-name">Facebook Reels</div></td>
+        <td><span class="pl-priority pri-high">High</span></td>
+        <td>Video</td>
+        <td>9:16 · 1080×1920</td>
+        <td>Same master asset as IG Reels · Older demographic skews here · Strong for 40–65</td>
+      </tr>
+      <tr>
+        <td><div class="pl-name">Instagram Stories</div></td>
+        <td><span class="pl-priority pri-high">High</span></td>
+        <td>Video + Static</td>
+        <td>9:16 · 1080×1920</td>
+        <td>Keep CTA and key text above bottom 250px (UI zone) · Tap-forward behaviour — first frame critical</td>
+      </tr>
+      <tr>
+        <td><div class="pl-name">Facebook Stories</div></td>
+        <td><span class="pl-priority pri-med">Medium</span></td>
+        <td>Video + Static</td>
+        <td>9:16 · 1080×1920</td>
+        <td>Same asset as IG Stories · Lower volume but good for 45–65 reach</td>
+      </tr>
+      <tr>
+        <td><div class="pl-name">Instagram Feed</div></td>
+        <td><span class="pl-priority pri-med">Medium</span></td>
+        <td>Static + Video</td>
+        <td>4:5 · 1080×1350</td>
+        <td>Higher intent placement · Users scroll deliberately · Copy in image can be read</td>
+      </tr>
+      <tr>
+        <td><div class="pl-name">Facebook Feed</div></td>
+        <td><span class="pl-priority pri-med">Medium</span></td>
+        <td>Static + Video</td>
+        <td>4:5 · 1080×1350</td>
+        <td>Best for 40–65 demographic · Longer dwell time than Reels · Primary text is actually read here</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 5. Advantage+ placements -->
+<div class="sec">
+  <div class="sec-title">5. Placement Approach</div>
+  <div class="adv-box">
+    <h3>Advantage+ Placements — On, but Asset-Specific</h3>
+    <p>Use Advantage+ Placements at launch so Meta can allocate across placements based on where conversions are cheapest. <strong>However: provide placement-specific assets for every key placement.</strong> Do not rely on a single 1:1 or 4:5 asset being auto-cropped into Reels — the result is letterboxed, feels amateur, and burns CPM budget. Upload the 9:16 master for Reels/Stories and the 4:5 adapted version for Feed. Advantage+ will pick the right asset per placement automatically.</p>
+  </div>
+  <div class="warn">⚠ Never upload only a square or landscape asset and let Meta auto-crop into 9:16. It destroys the hook frame and pushes critical text into UI zones. Always provide the correct native format per placement.</div>
+</div>
+
+<!-- 6. Video creative requirements -->
+<div class="sec">
+  <div class="sec-title">6. Video Creative Requirements</div>
+  <div class="req-grid">
+
+    <div class="req-card critical">
+      <div class="req-icon">⚡</div>
+      <div class="req-title">Hook in First 2 Seconds</div>
+      <div class="req-desc">The hook line must be on screen and spoken within the first 2 seconds. Text overlay of the hook appears from frame 1. Reels users swipe at 2–3 sec if not hooked.</div>
+      <div class="req-spec">Example frame 1: "Don't leave your family with a question mark." — full screen text + avatar speaking</div>
+    </div>
+
+    <div class="req-card critical">
+      <div class="req-icon">💬</div>
+      <div class="req-title">Captions / On-Screen Text Required</div>
+      <div class="req-desc">85% of Reels are watched without sound. Every spoken word must have a caption or on-screen text equivalent. Auto-captions are acceptable if reviewed for accuracy.</div>
+      <div class="req-spec">Style: white text, dark outline or semi-transparent bg — never bare white on white or light backgrounds</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">🤖</div>
+      <div class="req-title">AI Avatar — Advisor-Led Feel</div>
+      <div class="req-desc">Avatar must feel natural and credible — not robotic or generic. Talking-head style, direct eye contact with camera, calm and professional. Not a voiceover over stock footage.</div>
+      <div class="req-spec">Avatar: mid-40s appearance, professional casual attire, neutral home-office or clean background</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">🏷</div>
+      <div class="req-title">Brand Visible Early</div>
+      <div class="req-desc">Engel Financial Group name or logo visible within first 3 seconds. Can be subtle — lower-third text or small logo watermark. Builds trust signal before the hook lands.</div>
+      <div class="req-spec">Position: lower-left or lower-right · Avoid bottom 250px on 9:16 (Meta UI zone)</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">📋</div>
+      <div class="req-title">CTA Pre-frames the Review</div>
+      <div class="req-desc">CTA must clearly state this starts a short life insurance review — not a quote, not a sale. "Start your free review" or "Check your options in 5 minutes." Removes surprise at the wizard.</div>
+      <div class="req-spec">Spoken CTA + on-screen text CTA — both present in the final 3 seconds</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">📱</div>
+      <div class="req-title">Safe Zone — No Text Near Edges</div>
+      <div class="req-desc">Keep all critical text and faces within the safe zone. No important content in bottom 250px (UI bar), top 150px (profile/share UI), or within 50px of left/right edges.</div>
+      <div class="req-spec">9:16 safe zone: 980px wide · top 150px to bottom 250px clear</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">🧑‍💼</div>
+      <div class="req-title">Agent Follow-Up Pre-Frame</div>
+      <div class="req-desc">Video must mention that a licensed advisor will reach out after the review is complete. Spoken or on-screen. Reduces surprise, improves answer rate, pre-qualifies intent.</div>
+      <div class="req-spec">Example: "After your review, a licensed advisor from Engel Financial Group will reach out to walk through your options."</div>
+    </div>
+
+    <div class="req-card">
+      <div class="req-icon">⏱</div>
+      <div class="req-title">Recommended Length</div>
+      <div class="req-desc">15–30 seconds for Reels/Stories cold traffic. 30–45 seconds acceptable for retargeting warm audience who already know the brand. Keep it tight — every second must earn its place.</div>
+      <div class="req-spec">Launch with 15–20 sec versions · Test longer cuts only after baseline CPL is established</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 7. Decision rules -->
+<div class="sec">
+  <div class="sec-title">7. Placement Decision Rules — Quality-Weighted</div>
+  <div class="metrics-block">
+    <h3>Metrics to Compare Across Placements — Not Just CPL or CTR</h3>
+    <div class="metric-funnel" style="margin-bottom:16px;">
+      <div class="mf-stage">View / Click</div><div class="mf-arrow">›</div>
+      <div class="mf-stage">Wizard Start</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">OTP Verified</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">Contacted</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">Booked</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">Showed</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">Qualified</div><div class="mf-arrow">›</div>
+      <div class="mf-stage key">Sold</div>
+    </div>
+    <div class="decision-rules">
+      <div class="drule"><span class="di">→</span>If Reels produces cheaper leads but lower contact rate + qualified rate than Feed — reduce Reels budget, shift to Feed</div>
+      <div class="drule"><span class="di">→</span>If video leads cost more per OTP-verified lead than static but produce better booked call rate — video may still be winning on cost per qualified lead</div>
+      <div class="drule"><span class="di">→</span>Never cut a placement based on CPL or CTR alone — always trace through to contact rate and qualified rate before deciding</div>
+      <div class="drule"><span class="di">→</span>Stories tends to produce high volume, low intent. Monitor contact rate from Stories-sourced leads specifically before scaling</div>
+      <div class="drule"><span class="di">→</span>First placement review at Day 14 — do not restructure before then. Meta needs time in learning phase.</div>
+      <div class="drule"><span class="di">→</span>UTM parameters must capture placement (utm_content includes placement identifier) so Supabase lead records can be segmented by placement in post-lead analysis</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

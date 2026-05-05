@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Architecture v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1923; color: #e8e0d4; padding: 32px 24px 60px; min-height: 100vh; }
+
+  h1 { font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #8a9aaa; margin-bottom: 28px; }
+
+  .budget-bar { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 12px; height: 40px; }
+  .budget-seg { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+  .seg-main { background: #b87333; color: #fff; flex: 65; }
+  .seg-test { background: #1e3a5a; color: #6fa3d0; flex: 35; }
+  .budget-legend { display: flex; gap: 24px; margin-bottom: 32px; }
+  .legend-item { font-size: 12px; color: #8a9aaa; }
+  .legend-item strong { color: #e8e0d4; }
+
+  .campaigns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .campaigns { grid-template-columns: 1fr; } }
+
+  .camp { border-radius: 10px; padding: 22px; border: 1px solid rgba(255,255,255,0.08); }
+  .camp-main { background: rgba(184,115,51,0.07); border-color: rgba(184,115,51,0.25); }
+  .camp-test { background: rgba(30,58,90,0.25); border-color: rgba(30,58,90,0.6); }
+
+  .camp-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+  .camp-main .camp-label { color: #b87333; }
+  .camp-test .camp-label { color: #5b9bd4; }
+
+  .camp-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+  .camp-sub { font-size: 12px; color: #6a8a9a; margin-bottom: 18px; line-height: 1.5; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+  .meta-item { background: rgba(255,255,255,0.04); border-radius: 6px; padding: 10px 12px; }
+  .meta-item .k { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: #5a7a8a; margin-bottom: 3px; }
+  .meta-item .v { font-size: 12px; font-weight: 500; color: #d0c8c0; }
+
+  .adsets { display: flex; flex-direction: column; gap: 10px; }
+  .adset { border-radius: 7px; padding: 13px 15px; border-left: 3px solid; background: rgba(255,255,255,0.03); }
+  .adset-retargeting { border-color: #e8a84a; }
+  .adset-cashvalue  { border-color: #4a9eda; }
+  .adset-protection { border-color: #5db87a; }
+
+  .adset-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+  .adset-name { font-size: 12px; font-weight: 600; color: #e8e0d4; }
+  .adset-budget { font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .adset-retargeting .adset-budget { color: #e8a84a; }
+  .adset-cashvalue .adset-budget  { color: #4a9eda; }
+  .adset-protection .adset-budget { color: #5db87a; }
+
+  .adset-detail { font-size: 11px; color: #6a8a9a; line-height: 1.5; }
+
+  .badge { display: inline-block; border-radius: 3px; padding: 2px 7px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-top: 5px; }
+  .badge-warm  { background: rgba(232,168,74,0.15); color: #e8a84a; }
+  .badge-signal { background: rgba(93,184,122,0.12); color: #5db87a; }
+  .badge-cold  { background: rgba(74,158,218,0.12); color: #4a9eda; }
+
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 20px 0; }
+
+  .total-row { background: rgba(184,115,51,0.08); border: 1px solid rgba(184,115,51,0.2); border-radius: 8px; padding: 14px 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .total-row .label { font-size: 13px; color: #8a9aaa; }
+  .total-row .val { font-size: 18px; font-weight: 700; color: #b87333; }
+
+  .decision-box { margin-top: 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 18px 20px; }
+  .decision-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #5a7a8a; margin-bottom: 12px; }
+  .decision-rule { display: flex; gap: 10px; margin-bottom: 8px; font-size: 12px; color: #8a9aaa; line-height: 1.5; }
+  .decision-rule:last-child { margin-bottom: 0; }
+  .decision-rule .icon { color: #b87333; flex-shrink: 0; font-size: 14px; }
+
+  .prereq-box { margin-top: 24px; background: rgba(20,40,60,0.4); border: 1px solid rgba(91,155,212,0.2); border-radius: 8px; padding: 18px 20px; }
+  .prereq-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #5b9bd4; margin-bottom: 12px; }
+  .prereq-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .prereq-list li { font-size: 12px; color: #8a9aaa; display: flex; gap: 8px; }
+  .prereq-list li .check { color: #5b9bd4; flex-shrink: 0; }
+
+  .tracking-box { margin-top: 16px; background: rgba(20,40,60,0.4); border: 1px solid rgba(91,155,212,0.2); border-radius: 8px; padding: 18px 20px; }
+  .tracking-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #5b9bd4; margin-bottom: 12px; }
+  .event-rows { display: flex; flex-direction: column; gap: 8px; }
+  .event-row { display: flex; align-items: center; gap: 10px; }
+  .event-name { font-size: 12px; font-weight: 600; color: #e8a84a; font-family: monospace; min-width: 180px; }
+  .event-desc { font-size: 12px; color: #8a9aaa; }
+
+  .post-lead-box { margin-top: 16px; background: rgba(40,20,60,0.3); border: 1px solid rgba(155,91,212,0.2); border-radius: 8px; padding: 18px 20px; }
+  .post-lead-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9b5bd4; margin-bottom: 12px; }
+  .funnel-stages { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+  .stage { background: rgba(255,255,255,0.04); border-radius: 4px; padding: 7px 12px; font-size: 11px; color: #c0b8d0; position: relative; }
+  .stage-arrow { color: #4a3a5a; font-size: 14px; margin: 0 2px; }
+  .stage.key { background: rgba(155,91,212,0.15); color: #c89be8; }
+</style>
+</head>
+<body>
+
+<h1>Campaign Architecture — v2</h1>
+<p class="subtitle">Revised: standardised ages · retargeting replaces duplicate ad set · soft protection labelled as signal test · all 5 adjustments applied</p>
+
+<div class="budget-bar">
+  <div class="budget-seg seg-main">Campaign 1 — Legacy Broad Scale &nbsp; 65%</div>
+  <div class="budget-seg seg-test">Campaign 2 — Audience Tests &nbsp; 35%</div>
+</div>
+<div class="budget-legend">
+  <div class="legend-item"><strong>$650/week</strong> · Scale</div>
+  <div class="legend-item"><strong>$350/week</strong> · Testing</div>
+  <div class="legend-item"><strong>All ages: 35–65</strong> · standardised</div>
+</div>
+
+<div class="campaigns">
+
+  <!-- Campaign 1 -->
+  <div class="camp camp-main">
+    <div class="camp-label">Campaign 1 · Primary · Cold Traffic</div>
+    <div class="camp-title">Legacy — Broad Scale</div>
+    <div class="camp-sub">Advantage+ audience. Meta finds converters. Creative and wizard self-select the right buyer.</div>
+
+    <div class="meta-grid">
+      <div class="meta-item"><div class="k">Objective</div><div class="v">Website Conversions</div></div>
+      <div class="meta-item"><div class="k">Optimise for</div><div class="v">CompleteRegistration</div></div>
+      <div class="meta-item"><div class="k">Audience</div><div class="v">Advantage+ Broad</div></div>
+      <div class="meta-item"><div class="k">Hard filters</div><div class="v">15 states · Age 35–65</div></div>
+      <div class="meta-item"><div class="k">Angle</div><div class="v">Legacy</div></div>
+      <div class="meta-item"><div class="k">Creatives</div><div class="v">3–5 variations</div></div>
+      <div class="meta-item"><div class="k">Weekly budget</div><div class="v">$650 · ~$93/day</div></div>
+      <div class="meta-item"><div class="k">Evaluate at</div><div class="v">14 days</div></div>
+    </div>
+  </div>
+
+  <!-- Campaign 2 -->
+  <div class="camp camp-test">
+    <div class="camp-label">Campaign 2 · Testing · 3 Ad Sets</div>
+    <div class="camp-title">Audience + Angle Tests</div>
+    <div class="camp-sub">Each ad set tests a genuinely different variable — audience type, interest signal, or funnel stage.</div>
+
+    <div class="adsets">
+
+      <div class="adset adset-retargeting">
+        <div class="adset-header">
+          <div class="adset-name">Ad Set 1 — Retargeting · Warm</div>
+          <div class="adset-budget">$150/wk · ~$21/day</div>
+        </div>
+        <div class="adset-detail">Wizard visitors who did not complete OTP · Legacy angle · Tests warm re-engagement vs. cold acquisition</div>
+        <span class="badge badge-warm">Warm Audience</span>
+      </div>
+
+      <div class="adset adset-cashvalue">
+        <div class="adset-header">
+          <div class="adset-name">Ad Set 2 — Cash Value · Financial Interests</div>
+          <div class="adset-budget">$120/wk · ~$17/day</div>
+        </div>
+        <div class="adset-detail">Interests: financial planning, retirement, estate planning · Age 35–65 · 15 states · Tests financially-minded angle</div>
+        <span class="badge badge-cold">Cold · Manual</span>
+      </div>
+
+      <div class="adset adset-protection">
+        <div class="adset-header">
+          <div class="adset-name">Ad Set 3 — Soft Protection · Family/Homeowner</div>
+          <div class="adset-budget">$80/wk · ~$11/day</div>
+        </div>
+        <div class="adset-detail">Interests: homeownership, parenting, family milestones · Age 35–65 · 15 states · Family peace-of-mind angle</div>
+        <span class="badge badge-signal">30-Day Signal Test — Do Not Judge at 14 Days</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="total-row">
+  <span class="label">Total weekly spend</span>
+  <span class="val">$1,000 / week</span>
+</div>
+
+<div class="decision-box">
+  <h3>Decision Rules — After 14 Days (Ad Sets 1–2) / 30 Days (Ad Set 3)</h3>
+  <div class="decision-rule"><span class="icon">→</span>If Campaign 1 CPL is lower but test ad sets show higher qualified rate: shift budget toward test ad sets</div>
+  <div class="decision-rule"><span class="icon">→</span>If Retargeting (Ad Set 1) outperforms cold traffic on cost per qualified lead: increase retargeting pool and budget</div>
+  <div class="decision-rule"><span class="icon">→</span>Never kill an ad set based on CPL alone — always evaluate cost per OTP-verified lead + contact rate + qualified rate</div>
+  <div class="decision-rule"><span class="icon">→</span>Ad Set 3 (Soft Protection) is directional signal only — do not make budget decisions until 30-day data exists</div>
+</div>
+
+<div class="prereq-box">
+  <h3>Phase 1 — Technical Prerequisites Before Launch</h3>
+  <ul class="prereq-list">
+    <li><span class="check">☐</span>Meta Pixel installed on all pages (base code in &lt;head&gt;)</li>
+    <li><span class="check">☐</span>ViewContent fires when wizard page loads</li>
+    <li><span class="check">☐</span>Lead fires when contact info is submitted (name/phone/email step)</li>
+    <li><span class="check">☐</span>CompleteRegistration fires only after OTP is verified — not before</li>
+    <li><span class="check">☐</span>Conversions API (CAPI) wired to server-side lead submission endpoint</li>
+    <li><span class="check">☐</span>UTM parameters captured on landing: utm_campaign, utm_adset, utm_ad, utm_content</li>
+    <li><span class="check">☐</span>UTM values stored in Supabase lead record at form submission</li>
+    <li><span class="check">☐</span>Meta Events Manager — verify all 3 events firing correctly before going live</li>
+    <li><span class="check">☐</span>Custom conversion created in Meta: CompleteRegistration = qualified lead event</li>
+  </ul>
+</div>
+
+<div class="tracking-box">
+  <h3>Pixel Event Map — Wizard Flow</h3>
+  <div class="event-rows">
+    <div class="event-row"><div class="event-name">PageView</div><div class="event-desc">Auto-fires on every page load (base pixel)</div></div>
+    <div class="event-row"><div class="event-name">ViewContent</div><div class="event-desc">Wizard loaded — prospect entered the funnel</div></div>
+    <div class="event-row"><div class="event-name">Lead</div><div class="event-desc">Contact info submitted — name, phone, email captured</div></div>
+    <div class="event-row"><div class="event-name">CompleteRegistration ★</div><div class="event-desc">OTP verified + wizard fully completed — this is the optimisation target</div></div>
+  </div>
+</div>
+
+<div class="post-lead-box">
+  <h3>Post-Lead Quality Tracking (Outside Meta — CRM / Supabase Pipeline)</h3>
+  <div class="funnel-stages">
+    <div class="stage">Lead In</div>
+    <div class="stage-arrow">›</div>
+    <div class="stage key">Contacted</div>
+    <div class="stage-arrow">›</div>
+    <div class="stage key">Booked Call</div>
+    <div class="stage-arrow">›</div>
+    <div class="stage key">Showed</div>
+    <div class="stage-arrow">›</div>
+    <div class="stage key">Qualified</div>
+    <div class="stage-arrow">›</div>
+    <div class="stage key">Sold</div>
+  </div>
+  <div style="margin-top: 12px; font-size: 11px; color: #6a5a7a; line-height: 1.7;">
+    Each stage stored in Supabase against the lead record · UTMs link stage outcomes back to Meta campaign/ad set/ad/creative · Enables cost per qualified lead and cost per sale broken down by campaign source
+  </div>
+</div>
+
+</body>
+</html>

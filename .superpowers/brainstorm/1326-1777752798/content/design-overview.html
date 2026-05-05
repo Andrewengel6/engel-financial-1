@@ -1,0 +1,71 @@
+<h2>Design: LP Gateway Router</h2>
+<p class="subtitle">Full flow — from general entry to service-specific form</p>
+
+<div class="section">
+  <h3>User Flow</h3>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+
+    <!-- Step 1: Gateway -->
+    <div style="padding:16px;background:#1a2d3f;border:2px solid #b87333;border-radius:10px;">
+      <div style="color:#b87333;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">life-insurance.html — Gateway (only step)</div>
+      <div style="font-size:14px;margin-bottom:10px;color:#e8dcc8;">"Which type of coverage interests you?"</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:12px;">
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">🛡 Whole Life</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">📈 IUL</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">💰 Annuities</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">🏠 Mortgage</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">⏰ Retirement</div>
+        <div style="padding:8px;background:#243851;border-radius:6px;text-align:center;color:#aac4e0;">🏆 Advanced</div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#6b8cae;">Single-select — clicking a tile immediately redirects. Tile shows brief loading state. No "Next" button.</div>
+    </div>
+
+    <!-- Arrow -->
+    <div style="text-align:center;color:#b87333;font-size:20px;">↓ redirect</div>
+
+    <!-- Step 2: Specific LP -->
+    <div style="padding:16px;background:#1a2d3f;border:2px solid #3a5a7a;border-radius:10px;">
+      <div style="color:#7eb8a4;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">lp/[service].html — Full service-specific wizard</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:12px;">
+        <span style="padding:4px 10px;background:#243851;border-radius:20px;color:#aac4e0;">Q1: Goals</span>
+        <span style="padding:4px 10px;background:#243851;border-radius:20px;color:#aac4e0;">Q2: Dependents</span>
+        <span style="padding:4px 10px;background:#243851;border-radius:20px;color:#aac4e0;">Q3: State</span>
+        <span style="padding:4px 10px;background:#243851;border-radius:20px;color:#aac4e0;">Q4: Age / Health</span>
+        <span style="padding:4px 10px;background:#243851;border-radius:20px;color:#aac4e0;">→ Name / Email / Phone / OTP</span>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:#6b8cae;">Each specific LP already has its own tailored questions. No changes needed to them.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h3>Technical Changes</h3>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;font-size:13px;">
+
+    <div style="padding:12px;background:#1e2a3a;border-radius:8px;">
+      <div style="color:#b87333;font-weight:600;margin-bottom:6px;">1. js/lp-wizard.js — add <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">redirect</code> step type</div>
+      <div style="color:#aac4e0;">New step type: <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">{ type: 'redirect', choices: [{ label, value, icon, href }] }</code><br>
+      On tile click: tile enters loading state → <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">window.location.href = choice.href</code></div>
+    </div>
+
+    <div style="padding:12px;background:#1e2a3a;border-radius:8px;">
+      <div style="color:#b87333;font-weight:600;margin-bottom:6px;">2. lp/life-insurance.html — replace Q1 step config</div>
+      <div style="color:#aac4e0;">Change step type from <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">multiChoice</code> → <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">redirect</code>. Add <code style="background:#111d2b;padding:2px 6px;border-radius:4px;">href</code> to each choice. Remove all remaining steps (Q2 onwards) — no longer needed.</div>
+    </div>
+
+    <div style="padding:12px;background:#1e2a3a;border-radius:8px;">
+      <div style="color:#7eb8a4;font-weight:600;margin-bottom:6px;">✓ No changes to the 6 specific LPs</div>
+      <div style="color:#aac4e0;">whole-life.html, iul.html, annuities.html, mortgage-protection.html, retirement-planning.html, advanced-markets.html — all stay exactly as they are.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h3>Loading State (UX detail)</h3>
+  <div style="padding:12px;background:#1e2a3a;border-radius:8px;font-size:13px;color:#aac4e0;">
+    When a tile is clicked, it immediately shows a spinner/pulse so the user knows their tap registered — then the redirect fires. Prevents "did my click work?" confusion on slower connections.
+  </div>
+</div>
