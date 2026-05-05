@@ -371,11 +371,16 @@ const lpWizard = (() => {
     btn.textContent = 'Verifying…';
     errEl.style.display = 'none';
 
+    const eventId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
     const payload = {
       code,
       ..._answers,
       coverage_type: _config.coverage_type,
       source_page: _config.source_page,
+      event_id: eventId,
     };
 
     try {
@@ -399,7 +404,7 @@ const lpWizard = (() => {
       if (!json.ok) throw new Error();
       clearInterval(_resendInterval);
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'CompleteRegistration');
+        fbq('track', 'CompleteRegistration', {}, { eventID: eventId });
       }
       _render(_current + 1);
     } catch {

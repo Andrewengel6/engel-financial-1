@@ -9,23 +9,24 @@ function _sha256(val) {
   return crypto.createHash('sha256').update((val || '').trim().toLowerCase()).digest('hex');
 }
 
-async function sendCapi({ email, phone, sourceUrl }) {
+async function sendCapi({ email, phone, sourceUrl, eventId }) {
   const pixelId     = process.env.META_PIXEL_ID;
   const accessToken = process.env.META_ACCESS_TOKEN;
   if (!pixelId || !accessToken) return; // silently skip if not configured
 
-  const body = JSON.stringify({
-    data: [{
-      event_name:       'CompleteRegistration',
-      event_time:       Math.floor(Date.now() / 1000),
-      action_source:    'website',
-      event_source_url: sourceUrl || 'https://engelfinancialgroup.com/lp/life-insurance',
-      user_data: {
-        em: [_sha256(email)],
-        ph: [_sha256(phone.replace(/\D/g, ''))],
-      },
-    }],
-  });
+  const eventData = {
+    event_name:       'CompleteRegistration',
+    event_time:       Math.floor(Date.now() / 1000),
+    action_source:    'website',
+    event_source_url: sourceUrl || 'https://engelfinancialgroup.com/lp/life-insurance',
+    user_data: {
+      em: [_sha256(email)],
+      ph: [_sha256(phone.replace(/\D/g, ''))],
+    },
+  };
+  if (eventId) eventData.event_id = eventId;
+
+  const body = JSON.stringify({ data: [eventData] });
 
   const res = await fetch(
     `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`,
@@ -66,6 +67,8 @@ module.exports = async function handler(req, res) {
     // UTM / attribution fields
     'landing_page_url', 'query_string',
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_adset', 'utm_content', 'utm_term',
+    // deduplication
+    'event_id',
   ];
 
   const safeData = {};
@@ -90,6 +93,7 @@ module.exports = async function handler(req, res) {
       email:     safeData.email || '',
       phone,
       sourceUrl: safeData.landing_page_url || '',
+      eventId:   safeData.event_id || '',
     }).catch(err => console.error('[submit-lead] CAPI failed:', err.message));
 
     await sendTelegram(formatSms({ ...safeData, phone }))
