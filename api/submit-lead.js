@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'server_misconfigured' });
   }
 
-  const { code, ...leadData } = req.body || {};
+  const { code, event_id: eventId, ...leadData } = req.body || {};
   const phone = normalizePhone(leadData.phone);
 
   if (!phone || !code) {
@@ -67,8 +67,6 @@ module.exports = async function handler(req, res) {
     // UTM / attribution fields
     'landing_page_url', 'query_string',
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_adset', 'utm_content', 'utm_term',
-    // deduplication
-    'event_id',
   ];
 
   const safeData = {};
@@ -93,7 +91,7 @@ module.exports = async function handler(req, res) {
       email:     safeData.email || '',
       phone,
       sourceUrl: safeData.landing_page_url || '',
-      eventId:   safeData.event_id || '',
+      eventId:   eventId || '',
     }).catch(err => console.error('[submit-lead] CAPI failed:', err.message));
 
     await sendTelegram(formatSms({ ...safeData, phone }))
