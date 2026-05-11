@@ -915,8 +915,8 @@ footer {
    SHARED RESPONSIVE
    ══════════════════════════════ */
 @media (max-width: 1024px) {
-  .what-inner { grid-template-columns: 1fr; gap: 48px; }
-  .what-image { display: none; }
+  .what-inner { grid-template-columns: 1fr; gap: 32px; }
+  .what-image img { height: 280px; }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
