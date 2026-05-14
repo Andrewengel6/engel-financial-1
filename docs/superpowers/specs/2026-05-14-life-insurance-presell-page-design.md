@@ -105,8 +105,10 @@ In Minutes                              ← Cormorant Garamond, ~44px, navy
 ```
 - Background: `#111d2b` (navy)
 - Heading: white, Jost, `font-size: 15px`, `font-weight: 600`, uppercase letter-spacing
-- Carriers rendered as styled text badges (white text, subtle border or background) — no external logo images (the project has no individual carrier logo image files; the main site's carousel uses the Clearbit favicon API which isn't appropriate here)
-- Flex-wrap row, centered, gap 12px
+- Carrier logos are now available as real image files in `brand_assets/carriers/`: `transamerica.png`, `foresters-financial.svg`, `mutual-of-omaha.svg`, `sbli.png`, `fg.png`, `aetna.svg`, `corebridge.jpg`
+- Render as `<img>` tags with `alt` text for each carrier
+- CSS treatment for dark navy background: `filter: brightness(0) invert(1); opacity: 0.85` — converts all pixels to white, creating clean white logo silhouettes on the navy strip
+- Layout: flex-wrap row, centered, gap 24px, each logo constrained to `height: 32px; width: auto`
 - Mobile: wraps to 2–3 per row naturally
 
 ---
