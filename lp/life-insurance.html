@@ -55,7 +55,7 @@
       top: 0;
       z-index: 100;
     }
-    .ps-logo img { height: 42px; width: auto; }
+    .ps-logo img { height: 60px; width: auto; }
     .ps-phone { text-align: right; text-decoration: none; color: var(--text-dark); }
     .ps-phone span {
       display: block;
@@ -161,8 +161,8 @@
 
     /* ── Carriers ── */
     .ps-carriers {
-      background: #f5f0e8;
-      padding: 40px 24px;
+      background: var(--navy);
+      padding: 40px 48px;
       text-align: center;
     }
     .ps-carriers-label {
@@ -170,23 +170,24 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 28px;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 32px;
     }
     .ps-carriers-logos {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 16px 28px;
-      max-width: 900px;
+      justify-content: space-evenly;
+      gap: 24px 0;
+      max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
     }
     .ps-carriers-logos img {
-      height: 28px;
+      height: 30px;
       width: auto;
-      opacity: 0.78;
-      filter: none;
+      filter: brightness(0) invert(1);
+      opacity: 0.80;
     }
 
     /* ── Pain ── */
@@ -259,10 +260,10 @@
       text-align: center;
     }
     .ps-proof-logo {
-      height: 46px; width: auto;
+      height: 80px; width: auto;
       margin-bottom: 20px;
       filter: brightness(0) invert(1);
-      opacity: 0.88;
+      opacity: 0.90;
     }
     .ps-proof-line1 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
     .ps-proof-line2 { font-size: 14px; color: rgba(255,255,255,0.50); margin-bottom: 6px; }
