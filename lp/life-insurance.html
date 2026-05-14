@@ -30,6 +30,8 @@
       --text-dark: #111d2b;
       --text-mid: #3C4C62;
       --text-soft: #6B7A8D;
+      --stat-red: #C0392B;
+      --stat-amber: #D4861A;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -176,14 +178,14 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 24px 36px;
-      max-width: 660px;
+      gap: 16px 28px;
+      max-width: 900px;
       margin: 0 auto;
     }
     .ps-carriers-logos img {
       height: 28px;
       width: auto;
-      opacity: 0.75;
+      opacity: 0.78;
       filter: none;
     }
 
@@ -225,20 +227,21 @@
     }
     .ps-stat {
       flex: 1;
-      background: var(--navy);
       border-radius: 8px;
       padding: 20px 12px;
       text-align: center;
     }
+    .ps-stat--foreclosures { background: var(--stat-red); }
+    .ps-stat--bankruptcies { background: var(--stat-amber); }
     .ps-stat-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 42px; font-weight: 700; line-height: 1;
-      color: var(--gold);
+      color: #fff;
     }
     .ps-stat-label {
       font-size: 10px; font-weight: 600;
       letter-spacing: 0.09em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); margin-top: 6px;
+      color: rgba(255,255,255,0.80); margin-top: 6px;
     }
     .ps-stats-heading {
       font-family: 'Cormorant Garamond', serif;
@@ -403,11 +406,11 @@
       </div>
       <div>
         <div class="ps-stats-row">
-          <div class="ps-stat">
+          <div class="ps-stat ps-stat--foreclosures">
             <div class="ps-stat-num">54%</div>
             <div class="ps-stat-label">Foreclosures</div>
           </div>
-          <div class="ps-stat">
+          <div class="ps-stat ps-stat--bankruptcies">
             <div class="ps-stat-num">81%</div>
             <div class="ps-stat-label">Bankruptcies</div>
           </div>
