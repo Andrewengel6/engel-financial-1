@@ -4,6 +4,11 @@ const lpWizard = (() => {
   let _current = 0;
   let _answers = {};
   let _config = {};
+
+  function _track(eventName) {
+    if (typeof window.va === 'function') window.va('event', { name: eventName });
+    if (typeof gtag === 'function') gtag('event', eventName);
+  }
   let _phone = '';
   let _resendInterval = null;
   let _multiAnswers = {};
@@ -289,7 +294,7 @@ const lpWizard = (() => {
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Lead');
     }
-    if (typeof window.va === 'function') window.va('event', { name: 'wizard_lead_submitted' });
+    _track('wizard_lead_submitted');
 
     try {
       const res = await fetch('/api/send-code', {
@@ -407,7 +412,7 @@ const lpWizard = (() => {
       if (typeof fbq !== 'undefined') {
         fbq('track', 'CompleteRegistration', {}, { eventID: eventId });
       }
-      if (typeof window.va === 'function') window.va('event', { name: 'wizard_otp_verified' });
+      _track('wizard_otp_verified');
       _render(_current + 1);
     } catch {
       btn.disabled = false;
@@ -463,15 +468,14 @@ const lpWizard = (() => {
     _current = n;
     const step = _steps[n];
 
-    // Vercel Analytics — track funnel step
-    if (typeof window.va === 'function') {
-      const evtName = step.type === 'done'           ? 'wizard_complete'    :
-                      step.type === 'otp'            ? 'wizard_otp_screen'  :
-                      step.type === 'contactCapture' ? 'wizard_contact_step':
-                      step.type === 'interstitial'   ? 'wizard_interstitial':
-                      'wizard_step_' + (n + 1);
-      window.va('event', { name: evtName });
-    }
+    // Track funnel step (Vercel Analytics + GA4)
+    _track(
+      step.type === 'done'           ? 'wizard_complete'     :
+      step.type === 'otp'            ? 'wizard_otp_screen'   :
+      step.type === 'contactCapture' ? 'wizard_contact_step' :
+      step.type === 'interstitial'   ? 'wizard_interstitial' :
+      'wizard_step_' + (n + 1)
+    );
     const total = _steps.length - 1;
     const pct = Math.round((n / total) * 100);
     const numberedTotal = _steps.filter(s => s.type !== 'done' && s.type !== 'redirect' && s.type !== 'otp').length;
